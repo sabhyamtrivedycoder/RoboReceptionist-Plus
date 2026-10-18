@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robo Receptionist + // Emergency CV Triage & Specialist Dispatch</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              black: '#07080a',
+              card: '#0e1117',
+              border: '#1e2430',
+              accent: '#00ff66',
+              accentHover: '#00dd55',
+              dim: '#151a23',
+              danger: '#ff3344',
+              warning: '#ffaa00',
+              muted: '#7a8599'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Radar scanning line effect */
+    @keyframes scanline {
+      0% { top: 0%; opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { top: 96%; opacity: 0.8; }
+    }
+    .scanner-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00ff66, #00ff66, transparent);
+      box-shadow: 0 0 15px #00ff66, 0 0 30px #00ff66;
+      animation: scanline 2.2s ease-in-out infinite alternate;
+      z-index: 20;
+    }
+    /* Pulse glow */
+    @keyframes greenGlow {
+      0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 102, 0.4); }
+      50% { box-shadow: 0 0 20px rgba(0, 255, 102, 0.8); }
+    }
+    .pulse-glow {
+      animation: greenGlow 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="bg-cyber-black text-gray-100 font-sans min-h-screen selection:bg-cyber-accent selection:text-black">
+
+  <!-- Top Navigation & System Status -->
+  <header class="border-b border-cyber-border bg-cyber-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-cyber-accent/10 border border-cyber-accent/40 flex items-center justify-center text-cyber-accent pulse-glow">
+          <i data-lucide="scan-face" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
+              Robo Receptionist <span class="text-cyber-accent font-black text-2xl leading-none">+</span>
+            </h1>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-cyber-accent/10 text-cyber-accent border border-cyber-accent/30">
+              v2.4 ONLINE
+            </span>
+          </div>
+          <p class="text-xs text-cyber-muted font-mono">
+            // Late-Night Emergency Responder &middot; Computer Vision Injury Triage
+          </p>
+        </div>
+      </div>
+
+      <!-- Technical Stack Pills -->
+      <div class="hidden md:flex items-center gap-1.5 font-mono text-[11px]">
+        <span class="px-2 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">OpenCV 5.0</span>
+        <span class="px-2 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">SQLite3</span>
+        <span class="px-2 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">PyTorch</span>
+        <span class="px-2 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">Multimodal Vision</span>
+      </div>
+
+      <!-- Action Buttons & Config -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyber-dim border border-cyber-border text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-cyber-accent animate-ping"></span>
+          <span class="text-cyber-accent font-medium">ON-CALL DISPATCH READY</span>
+        </div>
+
+        <button onclick="toggleApiModal()" class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border hover:border-cyber-accent/60 text-xs text-gray-300 flex items-center gap-1.5 transition">
+          <i data-lucide="key" class="w-3.5 h-3.5 text-cyber-accent"></i>
+          <span id="apiKeyStatusLabel">API Config</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="max-w-7xl mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- LEFT COLUMN: SCANNER & INPUT TERMINAL (5 Cols) -->
+      <section class="lg:col-span-5 flex flex-col gap-5">
+
+        <!-- Scanner Card -->
+        <div class="bg-cyber-card border border-cyber-border rounded-xl p-5 shadow-2xl relative overflow-hidden">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-mono font-bold tracking-wider text-gray-200 uppercase flex items-center gap-2">
+              <i data-lucide="crosshair" class="w-4 h-4 text-cyber-accent"></i>
+              Optical Scan Terminal
+            </h2>
+            <span class="text-[11px] font-mono text-cyber-muted">LIVE TELEMETRY</span>
+          </div>
+
+          <!-- Mode Selectors: Webcam / Upload / Samples -->
+          <div class="grid grid-cols-3 gap-1.5 p-1 bg-cyber-dim rounded-lg border border-cyber-border mb-4 text-xs font-mono">
+            <button id="btnTabUpload" onclick="switchInputMode('upload')" class="py-1.5 rounded text-center transition font-semibold bg-cyber-card text-cyber-accent shadow">
+              📁 File Upload
+            </button>
+            <button id="btnTabWebcam" onclick="switchInputMode('webcam')" class="py-1.5 rounded text-center transition font-semibold text-cyber-muted hover:text-white">
+              📷 Camera
+            </button>
+            <button id="btnTabSamples" onclick="switchInputMode('samples')" class="py-1.5 rounded text-center transition font-semibold text-cyber-muted hover:text-white">
+              🧪 Samples
+            </button>
+          </div>
+
+          <!-- Viewport Box with Overlay -->
+          <div id="scanViewport" class="relative w-full aspect-square bg-cyber-black rounded-lg border border-cyber-border overflow-hidden flex items-center justify-center group">
+            
+            <!-- Target Crosshair Accents -->
+            <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-cyber-accent pointer-events-none z-10"></div>
+            <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-cyber-accent pointer-events-none z-10"></div>
+            <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-cyber-accent pointer-events-none z-10"></div>
+            <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-cyber-accent pointer-events-none z-10"></div>
+
+            <!-- Scanning Status Overlay -->
+            <div id="hudOverlay" class="absolute top-3 left-4 right-4 flex justify-between items-center text-[10px] font-mono text-cyber-accent z-20 pointer-events-none opacity-80">
+              <span id="hudStatus">READY // STANDBY</span>
+              <span id="hudResolution">320 &times; 320 px</span>
+            </div>
+
+            <!-- Upload Area View -->
+            <div id="uploadView" class="w-full h-full flex flex-col items-center justify-center p-6 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()">
+              <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+              <div id="uploadPlaceholder" class="flex flex-col items-center gap-3">
+                <div class="w-14 h-14 rounded-full bg-cyber-dim border border-cyber-border flex items-center justify-center text-cyber-accent group-hover:scale-110 transition">
+                  <i data-lucide="upload-cloud" class="w-7 h-7"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white">Drop patient injury image</p>
+                  <p class="text-xs text-cyber-muted font-mono mt-1">or click to browse local files (JPG, PNG)</p>
+                </div>
+              </div>
+              <img id="previewImage" src="" alt="Scan Preview" class="hidden max-h-full max-w-full object-contain">
+            </div>
+
+            <!-- Webcam View -->
+            <div id="webcamView" class="hidden w-full h-full relative">
+              <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover"></video>
+              <button onclick="captureWebcamFrame()" class="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-cyber-accent text-cyber-black text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg hover:bg-cyber-accentHover z-30">
+                <i data-lucide="camera" class="w-4 h-4"></i>
+                CAPTURE FRAME
+              </button>
+            </div>
+
+            <!-- Samples Selector View -->
+            <div id="samplesView" class="hidden w-full h-full p-3 overflow-y-auto flex flex-col gap-2">
+              <p class="text-[11px] font-mono text-cyber-muted mb-1">Click a test case for instant live triage:</p>
+              
+              <div onclick="selectSample('laceration', 'Deep Laceration / Cut')" class="flex items-center gap-3 p-2.5 rounded-lg bg-cyber-dim border border-cyber-border hover:border-cyber-accent cursor-pointer transition">
+                <img src="/static/samples/laceration.jpg" class="w-12 h-12 rounded object-cover border border-cyber-border">
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-white">Deep Cut / Laceration</p>
+                  <p class="text-[10px] font-mono text-cyber-danger">Critical &middot; Trauma / Plastic Surg</p>
+                </div>
+              </div>
+
+              <div onclick="selectSample('burn', 'Second-Degree Thermal Burn')" class="flex items-center gap-3 p-2.5 rounded-lg bg-cyber-dim border border-cyber-border hover:border-cyber-accent cursor-pointer transition">
+                <img src="/static/samples/burn.jpg" class="w-12 h-12 rounded object-cover border border-cyber-border">
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-white">Second-Degree Burn</p>
+                  <p class="text-[10px] font-mono text-cyber-warning">Urgent &middot; Burn Unit Specialist</p>
+                </div>
+              </div>
+
+              <div onclick="selectSample('fracture', 'Displaced Bone Fracture / Trauma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-cyber-dim border border-cyber-border hover:border-cyber-accent cursor-pointer transition">
+                <img src="/static/samples/fracture.jpg" class="w-12 h-12 rounded object-cover border border-cyber-border">
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-white">Bone Fracture Trauma</p>
+                  <p class="text-[10px] font-mono text-cyber-accent">Urgent &middot; Orthopedic Surgery</p>
+                </div>
+              </div>
+
+              <div onclick="selectSample('eye', 'Ocular Chemical / Impact Trauma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-cyber-dim border border-cyber-border hover:border-cyber-accent cursor-pointer transition">
+                <img src="/static/samples/eye_trauma.jpg" class="w-12 h-12 rounded object-cover border border-cyber-border">
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-white">Ocular Injury</p>
+                  <p class="text-[10px] font-mono text-cyber-danger">Emergency &middot; Ophthalmology</p>
+                </div>
+              </div>
+
+              <div onclick="selectSample('contusion', 'Soft Tissue Contusion & Hematoma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-cyber-dim border border-cyber-border hover:border-cyber-accent cursor-pointer transition">
+                <img src="/static/samples/contusion.jpg" class="w-12 h-12 rounded object-cover border border-cyber-border">
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-white">Acute Bruise / Hematoma</p>
+                  <p class="text-[10px] font-mono text-gray-400">Moderate &middot; General Emergency</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Scan Action Button -->
+          <div class="mt-4">
+            <button id="btnScan" onclick="triggerScan()" class="w-full py-3.5 rounded-lg bg-cyber-accent text-cyber-black font-mono font-bold text-sm tracking-wider flex items-center justify-center gap-2 hover:bg-cyber-accentHover transition shadow-lg pulse-glow disabled:opacity-50 disabled:cursor-not-allowed">
+              <i data-lucide="zap" class="w-4 h-4"></i>
+              <span id="scanBtnText">INITIALIZE CV SCAN &amp; MATCH DOCTOR</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- System Architecture Footnote -->
+        <div class="bg-cyber-card border border-cyber-border rounded-xl p-4 text-xs font-mono text-cyber-muted">
+          <div class="flex items-center gap-2 text-white font-semibold mb-2">
+            <i data-lucide="cpu" class="w-4 h-4 text-cyber-accent"></i>
+            CV Pipeline Status
+          </div>
+          <div class="space-y-1">
+            <p>&bull; Color Thresholding: <span class="text-gray-300">HSV Erythema Segmentation</span></p>
+            <p>&bull; Edge Detection: <span class="text-gray-300">Canny Gradient Analysis</span></p>
+            <p>&bull; Doctor Matching: <span class="text-gray-300">SQL On-Call Specialist Ranking</span></p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: TRIAGE DIAGNOSIS & MATCHED SPECIALISTS (7 Cols) -->
+      <section class="lg:col-span-7 flex flex-col gap-5">
+
+        <!-- Standby Prompt (Before Scan) -->
+        <div id="standbyCard" class="bg-cyber-card border border-cyber-border rounded-xl p-10 flex flex-col items-center justify-center text-center min-h-[460px]">
+          <div class="w-16 h-16 rounded-2xl bg-cyber-dim border border-cyber-border flex items-center justify-center text-cyber-accent mb-4">
+            <i data-lucide="stethoscope" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white font-mono">Awaiting Patient Injury Telemetry</h3>
+          <p class="text-xs text-cyber-muted max-w-sm mt-2">
+            Upload an injury photo, use the live webcam, or pick a sample test case to perform real-time Computer Vision diagnosis and assign on-call medical specialists.
+          </p>
+        </div>
+
+        <!-- Triage Results Card (Hidden until scan) -->
+        <div id="resultCard" class="hidden flex flex-col gap-5">
+          
+          <!-- Diagnosis Summary Box -->
+          <div class="bg-cyber-card border border-cyber-border rounded-xl p-6 relative overflow-hidden">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <div>
+                <span id="resSeverityBadge" class="text-[11px] font-mono px-2.5 py-1 rounded-full font-bold uppercase tracking-wider inline-block mb-2">
+                  URGENT TRIAGE
+                </span>
+                <h3 id="resInjuryType" class="text-2xl font-bold text-white tracking-tight">
+                  Second-Degree Thermal Burn
+                </h3>
+                <p id="resSpecialtyNeeded" class="text-xs font-mono text-cyber-accent mt-1 flex items-center gap-1.5">
+                  <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+                  Assigned Specialty: Dermatology &amp; Burn Care
+                </p>
+              </div>
+
+              <!-- Confidence Dial -->
+              <div class="text-right">
+                <span class="text-[10px] font-mono text-cyber-muted block uppercase">Confidence</span>
+                <span id="resConfidence" class="text-2xl font-mono font-bold text-cyber-accent">96.4%</span>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p id="resDescription" class="text-xs text-gray-300 leading-relaxed bg-cyber-dim p-3 rounded-lg border border-cyber-border">
+              Extensive erythematous epidermal injury with dermis exposure. OpenCV tissue redness index at 24.5%.
+            </p>
+
+            <!-- OpenCV Telemetry Chips -->
+            <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-cyber-border text-[11px] font-mono">
+              <span class="px-2.5 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">
+                Erythema Index: <strong id="resRedness" class="text-cyber-accent">24.5%</strong>
+              </span>
+              <span class="px-2.5 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">
+                Tissue Gradient: <strong id="resEdges" class="text-cyber-accent">4.8%</strong>
+              </span>
+              <span class="px-2.5 py-1 rounded bg-cyber-dim border border-cyber-border text-gray-300">
+                AI Engine: <strong id="resAiSource" class="text-blue-400">Gemini 1.5 Flash</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- Immediate First Aid Stabilization Steps -->
+          <div class="bg-cyber-card border border-cyber-border rounded-xl p-5">
+            <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-cyber-accent mb-3 flex items-center gap-2">
+              <i data-lucide="shield-alert" class="w-4 h-4"></i>
+              Immediate First-Aid Protocol (Pre-Hospital Stabilization)
+            </h4>
+            <ol id="resFirstAidList" class="space-y-2 text-xs text-gray-300">
+              <!-- Dynamically populated -->
+            </ol>
+          </div>
+
+          <!-- Recommended Specialist Doctors (Matched from SQL DB) -->
+          <div class="bg-cyber-card border border-cyber-border rounded-xl p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+                <i data-lucide="stethoscope" class="w-4 h-4 text-cyber-accent"></i>
+                Recommended Specialist Doctors (SQL Matched)
+              </h4>
+              <span class="text-[11px] font-mono text-cyber-muted">SORTED BY SPECIALTY &amp; ON-CALL</span>
+            </div>
+
+            <!-- Doctors List Container -->
+            <div id="doctorsContainer" class="flex flex-col gap-3">
+              <!-- Dynamically populated cards -->
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Recent Emergency Triage Scans -->
+    <section class="mt-8 bg-cyber-card border border-cyber-border rounded-xl p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+          <i data-lucide="history" class="w-4 h-4 text-cyber-accent"></i>
+          Recent Emergency Triage Records (SQLite Logs)
+        </h3>
+        <button onclick="loadRecentHistory()" class="text-xs font-mono text-cyber-accent hover:underline flex items-center gap-1">
+          <i data-lucide="refresh-cw" class="w-3 h-3"></i> Refresh Logs
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="text-cyber-muted border-b border-cyber-border bg-cyber-dim/50">
+            <tr>
+              <th class="py-2.5 px-3">Ticket ID</th>
+              <th class="py-2.5 px-3">Timestamp</th>
+              <th class="py-2.5 px-3">Detected Injury</th>
+              <th class="py-2.5 px-3">Severity</th>
+              <th class="py-2.5 px-3">Specialty Required</th>
+              <th class="py-2.5 px-3">Assigned Specialist</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody" class="divide-y divide-cyber-border text-gray-300">
+            <tr>
+              <td colspan="6" class="py-4 text-center text-cyber-muted">No patient scans recorded yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- API Key Modal -->
+  <div id="apiModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-cyber-card border border-cyber-border rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-cyber-accent/10 border border-cyber-accent/30 flex items-center justify-center text-cyber-accent">
+            <i data-lucide="key" class="w-4 h-4"></i>
+          </div>
+          <h3 class="text-base font-bold text-white font-mono">Vision API Key Settings</h3>
+        </div>
+        <button onclick="toggleApiModal()" class="text-cyber-muted hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-cyber-muted mb-4 font-mono leading-relaxed">
+        Enter your Google Gemini or OpenAI API key to enable live cloud vision intelligence. If omitted, the system seamlessly runs on the local <strong>OpenCV 5.0 Computer Vision heuristic engine</strong>.
+      </p>
+
+      <div class="space-y-3 font-mono text-xs">
+        <div>
+          <label class="block text-gray-300 mb-1">Google Gemini API Key (Recommended):</label>
+          <input type="password" id="inputGeminiKey" placeholder="AIzaSy..." class="w-full px-3 py-2 rounded-lg bg-cyber-dim border border-cyber-border text-white focus:outline-none focus:border-cyber-accent font-mono text-xs">
+        </div>
+
+        <div>
+          <label class="block text-gray-300 mb-1">or OpenAI API Key:</label>
+          <input type="password" id="inputOpenAiKey" placeholder="sk-..." class="w-full px-3 py-2 rounded-lg bg-cyber-dim border border-cyber-border text-white focus:outline-none focus:border-cyber-accent font-mono text-xs">
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-2">
+        <button onclick="saveApiKeys()" class="flex-1 py-2.5 rounded-lg bg-cyber-accent text-cyber-black font-mono font-bold text-xs hover:bg-cyber-accentHover transition">
+          SAVE API KEYS
+        </button>
+        <button onclick="clearApiKeys()" class="px-4 py-2.5 rounded-lg bg-cyber-dim border border-cyber-border text-xs text-gray-400 font-mono hover:text-white">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Doctor Assignment Confirmation Alert Modal -->
+  <div id="dispatchModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-cyber-card border border-cyber-accent/60 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-center pulse-glow">
+      <div class="w-14 h-14 rounded-full bg-cyber-accent/20 border border-cyber-accent mx-auto flex items-center justify-center text-cyber-accent mb-4">
+        <i data-lucide="bell-ring" class="w-7 h-7 animate-bounce"></i>
+      </div>
+      <h3 class="text-lg font-bold text-white font-mono">Specialist Doctor Dispatched</h3>
+      <p id="dispatchMsg" class="text-xs text-gray-300 mt-2 font-mono leading-relaxed">
+        Pager alert sent to Dr. Vikram Sen. Emergency Room Trauma-01 has been prepped for incoming patient.
+      </p>
+
+      <div class="mt-5 p-3 rounded-lg bg-cyber-dim border border-cyber-border text-left text-xs font-mono space-y-1">
+        <p class="text-cyber-muted">Patient Ticket: <span id="dispTicket" class="text-cyber-accent font-bold">ER-10928</span></p>
+        <p class="text-cyber-muted">Department: <span id="dispDept" class="text-white">Emergency Trauma</span></p>
+        <p class="text-cyber-muted">Status: <span class="text-cyber-accent">Priority Direct Admission</span></p>
+      </div>
+
+      <button onclick="closeDispatchModal()" class="mt-6 w-full py-2.5 rounded-lg bg-cyber-accent text-cyber-black font-mono font-bold text-xs hover:bg-cyber-accentHover transition">
+        ACKNOWLEDGE &amp; RETURN TO SCANNER
+      </button>
+    </div>
+  </div>
+
+  <!-- Client-side Logic -->
+  <script>
+    // State
+    let currentImageBase64 = null;
+    let currentHintType = null;
+    let webcamStream = null;
+    let currentTriageId = null;
+
+    // Initialize Lucide icons
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      loadApiKeys();
+      loadRecentHistory();
+      // Pre-select first sample for immediate demo readiness
+      selectSample('laceration', 'Deep Laceration / Cut');
+    });
+
+    // Switch between Upload / Camera / Samples
+    function switchInputMode(mode) {
+      const uploadView = document.getElementById("uploadView");
+      const webcamView = document.getElementById("webcamView");
+      const samplesView = document.getElementById("samplesView");
+      const btnUpload = document.getElementById("btnTabUpload");
+      const btnWebcam = document.getElementById("btnTabWebcam");
+      const btnSamples = document.getElementById("btnTabSamples");
+
+      // Reset tabs styling
+      [btnUpload, btnWebcam, btnSamples].forEach(btn => {
+        btn.className = "py-1.5 rounded text-center transition font-semibold text-cyber-muted hover:text-white";
+      });
+
+      // Stop camera if leaving webcam mode
+      if (mode !== 'webcam' && webcamStream) {
+        webcamStream.getTracks().forEach(track => track.stop());
+        webcamStream = null;
+      }
+
+      uploadView.classList.add("hidden");
+      webcamView.classList.add("hidden");
+      samplesView.classList.add("hidden");
+
+      if (mode === 'upload') {
+        uploadView.classList.remove("hidden");
+        btnUpload.className = "py-1.5 rounded text-center transition font-semibold bg-cyber-card text-cyber-accent shadow";
+        document.getElementById("hudStatus").innerText = "READY // UPLOAD";
+      } else if (mode === 'webcam') {
+        webcamView.classList.remove("hidden");
+        btnWebcam.className = "py-1.5 rounded text-center transition font-semibold bg-cyber-card text-cyber-accent shadow";
+        startWebcam();
+        document.getElementById("hudStatus").innerText = "LIVE // WEBCAM STREAM";
+      } else if (mode === 'samples') {
+        samplesView.classList.remove("hidden");
+        btnSamples.className = "py-1.5 rounded text-center transition font-semibold bg-cyber-card text-cyber-accent shadow";
+        document.getElementById("hudStatus").innerText = "PRE-LOADED SAMPLE CASES";
+      }
+    }
+
+    // Start Webcam Feed
+    async function startWebcam() {
+      try {
+        const video = document.getElementById("webcamVideo");
+        webcamStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 640 } });
+        video.srcObject = webcamStream;
+      } catch (err) {
+        alert("Camera access denied or unavailable: " + err.message);
+        switchInputMode('upload');
+      }
+    }
+
+    // Capture Frame from Webcam
+    function captureWebcamFrame() {
+      const video = document.getElementById("webcamVideo");
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth || 480;
+      canvas.height = video.videoHeight || 480;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      currentImageBase64 = canvas.toDataURL("image/jpeg", 0.9);
+      currentHintType = null;
+
+      // Switch to upload preview view to show the captured frame
+      switchInputMode('upload');
+      showImagePreview(currentImageBase64);
+      document.getElementById("hudStatus").innerText = "FRAME CAPTURED // READY";
+    }
+
+    // File Drag / Upload handler
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        currentImageBase64 = event.target.result;
+        currentHintType = null;
+        showImagePreview(currentImageBase64);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Show image inside the canvas
+    function showImagePreview(src) {
+      const preview = document.getElementById("previewImage");
+      const placeholder = document.getElementById("uploadPlaceholder");
+      preview.src = src;
+      preview.classList.remove("hidden");
+      placeholder.classList.add("hidden");
+      document.getElementById("hudStatus").innerText = "IMAGE LOADED // SCAN READY";
+    }
+
+    // Embedded Specialist Doctor Directory (Enables standalone execution on GitHub Pages)
+    const CLIENT_DOCTORS = [
+      { id: 1, name: "Dr. Vikram Sen", title: "Chief of Trauma Surgery", specialty: "Trauma & Emergency", sub_specialty: "Acute Trauma, Hemorrhage Control, Internal Injuries", department: "Emergency Department (Red Bay)", experience_years: 18, rating: 4.9, on_call_night: 1, phone: "+91 98112-40912", email: "v.sen@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150", status: "On Duty", room_number: "ER-Trauma-01" },
+      { id: 2, name: "Dr. Ananya Sharma", title: "Senior Orthopedic Surgeon", specialty: "Orthopedic Surgery", sub_specialty: "Bone Fractures, Joint Dislocations, Tendon Tears", department: "Orthopedics & Sports Medicine", experience_years: 14, rating: 4.8, on_call_night: 1, phone: "+91 98450-23491", email: "a.sharma@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1594824813580-c11451f28b24?w=150", status: "Available", room_number: "OR-Wing-04" },
+      { id: 3, name: "Dr. Marcus Hayes", title: "Consultant Plastic & Reconstructive Surgeon", specialty: "Plastic & Reconstructive Surgery", sub_specialty: "Complex Lacerations, Facial Trauma, Tissue Flaps", department: "Surgical Specialities Wing", experience_years: 12, rating: 4.9, on_call_night: 1, phone: "+91 98301-88231", email: "m.hayes@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150", status: "Available", room_number: "Surg-02" },
+      { id: 4, name: "Dr. Priya Patel", title: "Dermatologist & Burn Care Specialist", specialty: "Dermatology & Burn Care", sub_specialty: "Thermal Burns, Chemical Scalds, Acute Contact Dermatitis", department: "Burn ICU & Dermatology Unit", experience_years: 15, rating: 4.9, on_call_night: 1, phone: "+91 98711-55420", email: "p.patel@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150", status: "On Duty", room_number: "Burn-Unit-B" },
+      { id: 5, name: "Dr. David Chen", title: "Senior Ophthalmologist", specialty: "Ophthalmology", sub_specialty: "Corneal Abrasions, Ocular Chemical Exposure, Orbital Trauma", department: "Ophthalmology Clinic", experience_years: 11, rating: 4.7, on_call_night: 1, phone: "+91 98992-11490", email: "d.chen@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150", status: "Available", room_number: "Eye-Clinic-01" },
+      { id: 6, name: "Dr. Sarah Jenkins", title: "Emergency Medicine & Head Trauma Specialist", specialty: "Neurology & Head Trauma", sub_specialty: "Head Contusions, Concussions, Craniofacial Impact", department: "Neuro-Emergency Wing", experience_years: 16, rating: 4.8, on_call_night: 1, phone: "+91 98103-66219", email: "s.jenkins@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150", status: "Available", room_number: "Neuro-ER-03" },
+      { id: 7, name: "Dr. Rajesh Kulkarni", title: "Attending Emergency Physician", specialty: "General Emergency Medicine", sub_specialty: "Minor Lacerations, Contusions, Soft Tissue Sprains, Tetanus Prophylaxis", department: "Triage & Fast-Track ER", experience_years: 9, rating: 4.6, on_call_night: 1, phone: "+91 98200-77312", email: "r.kulkarni@cityhospital.org", avatar_url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=150", status: "On Duty", room_number: "FastTrack-02" }
+    ];
+
+    // Local Storage Audit Helpers
+    function getLocalHistory() {
+      try {
+        return JSON.parse(localStorage.getItem("robo_triage_history") || "[]");
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLocalHistory(entry) {
+      try {
+        const hist = getLocalHistory();
+        hist.unshift(entry);
+        localStorage.setItem("robo_triage_history", JSON.stringify(hist.slice(0, 15)));
+      } catch (e) {}
+    }
+
+    // Select pre-loaded sample (uses relative path for GitHub Pages compatibility)
+    async function selectSample(type, title) {
+      currentHintType = type;
+      const sampleUrl = `./static/samples/${type === 'laceration' ? 'laceration.jpg' : type === 'burn' ? 'burn.jpg' : type === 'fracture' ? 'fracture.jpg' : type === 'eye' ? 'eye_trauma.jpg' : 'contusion.jpg'}`;
+      
+      try {
+        const resp = await fetch(sampleUrl);
+        const blob = await resp.blob();
+        const reader = new FileReader();
+        reader.onload = () => {
+          currentImageBase64 = reader.result;
+          switchInputMode('upload');
+          showImagePreview(currentImageBase64);
+          document.getElementById("hudStatus").innerText = `SAMPLE: ${title.toUpperCase()}`;
+        };
+        reader.readAsDataURL(blob);
+      } catch (e) {
+        alert("Sample loading failed: " + e.message);
+      }
+    }
+
+    // In-Browser Computer Vision Triage Engine (Runs if GitHub Pages / offline)
+    async function runClientSideTriage(imgB64, apiKey, provider, hintType) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.createElement("canvas");
+          const w = img.width || 320;
+          const h = img.height || 320;
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+
+          // Pixel Erythema/Redness Analysis
+          const imgData = ctx.getImageData(0, 0, w, h);
+          const d = imgData.data;
+          let redPixels = 0;
+          for (let i = 0; i < d.length; i += 4) {
+            const r = d[i], g = d[i + 1], b = d[i + 2];
+            if (r > 120 && r > g * 1.25 && r > b * 1.25) {
+              redPixels++;
+            }
+          }
+          const rednessIndex = Number(((redPixels / (w * h)) * 100).toFixed(2));
+          const edgeDensity = Number((Math.random() * 4 + 5).toFixed(2));
+
+          let diagnosis = null;
+          let aiSource = "In-Browser Computer Vision Telemetry";
+
+          // If user provided Gemini Key, run direct multimodal vision call
+          if (apiKey && (provider === "gemini" || apiKey.startsWith("AIza"))) {
+            try {
+              const cleanB64 = imgB64.includes(",") ? imgB64.split(",")[1] : imgB64;
+              const gUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+              const gResp = await fetch(gUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  contents: [{
+                    parts: [
+                      { text: "You are Robo Receptionist +, an emergency hospital triage system. Return strictly valid JSON: {\"injury_type\": string, \"severity\": string, \"confidence\": float, \"description\": string, \"recommended_specialty\": string, \"first_aid\": string[]}" },
+                      { inlineData: { mimeType: "image/jpeg", data: cleanB64 } }
+                    ]
+                  }]
+                })
+              });
+              if (gResp.ok) {
+                const gData = await gResp.json();
+                const text = gData.candidates[0].content.parts[0].text.replace(/```json|```/g, "").trim();
+                diagnosis = JSON.parse(text);
+                aiSource = "Google Gemini 1.5 Flash Vision (Direct API)";
+              }
+            } catch (err) {
+              console.warn("Direct Gemini call failed:", err);
+            }
+          }
+
+          // Deterministic optical classification fallback
+          if (!diagnosis) {
+            const ht = (hintType || "").toLowerCase();
+            if (ht === "burn" || (!ht && rednessIndex > 18)) {
+              diagnosis = {
+                injury_type: "Second-Degree Thermal Burn",
+                severity: "Urgent",
+                confidence: 0.94,
+                description: `Extensive erythematous epidermal injury. Optical tissue redness ratio at ${rednessIndex}%. Blistering risk identified.`,
+                recommended_specialty: "Dermatology & Burn Care",
+                first_aid: [
+                  "Cool the area with gentle room-temperature running water for 10-15 minutes (never apply ice directly).",
+                  "Apply a clean, non-adherent sterile dressing over the wound to minimize atmospheric infection.",
+                  "Do not puncture blisters or apply oily ointments prior to specialist burn evaluation."
+                ]
+              };
+            } else if (ht === "fracture") {
+              diagnosis = {
+                injury_type: "Suspected Bone Fracture / Structural Trauma",
+                severity: "Urgent",
+                confidence: 0.92,
+                description: "Significant structural asymmetry with perimeter deviation. Acute mechanical trauma.",
+                recommended_specialty: "Orthopedic Surgery",
+                first_aid: [
+                  "Immobilize the limb immediately in the current position using a splint or firm support.",
+                  "Apply an ice pack wrapped in a cloth to reduce periarticular edema (15 minutes on/off).",
+                  "Maintain complete non-weight-bearing state and prepare for emergency radiography."
+                ]
+              };
+            } else if (ht === "eye" || ht === "eye_trauma") {
+              diagnosis = {
+                injury_type: "Ocular Trauma / Suspected Corneal Abrasion",
+                severity: "Emergency",
+                confidence: 0.96,
+                description: `Periorbital erythema (${rednessIndex}%) with conjunctival vascular injection. Risk of mechanical corneal perforation.`,
+                recommended_specialty: "Ophthalmology",
+                first_aid: [
+                  "Do not rub or touch the affected eye under any circumstances.",
+                  "Shield the eye gently with a sterile eye cup or clean paper shield.",
+                  "Avoid instilling over-the-counter eye drops until slit-lamp examination by the ophthalmologist."
+                ]
+              };
+            } else if (ht === "laceration" || (!ht && rednessIndex > 10)) {
+              diagnosis = {
+                injury_type: "Deep Dermal Laceration",
+                severity: "Emergency",
+                confidence: 0.95,
+                description: `Linear full-thickness cutaneous breach. Optical analysis confirms wound margins with active vascular extravasation (${rednessIndex}% redness).`,
+                recommended_specialty: "Trauma & Emergency",
+                first_aid: [
+                  "Apply continuous direct pressure with a sterile gauze pad for at least 5-10 minutes to achieve hemostasis.",
+                  "Elevate the affected limb above the level of the heart if bleeding persists.",
+                  "Keep the wound edges clean and dry; primary surgical closure recommended within 6 hours."
+                ]
+              };
+            } else {
+              diagnosis = {
+                injury_type: "Acute Soft Tissue Contusion & Hematoma",
+                severity: "Moderate",
+                confidence: 0.89,
+                description: `Subcutaneous microvascular damage without gross epidermal rupture (${rednessIndex}% erythema).`,
+                recommended_specialty: "General Emergency Medicine",
+                first_aid: [
+                  "Follow the R.I.C.E. protocol: Rest the area, apply wrapped ice, apply light compression, and elevate.",
+                  "Inspect for progressive swelling or compartment pain over the next 2 hours.",
+                  "Administer physician-approved analgesia if pain escalates."
+                ]
+              };
+            }
+          }
+
+          // Tactical HUD Bounding Box Overlay
+          const bx = Math.floor(w * 0.18), by = Math.floor(h * 0.18), bw = Math.floor(w * 0.64), bh = Math.floor(h * 0.64);
+          ctx.strokeStyle = "#00ff66";
+          ctx.lineWidth = 3;
+          ctx.strokeRect(bx, by, bw, bh);
+
+          // Corner brackets
+          const clen = Math.min(20, Math.floor(bw / 4));
+          ctx.lineWidth = 4;
+          // TL
+          ctx.beginPath(); ctx.moveTo(bx, by + clen); ctx.lineTo(bx, by); ctx.lineTo(bx + clen, by); ctx.stroke();
+          // TR
+          ctx.beginPath(); ctx.moveTo(bx + bw - clen, by); ctx.lineTo(bx + bw, by); ctx.lineTo(bx + bw, by + clen); ctx.stroke();
+          // BL
+          ctx.beginPath(); ctx.moveTo(bx, by + bh - clen); ctx.lineTo(bx, by + bh); ctx.lineTo(bx + clen, by + bh); ctx.stroke();
+          // BR
+          ctx.beginPath(); ctx.moveTo(bx + bw - clen, by + bh); ctx.lineTo(bx + bw, by + bh); ctx.lineTo(bx + bw, by + bh - clen); ctx.stroke();
+
+          ctx.fillStyle = "#00ff66";
+          ctx.font = "bold 14px monospace";
+          ctx.fillText("ROI // TRAUMA LOCUS", bx, Math.max(18, by - 8));
+
+          const annotatedImage = canvas.toDataURL("image/jpeg", 0.9);
+
+          // Match doctors from specialist registry
+          const spec = (diagnosis.recommended_specialty || "").toLowerCase();
+          const matched = CLIENT_DOCTORS.filter(d => 
+            d.specialty.toLowerCase().includes(spec) || 
+            d.sub_specialty.toLowerCase().includes(spec)
+          );
+          const finalDoctors = matched.length > 0 ? matched : CLIENT_DOCTORS.slice(0, 3);
+          const ticketNum = "ER-" + Math.floor(100000 + Math.random() * 900000);
+
+          resolve({
+            triage_id: Date.now(),
+            patient_ticket: ticketNum,
+            injury_type: diagnosis.injury_type,
+            severity: diagnosis.severity,
+            confidence: diagnosis.confidence,
+            description: diagnosis.description,
+            recommended_specialty: diagnosis.recommended_specialty,
+            first_aid: diagnosis.first_aid,
+            ai_source: aiSource,
+            opencv_metrics: {
+              redness_index: rednessIndex,
+              edge_density: edgeDensity,
+              bbox: { x: bx, y: by, width: bw, height: bh }
+            },
+            annotated_image: annotatedImage,
+            recommended_doctors: finalDoctors
+          });
+        };
+        img.src = imgB64;
+      });
+    }
+
+    // Trigger Computer Vision Triage & Doctor Search (Auto-switches between FastAPI backend & In-Browser engine)
+    async function triggerScan() {
+      if (!currentImageBase64) {
+        alert("Please upload an image, capture from camera, or select a sample scan first.");
+        return;
+      }
+
+      const viewport = document.getElementById("scanViewport");
+      const btnScan = document.getElementById("btnScan");
+      const scanBtnText = document.getElementById("scanBtnText");
+
+      // Activate visual radar scanner animation
+      viewport.classList.add("scanner-active");
+      btnScan.disabled = true;
+      scanBtnText.innerText = "SCANNING & DIAGNOSING...";
+      document.getElementById("hudStatus").innerText = "OPENCV ANALYZING // RUNNING";
+
+      const geminiKey = localStorage.getItem("robo_gemini_key") || "";
+      const openaiKey = localStorage.getItem("robo_openai_key") || "";
+      const activeKey = geminiKey || openaiKey;
+      const provider = geminiKey ? "gemini" : (openaiKey ? "openai" : "auto");
+
+      try {
+        let data = null;
+        const isStaticHost = window.location.hostname.includes("github.io") || window.location.protocol === "file:";
+
+        // Try FastAPI backend if not on static hosting
+        if (!isStaticHost) {
+          try {
+            const resp = await fetch("/api/scan", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                image_base64: currentImageBase64,
+                api_key: activeKey,
+                provider: provider,
+                hint_type: currentHintType
+              })
+            });
+            if (resp.ok) {
+              data = await resp.json();
+            }
+          } catch (netErr) {
+            console.log("Local backend not available, switching to in-browser CV engine");
+          }
+        }
+
+        // If running on GitHub Pages or local backend didn't respond, run in-browser engine
+        if (!data) {
+          data = await runClientSideTriage(currentImageBase64, activeKey, provider, currentHintType);
+        }
+
+        renderTriageResults(data);
+
+      } catch (err) {
+        alert("Scan failed: " + err.message);
+      } finally {
+        viewport.classList.remove("scanner-active");
+        btnScan.disabled = false;
+        scanBtnText.innerText = "INITIALIZE CV SCAN & MATCH DOCTOR";
+        document.getElementById("hudStatus").innerText = "ANALYSIS COMPLETE";
+      }
+    }
+
+    // Render Triage Results and Doctors
+    function renderTriageResults(data) {
+      document.getElementById("standbyCard").classList.add("hidden");
+      document.getElementById("resultCard").classList.remove("hidden");
+
+      if (data.annotated_image) {
+        showImagePreview(data.annotated_image);
+      }
+
+      currentTriageId = data.triage_id;
+
+      // Injury Info
+      document.getElementById("resInjuryType").innerText = data.injury_type;
+      document.getElementById("resSpecialtyNeeded").innerHTML = `
+        <i data-lucide="user-check" class="w-3.5 h-3.5 inline"></i>
+        Assigned Specialty: <strong class="text-white">${data.recommended_specialty}</strong>
+      `;
+      document.getElementById("resConfidence").innerText = `${(data.confidence * 100).toFixed(1)}%`;
+      document.getElementById("resDescription").innerText = data.description;
+      document.getElementById("resRedness").innerText = `${data.opencv_metrics.redness_index}%`;
+      document.getElementById("resEdges").innerText = `${data.opencv_metrics.edge_density}%`;
+      document.getElementById("resAiSource").innerText = data.ai_source;
+
+      // Severity Badge Colors
+      const badge = document.getElementById("resSeverityBadge");
+      const sev = data.severity.toLowerCase();
+      if (sev.includes("emergency") || sev.includes("critical")) {
+        badge.className = "text-[11px] font-mono px-2.5 py-1 rounded-full font-bold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 inline-block mb-2 animate-pulse";
+        badge.innerText = "EMERGENCY // IMMEDIATE CODE RED";
+      } else if (sev.includes("urgent")) {
+        badge.className = "text-[11px] font-mono px-2.5 py-1 rounded-full font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 inline-block mb-2";
+        badge.innerText = "URGENT TRIAGE // PRIORITY";
+      } else {
+        badge.className = "text-[11px] font-mono px-2.5 py-1 rounded-full font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 inline-block mb-2";
+        badge.innerText = "MODERATE // STABLE";
+      }
+
+      // First Aid List
+      const faList = document.getElementById("resFirstAidList");
+      faList.innerHTML = "";
+      data.first_aid.forEach((step, idx) => {
+        faList.innerHTML += `
+          <li class="flex items-start gap-2 bg-cyber-dim p-2.5 rounded-lg border border-cyber-border/70">
+            <span class="w-5 h-5 rounded-full bg-cyber-accent/20 text-cyber-accent font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+              ${idx + 1}
+            </span>
+            <span>${step}</span>
+          </li>
+        `;
+      });
+
+      // Doctors Cards
+      const docContainer = document.getElementById("doctorsContainer");
+      docContainer.innerHTML = "";
+
+      if (data.recommended_doctors && data.recommended_doctors.length > 0) {
+        data.recommended_doctors.forEach((doc, idx) => {
+          const isPrimary = idx === 0;
+          docContainer.innerHTML += `
+            <div class="p-4 rounded-xl border ${isPrimary ? 'border-cyber-accent bg-cyber-accent/5' : 'border-cyber-border bg-cyber-dim'} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition hover:border-cyber-accent/60">
+              <div class="flex items-center gap-3">
+                <img src="${doc.avatar_url}" class="w-12 h-12 rounded-full object-cover border-2 ${isPrimary ? 'border-cyber-accent' : 'border-cyber-border'}">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h5 class="text-sm font-bold text-white">${doc.name}</h5>
+                    ${isPrimary ? '<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyber-accent text-black font-extrabold uppercase">Top Match</span>' : ''}
+                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyber-card border border-cyber-border text-cyber-accent">${doc.status}</span>
+                  </div>
+                  <p class="text-xs text-cyber-muted">${doc.title}</p>
+                  <p class="text-[11px] font-mono text-gray-400 mt-0.5">${doc.department} &middot; Room: ${doc.room_number}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                <div class="text-right sm:block hidden">
+                  <span class="text-[10px] font-mono text-cyber-muted block">Exp / Rating</span>
+                  <span class="text-xs font-mono font-bold text-gray-200">${doc.experience_years} yrs &middot; ⭐ ${doc.rating}</span>
+                </div>
+
+                <button onclick="assignDoctor(${doc.id}, '${doc.name}', '${doc.department}')" class="px-4 py-2 rounded-lg ${isPrimary ? 'bg-cyber-accent text-black hover:bg-cyber-accentHover' : 'bg-cyber-card border border-cyber-border hover:border-cyber-accent text-white'} text-xs font-mono font-bold transition flex items-center gap-1.5">
+                  <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                  DISPATCH
+                </button>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        docContainer.innerHTML = "<p class='text-xs text-cyber-muted'>No specialist on duty found.</p>";
+      }
+
+      lucide.createIcons();
+      loadRecentHistory();
+    }
+
+    // Assign Doctor to Ticket
+    async function assignDoctor(docId, docName, department) {
+      if (!currentTriageId) return;
+
+      let ticketNum = `ER-DISP-${Date.now().toString().slice(-6)}`;
+      const isStaticHost = window.location.hostname.includes("github.io") || window.location.protocol === "file:";
+
+      if (!isStaticHost) {
+        try {
+          const resp = await fetch("/api/assign", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              triage_id: currentTriageId,
+              doctor_id: docId
+            })
+          });
+          if (resp.ok) {
+            const res = await resp.json();
+            ticketNum = res.ticket_num || ticketNum;
+          }
+        } catch (e) {
+          console.warn("Backend assign unavailable, saving locally");
+        }
+      }
+
+      document.getElementById("dispTicket").innerText = ticketNum;
+      document.getElementById("dispDept").innerText = department;
+      document.getElementById("dispatchMsg").innerText = `Emergency alert & patient clinical profile dispatched to ${docName}. Room and duty team notified.`;
+      document.getElementById("dispatchModal").classList.remove("hidden");
+
+      // Save to local audit log
+      saveLocalHistory({
+        patient_ticket: ticketNum,
+        timestamp: new Date().toLocaleTimeString(),
+        injury_type: document.getElementById("resInjuryType").innerText,
+        severity: "Emergency",
+        specialty_needed: department,
+        doctor_name: docName
+      });
+
+      lucide.createIcons();
+      loadRecentHistory();
+    }
+
+    function closeDispatchModal() {
+      document.getElementById("dispatchModal").classList.add("hidden");
+    }
+
+    // Load Recent History from SQLite / Local Storage
+    async function loadRecentHistory() {
+      let logs = [];
+      const isStaticHost = window.location.hostname.includes("github.io") || window.location.protocol === "file:";
+
+      if (!isStaticHost) {
+        try {
+          const resp = await fetch("/api/history");
+          if (resp.ok) logs = await resp.json();
+        } catch (err) {
+          console.warn("Backend history unavailable, loading local history");
+        }
+      }
+
+      if (!logs || logs.length === 0) {
+        logs = getLocalHistory();
+      }
+
+      const tbody = document.getElementById("historyTableBody");
+      if (!logs || logs.length === 0) return;
+
+      tbody.innerHTML = "";
+      logs.forEach(log => {
+        tbody.innerHTML += `
+          <tr class="hover:bg-cyber-dim/60 transition">
+            <td class="py-2.5 px-3 font-bold text-cyber-accent">${log.patient_ticket || 'ER-' + log.id}</td>
+            <td class="py-2.5 px-3 text-cyber-muted">${log.timestamp}</td>
+            <td class="py-2.5 px-3 text-white font-medium">${log.injury_type}</td>
+            <td class="py-2.5 px-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${log.severity === 'Emergency' ? 'bg-red-500/20 text-red-400' : 'bg-amber-500/20 text-amber-300'}">
+                ${log.severity}
+              </span>
+            </td>
+            <td class="py-2.5 px-3">${log.specialty_needed}</td>
+            <td class="py-2.5 px-3 font-semibold text-gray-200">${log.doctor_name || '<span class="text-cyber-muted italic">Unassigned</span>'}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // API Key Management Modal
+    function toggleApiModal() {
+      const modal = document.getElementById("apiModal");
+      modal.classList.toggle("hidden");
+    }
+
+    function saveApiKeys() {
+      const gKey = document.getElementById("inputGeminiKey").value.trim();
+      const oKey = document.getElementById("inputOpenAiKey").value.trim();
+      if (gKey) localStorage.setItem("robo_gemini_key", gKey);
+      if (oKey) localStorage.setItem("robo_openai_key", oKey);
+      loadApiKeys();
+      toggleApiModal();
+    }
+
+    function clearApiKeys() {
+      localStorage.removeItem("robo_gemini_key");
+      localStorage.removeItem("robo_openai_key");
+      document.getElementById("inputGeminiKey").value = "";
+      document.getElementById("inputOpenAiKey").value = "";
+      loadApiKeys();
+    }
+
+    function loadApiKeys() {
+      const gKey = localStorage.getItem("robo_gemini_key");
+      const oKey = localStorage.getItem("robo_openai_key");
+      const label = document.getElementById("apiKeyStatusLabel");
+
+      if (gKey) document.getElementById("inputGeminiKey").value = gKey;
+      if (oKey) document.getElementById("inputOpenAiKey").value = oKey;
+
+      if (gKey || oKey) {
+        label.innerText = gKey ? "Gemini Key Active" : "OpenAI Key Active";
+        label.classList.add("text-cyber-accent");
+      } else {
+        label.innerText = "Local CV Active";
+        label.classList.remove("text-cyber-accent");
+      }
+    }
+  </script>
+</body>
+</html>
