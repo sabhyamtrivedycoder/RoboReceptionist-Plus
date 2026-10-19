@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Triage Workstation | Robo Receptionist +</title>
+  <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,27 +26,22 @@
   <style>
     :root {
       --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'Literata', Georgia, serif;
-      --font-sans: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Literata', Georgia, serif;
       --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
     }
 
     html, body {
       font-family: var(--font-body);
-      background-color: #f8fafc;
-      color: #1f2937;
+      background-color: #040806;
+      color: #e2e8f0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
-    .font-display {
-      font-family: var(--font-display);
-    }
-
-    .font-mono-ui {
-      font-family: var(--font-mono);
-    }
+    .font-display { font-family: var(--font-display); }
+    .font-mono-ui { font-family: var(--font-mono); }
 
     .hero-headline {
       font-family: var(--font-display);
@@ -54,7 +50,6 @@
       line-height: 1.06;
       letter-spacing: -0.025em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
     }
 
     .section-heading {
@@ -64,7 +59,6 @@
       line-height: 1.15;
       letter-spacing: -0.02em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
     }
 
     .stat-number {
@@ -73,7 +67,6 @@
       font-size: clamp(2.2rem, 4vw, 3.25rem);
       line-height: 1;
       letter-spacing: -0.02em;
-      color: #0a0a0a;
       font-variation-settings: "opsz" 144;
     }
 
@@ -89,68 +82,74 @@
       display: block !important;
     }
 
-    .clean-panel {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+    .health-panel {
+      background: #09110d;
+      border: 1px solid rgba(16, 185, 129, 0.2);
       border-radius: 20px;
-      box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.05);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .clean-panel:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08);
+    .health-panel:hover {
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 16px 48px -10px rgba(16, 185, 129, 0.15);
     }
   </style>
 </head>
-<body class="selection:bg-gray-900 selection:text-white">
+<body class="selection:bg-emerald-500 selection:text-black">
 
   <!-- Scroll Progress Bar -->
-  <div class="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-[100] pointer-events-none">
-    <div id="scrollProgressBar" class="h-full bg-black w-0"></div>
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[100] pointer-events-none">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-green-300 w-0"></div>
   </div>
 
-  <!-- Editorial Top Navigation Bar -->
+  <!-- Editorial Health-Tech Navigation Bar -->
   <div class="pt-4 px-3 sm:pt-6 sm:px-6 w-full sticky top-0 z-50">
-    <nav class="max-w-7xl mx-auto rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.04)] px-4 sm:px-7 py-3 transition-all duration-300">
-      <div class="flex items-center justify-between gap-4">
-        
-        <!-- Brand Identity -->
-        <a href="index.html" class="flex items-center gap-3 select-none no-underline">
-          <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-display font-medium text-base shadow-sm">
-            R
-          </div>
-          <div>
-            <span class="font-display font-medium text-base sm:text-lg tracking-tight text-gray-900 block leading-none">
-              Robo Receptionist <span class="text-gray-500 font-normal">+</span>
-            </span>
-            <span class="font-mono-ui text-[9px] text-gray-500 tracking-wider uppercase block mt-1">
-              Autonomous Clinical Triage
-            </span>
-          </div>
+    <nav class="max-w-7xl mx-auto rounded-2xl border border-emerald-500/25 bg-[#070e0a]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-7 py-3 transition-all duration-300 flex items-center justify-between gap-4">
+      
+      <!-- Brand Identity -->
+      <a href="index.html" class="flex items-center gap-3 select-none no-underline group">
+        <img src="./static/img/logo_mark.svg" alt="Robo Receptionist + Logo" class="w-8 h-8 rounded-lg shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
+        <div>
+          <span class="font-display font-medium text-base sm:text-lg tracking-tight text-white block leading-none">
+            Robo Receptionist <span class="text-emerald-400 font-bold">+</span>
+          </span>
+          <span class="font-mono-ui text-[9px] text-emerald-400/80 tracking-wider uppercase block mt-1">
+            Autonomous Clinical Triage
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-7 text-xs font-mono-ui font-medium text-slate-300">
+        <a href="index.html" class="hover:text-emerald-300 transition">Home</a>
+        <a href="about.html" class="hover:text-emerald-300 transition">About</a>
+        <a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a>
+        <a href="triage.html" class="text-emerald-400 font-semibold border-b border-emerald-400 pb-0.5 transition">Triage Console</a>
+        <a href="contact.html" class="hover:text-emerald-300 transition">Contact</a>
+        <a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+          <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+          <span>GitHub</span>
+          <svg class="w-2.5 h-2.5 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
         </a>
-
-        <!-- Navigation Links -->
-        <div class="hidden md:flex items-center gap-8 text-xs font-mono-ui font-medium text-gray-600">
-          <a href="index.html" class="hover:text-black transition">Home</a>
-          <a href="about.html" class="hover:text-black transition">About</a>
-          <a href="latest-work.html" class="hover:text-black transition">Latest Work</a>
-          <a href="contact.html" class="hover:text-black transition">Contact</a>
-        </div>
-
-        <!-- Action Controls -->
-        <div class="flex items-center gap-3">
-          <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono-ui border border-emerald-500/30 text-emerald-700 bg-emerald-50">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Console Online</span>
-          </div>
-
-          <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-medium bg-black text-white hover:bg-gray-800 shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
-            <span>Diagnostic Console</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-          </a>
-        </div>
-
       </div>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-mono-ui border border-emerald-500/30 text-emerald-400 bg-[#0c1811]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Station Active</span>
+        </div>
+
+        <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-semibold bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
+          <span>Diagnostic Console</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
+        </a>
+      </div>
+
     </nav>
   </div>
 
@@ -158,13 +157,16 @@
   <section class="pt-12 pb-8 px-4 sm:px-6 relative">
     <div class="max-w-7xl mx-auto">
       <div class="max-w-3xl" data-aos="fade-up">
-        <p class="font-mono-ui text-xs font-medium uppercase tracking-[0.22em] text-gray-500 mb-3">
-          LIVE CLINICAL CONSOLE
-        </p>
-        <h1 class="hero-headline mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-[#09150e] mb-3">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span class="font-mono-ui text-xs font-medium uppercase tracking-[0.22em] text-emerald-300">
+            LIVE CLINICAL CONSOLE
+          </span>
+        </div>
+        <h1 class="hero-headline text-white mb-3">
           Diagnostic Optical Terminal
         </h1>
-        <p class="text-sm sm:text-base text-gray-600 font-light leading-relaxed max-w-2xl">
+        <p class="text-sm sm:text-base text-slate-300 font-light leading-relaxed max-w-2xl">
           Ingest patient injury imagery to execute real-time HSV color segmentation, 3x3 Sobel edge convolution, ESI v4 emergency prioritization, and on-call physician dispatch.
         </p>
       </div>
@@ -182,46 +184,46 @@
         <div class="lg:col-span-5 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="100">
 
           <!-- Ingestion Card -->
-          <div class="clean-panel p-6 relative overflow-hidden">
+          <div class="health-panel p-6 relative overflow-hidden">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="font-mono-ui text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="crosshair" class="w-4 h-4 text-gray-700"></i>
+              <h3 class="font-mono-ui text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="crosshair" class="w-4 h-4 text-emerald-400"></i>
                 Patient Trauma Ingestion
               </h3>
-              <span id="hudStatus" class="font-mono-ui text-[10px] text-gray-500 tracking-widest uppercase">
+              <span id="hudStatus" class="font-mono-ui text-[10px] text-emerald-400 tracking-widest uppercase">
                 READY // SENSOR ACTIVE
               </span>
             </div>
 
             <!-- Ingestion Mode Tabs -->
-            <div class="grid grid-cols-3 gap-1 bg-gray-100 p-1 rounded-xl mb-4 text-xs font-mono-ui">
-              <button id="btnTabUpload" onclick="app.switchInputMode('upload')" class="py-1.5 rounded-lg text-center font-semibold bg-white text-gray-900 shadow-sm border border-gray-200 transition">
+            <div class="grid grid-cols-3 gap-1 bg-[#06100a] p-1 rounded-xl mb-4 text-xs font-mono-ui border border-emerald-500/20">
+              <button id="btnTabUpload" onclick="app.switchInputMode('upload')" class="py-1.5 rounded-lg text-center font-semibold bg-emerald-500 text-black shadow-sm transition">
                 Upload File
               </button>
-              <button id="btnTabWebcam" onclick="app.switchInputMode('webcam')" class="py-1.5 rounded-lg text-center font-medium text-gray-600 hover:text-gray-900 transition">
+              <button id="btnTabWebcam" onclick="app.switchInputMode('webcam')" class="py-1.5 rounded-lg text-center font-medium text-slate-400 hover:text-white transition">
                 Live Camera
               </button>
-              <button id="btnTabSamples" onclick="app.switchInputMode('samples')" class="py-1.5 rounded-lg text-center font-medium text-gray-600 hover:text-gray-900 transition">
+              <button id="btnTabSamples" onclick="app.switchInputMode('samples')" class="py-1.5 rounded-lg text-center font-medium text-slate-400 hover:text-white transition">
                 Case Studies
               </button>
             </div>
 
             <!-- Ingestion Viewport Container -->
-            <div id="scanViewport" class="relative w-full aspect-square bg-[#030611] rounded-2xl border border-gray-800 overflow-hidden flex items-center justify-center group shadow-inner">
+            <div id="scanViewport" class="relative w-full aspect-square bg-[#020503] rounded-2xl border border-emerald-950 overflow-hidden flex items-center justify-center group shadow-inner">
               
-              <!-- Subtle Scanning Progress Bar Indicator -->
-              <div class="scan-progress-bar hidden absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent z-30" style="animation: progressSweep 1.2s infinite linear;"></div>
+              <!-- Scanning Progress Bar Indicator -->
+              <div class="scan-progress-bar hidden absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent z-30" style="animation: progressSweep 1.2s infinite linear;"></div>
 
               <!-- View 1: Upload Dropzone & Preview -->
               <div id="uploadView" class="w-full h-full relative flex items-center justify-center">
                 <img id="previewImage" src="" alt="Injury Preview" class="hidden w-full h-full object-contain z-10">
                 <div id="uploadPlaceholder" class="text-center p-6 flex flex-col items-center">
-                  <div class="w-14 h-14 rounded-2xl bg-gray-900 border border-gray-700 flex items-center justify-center text-gray-300 mb-3 shadow-sm group-hover:scale-105 transition-transform">
+                  <div class="w-14 h-14 rounded-2xl bg-[#08150e] border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-3 shadow-[0_0_15px_rgba(16,185,129,0.2)] group-hover:scale-105 transition-transform">
                     <i data-lucide="upload-cloud" class="w-7 h-7"></i>
                   </div>
-                  <p class="font-mono-ui text-xs font-semibold text-gray-200">Drag &amp; drop clinical photograph</p>
-                  <p class="font-mono-ui text-[10px] text-gray-400 mt-1">Direct upload (JPEG, PNG, WebP) up to 25MB</p>
-                  <label class="mt-4 px-4 py-2 rounded-xl bg-gray-800 border border-gray-700 text-gray-200 hover:text-white hover:bg-gray-700 font-mono-ui text-xs cursor-pointer transition shadow-sm">
+                  <p class="font-mono-ui text-xs font-semibold text-white">Drag &amp; drop clinical photograph</p>
+                  <p class="font-mono-ui text-[10px] text-slate-400 mt-1">Direct upload (JPEG, PNG, WebP) up to 25MB</p>
+                  <label class="mt-4 px-4 py-2 rounded-xl bg-[#0c1c13] border border-emerald-500/30 text-emerald-300 hover:text-white hover:border-emerald-400 font-mono-ui text-xs cursor-pointer transition shadow-sm">
                     Select Local File
                     <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="app.handleFileSelect(event)">
                   </label>
@@ -232,7 +234,7 @@
               <div id="webcamView" class="hidden w-full h-full relative">
                 <video id="webcamVideo" autoplay playsinline muted class="w-full h-full object-cover"></video>
                 <div class="absolute bottom-4 left-0 right-0 flex justify-center z-20">
-                  <button onclick="app.captureWebcamFrame()" class="px-5 py-2.5 rounded-xl bg-white text-gray-900 font-mono-ui font-bold text-xs flex items-center gap-2 shadow-lg transition transform active:scale-95 hover:bg-gray-100">
+                  <button onclick="app.captureWebcamFrame()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-mono-ui font-bold text-xs flex items-center gap-2 shadow-lg transition transform active:scale-95">
                     <i data-lucide="camera" class="w-4 h-4"></i>
                     Capture Frame
                   </button>
@@ -240,57 +242,57 @@
               </div>
 
               <!-- View 3: Curated Clinical Sample Cases -->
-              <div id="samplesView" class="hidden w-full h-full p-4 overflow-y-auto space-y-2.5 bg-gray-950/95">
-                <p class="font-mono-ui text-[11px] text-gray-400 uppercase tracking-wider mb-2">Preset Clinical Presentations:</p>
+              <div id="samplesView" class="hidden w-full h-full p-4 overflow-y-auto space-y-2.5 bg-[#030805]">
+                <p class="font-mono-ui text-[11px] text-emerald-400 uppercase tracking-wider mb-2">Preset Clinical Presentations:</p>
                 
-                <button onclick="app.selectSample('laceration', 'Deep Cutaneous Laceration')" class="w-full p-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 text-left transition flex items-center justify-between group">
+                <button onclick="app.selectSample('laceration', 'Deep Cutaneous Laceration')" class="w-full p-3 rounded-xl bg-[#08150e] hover:bg-[#0c2016] border border-emerald-500/20 hover:border-emerald-500/50 text-left transition flex items-center justify-between group">
                   <div>
                     <span class="font-mono-ui text-xs font-semibold text-white block">Case 101: Cutaneous Laceration</span>
-                    <span class="font-mono-ui text-[10px] text-gray-400">Forearm soft-tissue wound with active capillary bleeding</span>
+                    <span class="font-mono-ui text-[10px] text-slate-400">Forearm soft-tissue wound with active capillary bleeding</span>
                   </div>
-                  <span class="text-xs font-mono-ui text-gray-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span class="text-xs font-mono-ui text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </button>
 
-                <button onclick="app.selectSample('burn', 'Second-Degree Thermal Burn')" class="w-full p-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 text-left transition flex items-center justify-between group">
+                <button onclick="app.selectSample('burn', 'Second-Degree Thermal Burn')" class="w-full p-3 rounded-xl bg-[#08150e] hover:bg-[#0c2016] border border-emerald-500/20 hover:border-emerald-500/50 text-left transition flex items-center justify-between group">
                   <div>
                     <span class="font-mono-ui text-xs font-semibold text-white block">Case 102: Thermal Scald / Burn</span>
-                    <span class="font-mono-ui text-[10px] text-gray-400">Epidermal blister with significant erythema extravasation</span>
+                    <span class="font-mono-ui text-[10px] text-slate-400">Epidermal blister with significant erythema extravasation</span>
                   </div>
-                  <span class="text-xs font-mono-ui text-gray-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span class="text-xs font-mono-ui text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </button>
 
-                <button onclick="app.selectSample('fracture', 'Suspected Bone Fracture')" class="w-full p-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 text-left transition flex items-center justify-between group">
+                <button onclick="app.selectSample('fracture', 'Suspected Bone Fracture')" class="w-full p-3 rounded-xl bg-[#08150e] hover:bg-[#0c2016] border border-emerald-500/20 hover:border-emerald-500/50 text-left transition flex items-center justify-between group">
                   <div>
                     <span class="font-mono-ui text-xs font-semibold text-white block">Case 103: Compound Fracture</span>
-                    <span class="font-mono-ui text-[10px] text-gray-400">Angular limb deformity with focal tissue edema</span>
+                    <span class="font-mono-ui text-[10px] text-slate-400">Angular limb deformity with focal tissue edema</span>
                   </div>
-                  <span class="text-xs font-mono-ui text-gray-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span class="text-xs font-mono-ui text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </button>
 
-                <button onclick="app.selectSample('eye', 'Acute Ocular Trauma')" class="w-full p-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 text-left transition flex items-center justify-between group">
+                <button onclick="app.selectSample('eye', 'Acute Ocular Trauma')" class="w-full p-3 rounded-xl bg-[#08150e] hover:bg-[#0c2016] border border-emerald-500/20 hover:border-emerald-500/50 text-left transition flex items-center justify-between group">
                   <div>
                     <span class="font-mono-ui text-xs font-semibold text-white block">Case 104: Periorbital Trauma</span>
-                    <span class="font-mono-ui text-[10px] text-gray-400">Corneal hyperemia &amp; blunt ocular contusion</span>
+                    <span class="font-mono-ui text-[10px] text-slate-400">Corneal hyperemia &amp; blunt ocular contusion</span>
                   </div>
-                  <span class="text-xs font-mono-ui text-gray-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span class="text-xs font-mono-ui text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </button>
 
-                <button onclick="app.selectSample('contusion', 'Soft Tissue Contusion')" class="w-full p-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 text-left transition flex items-center justify-between group">
+                <button onclick="app.selectSample('contusion', 'Soft Tissue Contusion')" class="w-full p-3 rounded-xl bg-[#08150e] hover:bg-[#0c2016] border border-emerald-500/20 hover:border-emerald-500/50 text-left transition flex items-center justify-between group">
                   <div>
                     <span class="font-mono-ui text-xs font-semibold text-white block">Case 105: Blunt Contusion</span>
-                    <span class="font-mono-ui text-[10px] text-gray-400">Subcutaneous ecchymosis without skin compromise</span>
+                    <span class="font-mono-ui text-[10px] text-slate-400">Subcutaneous ecchymosis without skin compromise</span>
                   </div>
-                  <span class="text-xs font-mono-ui text-gray-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span class="text-xs font-mono-ui text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </button>
               </div>
 
               <!-- HUD Targeting Crosshair Overlays -->
-              <div class="pointer-events-none absolute inset-4 border border-cyan-400/20 rounded-xl z-20 flex flex-col justify-between p-2">
-                <div class="flex justify-between items-start text-[9px] font-mono-ui text-cyan-400/60">
+              <div class="pointer-events-none absolute inset-4 border border-emerald-500/20 rounded-xl z-20 flex flex-col justify-between p-2">
+                <div class="flex justify-between items-start text-[9px] font-mono-ui text-emerald-400/70">
                   <span>FOV: 84&deg;</span>
                   <span>SPECTRAL: 540nm</span>
                 </div>
-                <div class="flex justify-between items-end text-[9px] font-mono-ui text-cyan-400/60">
+                <div class="flex justify-between items-end text-[9px] font-mono-ui text-emerald-400/70">
                   <span>CAL: ISO 13485</span>
                   <span>FPS: 60</span>
                 </div>
@@ -299,7 +301,7 @@
             </div>
 
             <!-- Primary Trigger Action -->
-            <button id="btnScan" onclick="app.triggerScan()" class="mt-5 w-full py-4 rounded-xl bg-black hover:bg-gray-800 text-white font-mono-ui font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(0,0,0,0.18)] transition transform hover:-translate-y-0.5 active:scale-[0.98]">
+            <button id="btnScan" onclick="app.triggerScan()" class="mt-5 w-full py-4 rounded-xl bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 hover:brightness-110 text-black font-mono-ui font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_6px_25px_rgba(16,185,129,0.35)] transition transform hover:-translate-y-0.5 active:scale-[0.98]">
               <i data-lucide="play" class="w-4 h-4 fill-current"></i>
               <span id="scanBtnText">Execute Optical Triage Scan</span>
             </button>
@@ -307,34 +309,34 @@
           </div>
 
           <!-- Secondary Telemetry HUD Card: Sobel Gradient Convolution Viewport -->
-          <div class="clean-panel p-6 relative">
+          <div class="health-panel p-6 relative">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="font-mono-ui text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="layers" class="w-4 h-4 text-gray-700"></i>
+              <h3 class="font-mono-ui text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i>
                 Sobel Gradient Convolution
               </h3>
               <div class="flex gap-2">
-                <button onclick="app.setEdgeFilterMode('sobel')" class="px-2.5 py-1 rounded-md text-[10px] font-mono-ui bg-gray-100 hover:bg-gray-200 text-gray-800 transition">Sobel 3x3</button>
-                <button onclick="app.setEdgeFilterMode('hsv')" class="px-2.5 py-1 rounded-md text-[10px] font-mono-ui bg-gray-100 hover:bg-gray-200 text-gray-800 transition">HSV Mask</button>
+                <button onclick="app.setEdgeFilterMode('sobel')" class="px-2.5 py-1 rounded-md text-[10px] font-mono-ui bg-[#08150e] border border-emerald-500/30 text-emerald-300 hover:text-white transition">Sobel 3x3</button>
+                <button onclick="app.setEdgeFilterMode('hsv')" class="px-2.5 py-1 rounded-md text-[10px] font-mono-ui bg-[#08150e] border border-emerald-950 text-slate-400 hover:text-white transition">HSV Mask</button>
               </div>
             </div>
 
-            <div class="w-full aspect-[16/9] bg-[#02050e] rounded-xl border border-gray-800 overflow-hidden relative flex items-center justify-center">
+            <div class="w-full aspect-[16/9] bg-[#020503] rounded-xl border border-emerald-950 overflow-hidden relative flex items-center justify-center">
               <canvas id="edgeCanvas" width="480" height="270" class="w-full h-full object-cover"></canvas>
-              <div id="edgePlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 font-mono-ui text-xs p-4 text-center">
-                <i data-lucide="scan" class="w-6 h-6 mb-2 text-gray-600"></i>
+              <div id="edgePlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 font-mono-ui text-xs p-4 text-center">
+                <i data-lucide="scan" class="w-6 h-6 mb-2 text-emerald-600"></i>
                 <span>Awaiting optical ingestion to compute gradient matrices</span>
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3 mt-4 text-xs font-mono-ui">
-              <div class="p-3 rounded-xl bg-gray-50 border border-gray-200">
-                <span class="text-gray-500 block text-[10px] uppercase">Sobel Gradient Density</span>
-                <span id="edgeScore" class="text-gray-900 font-bold text-sm">--</span>
+              <div class="p-3 rounded-xl bg-[#08120d] border border-emerald-500/20">
+                <span class="text-slate-400 block text-[10px] uppercase">Sobel Gradient Density</span>
+                <span id="edgeScore" class="text-emerald-400 font-bold text-sm">--</span>
               </div>
-              <div class="p-3 rounded-xl bg-gray-50 border border-gray-200">
-                <span class="text-gray-500 block text-[10px] uppercase">Erythema Extravasation</span>
-                <span id="rednessScore" class="text-gray-900 font-bold text-sm">--</span>
+              <div class="p-3 rounded-xl bg-[#08120d] border border-emerald-500/20">
+                <span class="text-slate-400 block text-[10px] uppercase">Erythema Extravasation</span>
+                <span id="rednessScore" class="text-teal-300 font-bold text-sm">--</span>
               </div>
             </div>
           </div>
@@ -345,47 +347,47 @@
         <div class="lg:col-span-7 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="200">
 
           <!-- Core Clinical Assessment Card -->
-          <div class="clean-panel p-7 relative">
+          <div class="health-panel p-7 relative">
             
-            <div class="flex items-start justify-between gap-4 mb-6 pb-5 border-b border-gray-100 flex-wrap">
+            <div class="flex items-start justify-between gap-4 mb-6 pb-5 border-b border-emerald-950 flex-wrap">
               <div>
-                <span class="font-mono-ui text-[10px] text-gray-400 tracking-[0.2em] uppercase block mb-1">
+                <span class="font-mono-ui text-[10px] text-emerald-400 tracking-[0.2em] uppercase block mb-1">
                   DIAGNOSTIC SYNTHESIS
                 </span>
-                <h3 id="resInjuryTitle" class="font-display text-2xl sm:text-3xl font-normal text-gray-950">
+                <h3 id="resInjuryTitle" class="font-display text-2xl sm:text-3xl font-normal text-white">
                   Awaiting Optical Telemetry
                 </h3>
-                <p id="resIcdCode" class="font-mono-ui text-xs text-gray-500 mt-1">
+                <p id="resIcdCode" class="font-mono-ui text-xs text-slate-400 mt-1">
                   ICD-10 Code: Pending Intake
                 </p>
               </div>
 
               <!-- ESI Acuity Badge -->
-              <div id="resEsiBadge" class="px-4 py-2 rounded-xl bg-gray-100 border border-gray-200 text-gray-800 font-mono-ui text-xs font-bold uppercase tracking-wider text-center">
-                <span class="text-[10px] block font-normal text-gray-500">Acuity Stratification</span>
+              <div id="resEsiBadge" class="px-4 py-2 rounded-xl bg-[#08150e] border border-emerald-500/30 text-emerald-300 font-mono-ui text-xs font-bold uppercase tracking-wider text-center">
+                <span class="text-[10px] block font-normal text-slate-400">Acuity Stratification</span>
                 <span id="resEsiText">ESI Level --</span>
               </div>
             </div>
 
             <!-- Clinical Explanation Narrative -->
             <div class="mb-6">
-              <h4 class="font-mono-ui text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
+              <h4 class="font-mono-ui text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                 Pathophysiological Observation
               </h4>
-              <p id="resClinicalNarrative" class="text-xs sm:text-sm text-gray-700 leading-relaxed font-light bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <p id="resClinicalNarrative" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light bg-[#08120d] p-4 rounded-xl border border-emerald-500/20">
                 Select a clinical sample presentation or upload a wound photograph to trigger real-time anatomical edge delineation and erythema distribution modeling.
               </p>
             </div>
 
             <!-- Immediate Pre-Hospital Stabilization Protocol -->
             <div class="mb-6">
-              <h4 class="font-mono-ui text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <i data-lucide="shield-alert" class="w-4 h-4 text-gray-700"></i>
+              <h4 class="font-mono-ui text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-emerald-400"></i>
                 Emergency Stabilization Directive
               </h4>
-              <ul id="resFirstAidList" class="space-y-2 text-xs font-mono-ui text-gray-700">
-                <li class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-start gap-2.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-black mt-1.5"></span>
+              <ul id="resFirstAidList" class="space-y-2 text-xs font-mono-ui text-slate-300">
+                <li class="p-3 rounded-xl bg-[#08120d] border border-emerald-500/20 flex items-start gap-2.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1"></span>
                   <span>Maintain sterile field and avoid direct lesion palpation until surgical assessment.</span>
                 </li>
               </ul>
@@ -394,12 +396,12 @@
             <!-- Attending Specialist Paging System -->
             <div>
               <div class="flex items-center justify-between mb-3">
-                <h4 class="font-mono-ui text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-2">
-                  <i data-lucide="user-check" class="w-4 h-4 text-gray-700"></i>
+                <h4 class="font-mono-ui text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                  <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
                   On-Call Specialist Roster
                 </h4>
-                <span class="text-[10px] font-mono-ui text-emerald-600 flex items-center gap-1 font-medium">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[10px] font-mono-ui text-emerald-400 flex items-center gap-1 font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                   Verified On-Duty
                 </span>
               </div>
@@ -407,17 +409,17 @@
               <!-- Doctors List Container -->
               <div id="doctorRosterContainer" class="space-y-3">
                 <!-- Dynamically Populated by App Controller -->
-                <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-4">
+                <div class="p-4 rounded-xl bg-[#08150e] border border-emerald-500/20 flex items-center justify-between gap-4">
                   <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-800 font-mono-ui font-bold text-xs">
+                    <div class="w-10 h-10 rounded-xl bg-[#0e2418] border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono-ui font-bold text-xs">
                       DR
                     </div>
                     <div>
-                      <h5 class="text-xs font-bold text-gray-900">Trauma Surgical Pool</h5>
-                      <p class="text-[10px] font-mono-ui text-gray-500">Department: Emergency Surgery &middot; Suite 04</p>
+                      <h5 class="text-xs font-bold text-white">Trauma Surgical Pool</h5>
+                      <p class="text-[10px] font-mono-ui text-slate-400">Department: Emergency Surgery &middot; Suite 04</p>
                     </div>
                   </div>
-                  <button disabled class="px-4 py-2 rounded-xl bg-gray-200 text-gray-400 text-xs font-mono-ui font-semibold cursor-not-allowed">
+                  <button disabled class="px-4 py-2 rounded-xl bg-[#06100a] border border-emerald-950 text-slate-500 text-xs font-mono-ui font-semibold cursor-not-allowed">
                     Awaiting Scan
                   </button>
                 </div>
@@ -426,11 +428,11 @@
             </div>
 
             <!-- Export Clinical Report Action -->
-            <div class="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between flex-wrap gap-4">
-              <div class="text-[11px] font-mono-ui text-gray-500">
-                Patient Admission Identifier: <span id="resPatientId" class="text-gray-900 font-bold">ER-PENDING</span>
+            <div class="mt-8 pt-6 border-t border-emerald-950 flex items-center justify-between flex-wrap gap-4">
+              <div class="text-[11px] font-mono-ui text-slate-400">
+                Patient Admission Identifier: <span id="resPatientId" class="text-emerald-400 font-bold">ER-PENDING</span>
               </div>
-              <button onclick="app.downloadAdmissionProfile()" class="px-5 py-2.5 rounded-xl bg-gray-900 hover:bg-black text-white font-mono-ui text-xs flex items-center gap-2 transition shadow-sm">
+              <button onclick="app.downloadAdmissionProfile()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-mono-ui text-xs font-bold flex items-center gap-2 transition hover:brightness-110 shadow-sm">
                 <i data-lucide="download" class="w-4 h-4"></i>
                 Export Admission Ticket (JSON)
               </button>
@@ -446,29 +448,29 @@
   </section>
 
   <!-- HOSPITAL OPERATIONAL CENSUS TELEMETRY -->
-  <section id="census" class="py-16 px-4 sm:px-6 relative border-t border-gray-200 bg-white">
+  <section id="census" class="py-16 px-4 sm:px-6 relative border-t border-emerald-950/80 bg-[#060c08]">
     <div class="max-w-6xl mx-auto">
       
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-200 text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-emerald-900/40 text-center">
         
         <div class="pt-6 md:pt-0 px-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="stat-number mb-2">&lt; 0.85s</div>
-          <div class="font-mono-ui text-[11px] text-gray-500 uppercase tracking-wider">Average Triage Latency</div>
+          <div class="stat-number text-emerald-400 mb-2">&lt; 0.85s</div>
+          <div class="font-mono-ui text-[11px] text-slate-400 uppercase tracking-wider">Average Triage Latency</div>
         </div>
 
         <div class="pt-6 md:pt-0 px-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="stat-number mb-2">100%</div>
-          <div class="font-mono-ui text-[11px] text-gray-500 uppercase tracking-wider">Optical Coverage</div>
+          <div class="stat-number text-teal-300 mb-2">100%</div>
+          <div class="font-mono-ui text-[11px] text-slate-400 uppercase tracking-wider">Optical Coverage</div>
         </div>
 
         <div class="pt-6 md:pt-0 px-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="stat-number mb-2">6 / 6</div>
-          <div class="font-mono-ui text-[11px] text-gray-500 uppercase tracking-wider">Specialists On Duty</div>
+          <div class="stat-number text-emerald-400 mb-2">6 / 6</div>
+          <div class="font-mono-ui text-[11px] text-slate-400 uppercase tracking-wider">Specialists On Duty</div>
         </div>
 
         <div class="pt-6 md:pt-0 px-4" data-aos="fade-up" data-aos-delay="400">
-          <div class="stat-number mb-2">4.93 / 5</div>
-          <div class="font-mono-ui text-[11px] text-gray-500 uppercase tracking-wider">Peer Clinical Review</div>
+          <div class="stat-number text-teal-300 mb-2">4.93 / 5</div>
+          <div class="font-mono-ui text-[11px] text-slate-400 uppercase tracking-wider">Peer Clinical Review</div>
         </div>
 
       </div>
@@ -477,26 +479,26 @@
   </section>
 
   <!-- CLINICAL AUDIT LOG REGISTRY -->
-  <section id="audit" class="py-16 px-4 sm:px-6 relative border-t border-gray-200 bg-[#fafafa]">
+  <section id="audit" class="py-16 px-4 sm:px-6 relative border-t border-emerald-950/80 bg-[#040806]">
     <div class="max-w-6xl mx-auto">
       
       <div class="flex items-center justify-between mb-8 flex-wrap gap-4" data-aos="fade-up">
         <div>
-          <p class="font-mono-ui text-[11px] text-gray-400 tracking-[0.22em] uppercase mb-1">AUDIT REGISTRY</p>
-          <h2 class="section-heading">Emergency Session Encounters</h2>
+          <p class="font-mono-ui text-[11px] text-emerald-400 tracking-[0.22em] uppercase mb-1">AUDIT REGISTRY</p>
+          <h2 class="section-heading text-white">Emergency Session Encounters</h2>
         </div>
-        <button onclick="app.loadHistory()" class="px-4 py-2 rounded-xl bg-white border border-gray-200 text-xs font-mono-ui text-gray-800 hover:text-black hover:border-black flex items-center gap-1.5 transition shadow-sm">
+        <button onclick="app.loadHistory()" class="px-4 py-2 rounded-xl bg-[#09150e] border border-emerald-500/30 text-xs font-mono-ui text-emerald-300 hover:text-white hover:border-emerald-400 flex items-center gap-1.5 transition shadow-sm">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
           <span>Refresh Records</span>
         </button>
       </div>
 
-      <div class="clean-panel overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+      <div class="health-panel overflow-hidden" data-aos="fade-up" data-aos-delay="100">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs font-mono-ui">
-            <thead class="text-gray-500 border-b border-gray-200 bg-gray-50">
+            <thead class="text-slate-400 border-b border-emerald-950 bg-[#06100a]">
               <tr>
-                <th class="py-3 px-4 font-semibold">PATIENT TICKET</th>
+                <th class="py-3 px-4 font-semibold text-white">PATIENT TICKET</th>
                 <th class="py-3 px-4 font-semibold">TIMESTAMP</th>
                 <th class="py-3 px-4 font-semibold">INJURY PRESENTATION</th>
                 <th class="py-3 px-4 font-semibold">ESI ACUITY</th>
@@ -504,7 +506,7 @@
                 <th class="py-3 px-4 font-semibold">ATTENDING PHYSICIAN</th>
               </tr>
             </thead>
-            <tbody id="historyTableBody" class="divide-y divide-gray-100 text-gray-800">
+            <tbody id="historyTableBody" class="divide-y divide-emerald-950/60 text-slate-300">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -515,20 +517,20 @@
   </section>
 
   <!-- GET IN TOUCH SECTION (Bottom of page) -->
-  <section class="py-24 px-4 sm:px-6 bg-white border-t border-gray-200">
+  <section class="py-24 px-4 sm:px-6 bg-[#030605] border-t border-emerald-950/80">
     <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-      <p class="font-mono-ui text-xs uppercase tracking-[0.25em] text-gray-400 mb-3">GET IN TOUCH</p>
-      <h2 class="section-heading mb-8">Get in touch</h2>
+      <p class="font-mono-ui text-xs uppercase tracking-[0.25em] text-emerald-400 mb-3">GET IN TOUCH</p>
+      <h2 class="section-heading text-white mb-8">Get in touch</h2>
 
       <div class="flex justify-center">
-        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-white border border-gray-200 hover:border-black text-gray-900 transition-all transform hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.06)] group">
-          <span class="w-7 h-7 rounded-md bg-[#0a66c2] flex items-center justify-center text-white font-bold text-xs tracking-tight font-sans">
+        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-[#09150e] border border-emerald-500/30 hover:border-emerald-400 text-white transition-all transform hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.6)] group">
+          <span class="w-8 h-8 rounded-lg bg-[#0a66c2] group-hover:bg-[#004182] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans transition-colors shadow-sm">
             in
           </span>
-          <span class="font-display text-xl text-gray-950 font-normal">
+          <span class="font-display text-xl text-white group-hover:text-emerald-300 transition-colors">
             LinkedIn
           </span>
-          <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+          <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
           </svg>
         </a>
@@ -536,46 +538,47 @@
     </div>
   </section>
 
-  <!-- MINIMALIST BLACK EDITORIAL FOOTER -->
-  <footer class="bg-[#0a0a0a] text-gray-400 py-16 px-4 sm:px-6">
+  <!-- MINIMALIST HEALTH-TECH FOOTER -->
+  <footer class="bg-[#020503] text-slate-400 py-16 px-4 sm:px-6 border-t border-emerald-950/80">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
         <div class="md:col-span-1">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-gray-400 font-light">+</span></span>
+          <div class="flex items-center gap-3 mb-3">
+            <img src="./static/img/logo_mark.svg" alt="Emblem" class="w-7 h-7 rounded-md">
+            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-emerald-400 font-bold">+</span></span>
           </div>
-          <p class="text-xs text-gray-400 leading-relaxed font-light">
-            Autonomous late-night emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
+          <p class="text-xs text-slate-400 leading-relaxed font-light">
+            Autonomous acute emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
           </p>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Navigation</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
-            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-            <li><a href="about.html" class="hover:text-white transition">About</a></li>
-            <li><a href="latest-work.html" class="hover:text-white transition">Latest Work</a></li>
-            <li><a href="triage.html" class="hover:text-white transition text-white">Triage Console</a></li>
-            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Navigation</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-emerald-300 transition">About</a></li>
+            <li><a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a></li>
+            <li><a href="triage.html" class="hover:text-emerald-300 transition text-emerald-400">Triage Console</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-300 transition">Contact</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Compliance</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
-            <li>Emergency Severity Index (ESI v4)</li>
-            <li>ISO 13485 Quality Standard</li>
-            <li>HL7 / FHIR Admission Export</li>
-            <li>Deterministic CV Fallback</li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Open Source</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">GitHub Repository</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">MIT License</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Contributing Guide</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Code of Conduct</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Connect</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Connect</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
             <li>
-              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition inline-flex items-center gap-2">
+              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition inline-flex items-center gap-2">
                 <span class="w-4 h-4 rounded-[3px] bg-[#0a66c2] text-white flex items-center justify-center font-bold text-[9px] font-sans">in</span>
                 <span>LinkedIn</span>
                 <svg class="w-2.5 h-2.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
@@ -588,32 +591,32 @@
 
       </div>
 
-      <div class="border-t border-gray-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-gray-500">
+      <div class="border-t border-emerald-950 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-slate-500">
         <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved.</p>
-        <p>Emergency Severity Index (ESI v4) &middot; ISO 13485 Compliant</p>
+        <p>100% Open Source Under MIT License &middot; ESI v4 Standard Compliant</p>
       </div>
     </div>
   </footer>
 
   <!-- Specialist Pager Dispatch Modal -->
-  <div id="dispatchModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl border border-gray-200 max-w-md w-full p-6 shadow-2xl relative text-center">
-      <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 mx-auto flex items-center justify-center text-emerald-600 mb-4 shadow-sm">
+  <div id="dispatchModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="health-panel max-w-md w-full p-6 shadow-2xl relative text-center">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400 mx-auto flex items-center justify-center text-emerald-400 mb-4 shadow-sm">
         <i data-lucide="bell-ring" class="w-6 h-6"></i>
       </div>
-      <h3 class="font-display text-lg font-normal text-gray-950 uppercase tracking-wide">Specialist Physician Paged</h3>
-      <p id="dispatchMsg" class="text-xs text-gray-600 mt-2 font-mono-ui leading-relaxed font-light">
+      <h3 class="font-display text-lg font-normal text-white uppercase tracking-wide">Specialist Physician Paged</h3>
+      <p id="dispatchMsg" class="text-xs text-slate-300 mt-2 font-mono-ui leading-relaxed font-light">
         Pager alert routed to attending specialist. Trauma Bay has been prepped for direct admission.
       </p>
 
-      <div class="mt-5 p-4 rounded-xl bg-gray-50 border border-gray-200 text-left text-xs font-mono-ui space-y-1.5">
-        <p class="text-gray-500">Patient Ticket: <span id="dispTicket" class="text-gray-950 font-bold">ER-10928</span></p>
-        <p class="text-gray-500">Department: <span id="dispDept" class="text-gray-900">Emergency Trauma</span></p>
-        <p class="text-gray-500">Clinical Suite: <span id="dispRoom" class="text-gray-900 font-semibold">Trauma Bay 01</span></p>
-        <p class="text-gray-500">Triage Priority: <span class="text-emerald-600 font-medium">Direct Emergency Intake</span></p>
+      <div class="mt-5 p-4 rounded-xl bg-[#06100a] border border-emerald-500/30 text-left text-xs font-mono-ui space-y-1.5">
+        <p class="text-slate-400">Patient Ticket: <span id="dispTicket" class="text-emerald-400 font-bold">ER-10928</span></p>
+        <p class="text-slate-400">Department: <span id="dispDept" class="text-white">Emergency Trauma</span></p>
+        <p class="text-slate-400">Clinical Suite: <span id="dispRoom" class="text-teal-300">Trauma Bay 01</span></p>
+        <p class="text-slate-400">Triage Priority: <span class="text-emerald-400">Direct Emergency Intake</span></p>
       </div>
 
-      <button onclick="app.closeDispatchModal()" class="mt-6 w-full py-2.5 rounded-xl bg-black hover:bg-gray-800 text-white font-mono-ui font-semibold text-xs transition shadow-md">
+      <button onclick="app.closeDispatchModal()" class="mt-6 w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-300 text-black font-mono-ui font-bold text-xs transition hover:brightness-110 shadow-md">
         Acknowledge &amp; Return to Console
       </button>
     </div>

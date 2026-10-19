@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Background rich obsidian carbon -->
+    <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070c09" />
+      <stop offset="100%" stop-color="#020403" />
+    </linearGradient>
+
+    <!-- Emerald Clinical Cross Gradient -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Core Vital Pulse Glow -->
+    <radialGradient id="vitalGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="1" />
+      <stop offset="40%" stop-color="#10b981" stop-opacity="0.8" />
+      <stop offset="75%" stop-color="#059669" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#059669" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Subtle Emerald Rim Border -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Canvas Base -->
+  <rect x="2" y="2" width="116" height="116" rx="28" fill="url(#logoBgGrad)" stroke="url(#rimGrad)" stroke-width="1.8" />
+
+  <!-- Ambient Vital Green Glow -->
+  <circle cx="60" cy="60" r="46" fill="url(#vitalGlow)" opacity="0.2" />
+
+  <!-- Calibrated Medical Reticle Rings -->
+  <g stroke="#10b981" stroke-width="0.8" stroke-linecap="round" opacity="0.35">
+    <circle cx="60" cy="60" r="40" stroke-dasharray="2 6" fill="none" />
+    <circle cx="60" cy="60" r="26" stroke-dasharray="3 4" fill="none" />
+    
+    <!-- Reticle Ticks -->
+    <line x1="60" y1="13" x2="60" y2="19" stroke-width="1.5" />
+    <line x1="60" y1="101" x2="60" y2="107" stroke-width="1.5" />
+    <line x1="13" y1="60" x2="19" y2="60" stroke-width="1.5" />
+    <line x1="101" y1="60" x2="107" y2="60" stroke-width="1.5" />
+  </g>
+
+  <!-- Medical Cross: 4 Symmetrical Precision Curved Blades -->
+  <!-- North Arm -->
+  <path d="M53 23 C53 20 67 20 67 23 L66 43 C63 45 57 45 54 43 Z" fill="url(#emeraldGrad)" />
+  <!-- South Arm -->
+  <path d="M53 97 C53 100 67 100 67 97 L66 77 C63 75 57 75 54 77 Z" fill="url(#emeraldGrad)" />
+  <!-- West Arm -->
+  <path d="M23 53 C20 53 20 67 23 67 L43 66 C45 63 45 57 43 54 Z" fill="url(#emeraldGrad)" />
+  <!-- East Arm -->
+  <path d="M97 53 C100 53 100 67 97 67 L77 66 C75 63 75 57 77 54 Z" fill="url(#emeraldGrad)" />
+
+  <!-- 4 Diagonal Optical Shutter Wings -->
+  <path d="M43 43 C49 37 54 39 56 42 C51 47 47 51 42 56 C39 54 37 49 43 43 Z" fill="#047857" opacity="0.65" />
+  <path d="M77 43 C83 49 81 54 78 56 C73 51 69 47 64 42 C66 39 71 37 77 43 Z" fill="#047857" opacity="0.65" />
+  <path d="M77 77 C71 83 66 81 64 78 C69 73 73 69 78 64 C81 66 83 71 77 77 Z" fill="#047857" opacity="0.65" />
+  <path d="M43 77 C37 71 39 66 42 64 C47 69 51 73 56 78 C54 81 49 83 43 77 Z" fill="#047857" opacity="0.65" />
+
+  <!-- Center Diagnostic Aperture Iris -->
+  <circle cx="60" cy="60" r="14" fill="#030705" stroke="#34d399" stroke-width="2" />
+  
+  <!-- Optical Core Pulse -->
+  <circle cx="60" cy="60" r="7.5" fill="url(#vitalGlow)" />
+  <circle cx="60" cy="60" r="3" fill="#ffffff" />
+
+  <!-- Plus Accent Badge (+) in Upper-Right -->
+  <g transform="translate(86, 17)">
+    <circle cx="9" cy="9" r="9" fill="#064e3b" stroke="#34d399" stroke-width="1.3" />
+    <line x1="9" y1="4.5" x2="9" y2="13.5" stroke="#4ade80" stroke-width="2" stroke-linecap="round" />
+    <line x1="4.5" y1="9" x2="13.5" y2="9" stroke="#4ade80" stroke-width="2" stroke-linecap="round" />
+  </g>
+</svg>

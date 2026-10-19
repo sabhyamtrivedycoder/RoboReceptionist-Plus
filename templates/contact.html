@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Contact &amp; Inquiries | Robo Receptionist +</title>
+  <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,15 +26,15 @@
   <style>
     :root {
       --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'Literata', Georgia, serif;
-      --font-sans: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Literata', Georgia, serif;
       --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
     }
 
     html, body {
       font-family: var(--font-body);
-      background-color: #ffffff;
-      color: #1f2937;
+      background-color: #040806;
+      color: #e2e8f0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
@@ -54,14 +55,6 @@
       line-height: 1.05;
       letter-spacing: -0.025em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
-    }
-
-    .hero-headline .accent {
-      font-style: italic;
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 100;
-      color: #1a1a1a;
     }
 
     .section-heading {
@@ -71,74 +64,79 @@
       line-height: 1.15;
       letter-spacing: -0.02em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
     }
 
     #scrollProgressBar {
       transition: width 0.08s ease-out;
     }
 
-    .clean-card {
-      padding: 2.25rem 2rem;
+    /* Green & Black Clinical Health-Tech Card */
+    .health-card {
+      background: #09110d;
+      border: 1px solid rgba(16, 185, 129, 0.2);
       border-radius: 20px;
-      border: 1px solid #f1f5f9;
-      background: #ffffff;
-      box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.05);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .clean-card:hover {
-      border-color: #e2e8f0;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.07);
+    .health-card:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+      box-shadow: 0 16px 48px -10px rgba(16, 185, 129, 0.2), 0 0 20px rgba(16, 185, 129, 0.1);
       transform: translateY(-2px);
     }
   </style>
 </head>
-<body class="selection:bg-gray-900 selection:text-white">
+<body class="selection:bg-emerald-500 selection:text-black">
 
-  <!-- Scroll Progress Bar -->
-  <div class="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-[100] pointer-events-none">
-    <div id="scrollProgressBar" class="h-full bg-black w-0"></div>
+  <!-- Top Emerald Scroll Progress Indicator -->
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[100] pointer-events-none">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-green-300 w-0"></div>
   </div>
 
-  <!-- Editorial Top Navigation Bar -->
+  <!-- Editorial Health-Tech Navigation Bar -->
   <div class="pt-4 px-3 sm:pt-6 sm:px-6 w-full sticky top-0 z-50">
-    <nav class="max-w-6xl mx-auto rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.04)] px-4 sm:px-7 py-3 transition-all duration-300">
-      <div class="flex items-center justify-between gap-4">
-        
-        <!-- Brand Identity -->
-        <a href="index.html" class="flex items-center gap-3 select-none no-underline">
-          <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-display font-medium text-base shadow-sm">
-            R
-          </div>
-          <div>
-            <span class="font-display font-medium text-base sm:text-lg tracking-tight text-gray-900 block leading-none">
-              Robo Receptionist <span class="text-gray-500 font-normal">+</span>
-            </span>
-            <span class="font-mono-ui text-[9px] text-gray-500 tracking-wider uppercase block mt-1">
-              Autonomous Clinical Triage
-            </span>
-          </div>
+    <nav class="max-w-6xl mx-auto rounded-2xl border border-emerald-500/25 bg-[#070e0a]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-7 py-3 transition-all duration-300 flex items-center justify-between gap-4">
+      
+      <!-- Brand Identity with Bespoke Medical Cross Emblem -->
+      <a href="index.html" class="flex items-center gap-3 select-none no-underline group">
+        <img src="./static/img/logo_mark.svg" alt="Robo Receptionist + Logo" class="w-8 h-8 rounded-lg shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
+        <div>
+          <span class="font-display font-medium text-base sm:text-lg tracking-tight text-white block leading-none">
+            Robo Receptionist <span class="text-emerald-400 font-bold">+</span>
+          </span>
+          <span class="font-mono-ui text-[9px] text-emerald-400/80 tracking-wider uppercase block mt-1">
+            Autonomous Clinical Triage
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-7 text-xs font-mono-ui font-medium text-slate-300">
+        <a href="index.html" class="hover:text-emerald-300 transition">Home</a>
+        <a href="about.html" class="hover:text-emerald-300 transition">About</a>
+        <a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a>
+        <a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a>
+        <a href="contact.html" class="text-emerald-400 font-semibold border-b border-emerald-400 pb-0.5 transition">Contact</a>
+        <a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+          <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+          <span>GitHub</span>
+          <svg class="w-2.5 h-2.5 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
         </a>
-
-        <!-- Navigation Links -->
-        <div class="hidden md:flex items-center gap-8 text-xs font-mono-ui font-medium text-gray-600">
-          <a href="index.html" class="hover:text-black transition">Home</a>
-          <a href="about.html" class="hover:text-black transition">About</a>
-          <a href="latest-work.html" class="hover:text-black transition">Latest Work</a>
-          <a href="contact.html" class="text-black font-semibold border-b border-black pb-0.5 transition">Contact</a>
-        </div>
-
-        <!-- Action Controls -->
-        <div class="flex items-center gap-3">
-          <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-medium bg-black text-white hover:bg-gray-800 shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
-            <span>Try Robo Receptionist</span>
-            <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
-            </svg>
-          </a>
-        </div>
-
       </div>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-semibold bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
+          <span>Try Robo Receptionist</span>
+          <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
+      </div>
+
     </nav>
   </div>
 
@@ -147,28 +145,31 @@
     <div class="max-w-4xl mx-auto w-full text-center">
       <div data-aos="fade-up">
         
-        <p class="font-mono-ui text-xs font-medium uppercase tracking-[0.25em] text-gray-400 mb-4">
-          CONNECT WITH OUR TEAM
-        </p>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-[#09150e] mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono-ui text-xs font-medium uppercase tracking-[0.22em] text-emerald-300">
+            CONNECT WITH OUR CLINICAL &amp; ENGINEERING TEAM
+          </span>
+        </div>
 
-        <h1 class="hero-headline mb-6">
-          Get in <span class="accent">touch</span>
+        <h1 class="hero-headline text-white mb-6">
+          Get in <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-green-200 bg-clip-text text-transparent">touch</span>
         </h1>
 
-        <p class="text-lg sm:text-xl text-gray-600 leading-relaxed font-light mb-12 max-w-2xl mx-auto">
-          Direct clinical inquiries, emergency department deployments, medical informatics integration, and institutional partnerships.
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light mb-12 max-w-2xl mx-auto">
+          Direct institutional inquiries, Level-1 trauma center deployments, EHR/FHIR interoperability, and open-source clinical informatics collaboration.
         </p>
 
         <!-- Centered Simplified LinkedIn Card -->
         <div class="flex justify-center mb-16">
-          <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-10 py-5 rounded-2xl bg-white border border-gray-200 hover:border-black text-gray-900 transition-all transform hover:-translate-y-1 shadow-[0_6px_28px_rgba(0,0,0,0.07)] group">
-            <span class="w-9 h-9 rounded-lg bg-[#0a66c2] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans shadow-sm">
+          <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-10 py-5 rounded-2xl bg-[#09130e] border border-emerald-500/30 hover:border-emerald-400 text-white transition-all transform hover:-translate-y-1 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_20px_rgba(16,185,129,0.15)] group">
+            <span class="w-10 h-10 rounded-xl bg-[#0a66c2] flex items-center justify-center text-white font-bold text-base tracking-tight font-sans shadow-md group-hover:scale-105 transition-transform">
               in
             </span>
-            <span class="font-display text-2xl text-gray-950 font-normal">
+            <span class="font-display text-2xl text-white font-normal group-hover:text-emerald-300 transition-colors">
               LinkedIn
             </span>
-            <svg class="w-4 h-4 text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <svg class="w-4 h-4 text-emerald-400 group-hover:text-emerald-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
             </svg>
           </a>
@@ -179,46 +180,79 @@
   </section>
 
   <!-- INSTITUTIONAL INQUIRY DOMAINS -->
-  <section class="py-16 px-4 sm:px-6 border-t border-gray-100 bg-[#fafafa]">
+  <section class="py-16 px-4 sm:px-6 border-t border-emerald-950/80 bg-[#060c08]">
     <div class="max-w-5xl mx-auto">
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left" data-aos="fade-up">
+      <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
+        <p class="font-mono-ui text-xs text-emerald-400 tracking-[0.2em] uppercase mb-2">ENGAGEMENT PATHWAYS</p>
+        <h2 class="section-heading text-white">Institutional Collaboration</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-16" data-aos="fade-up">
         
-        <div class="clean-card p-6">
-          <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-900 mb-4">
-            <i data-lucide="hospital" class="w-5 h-5"></i>
+        <div class="health-card p-6">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+            <i data-lucide="hospital" class="w-6 h-6"></i>
           </div>
-          <h3 class="font-display text-lg text-gray-900 mb-2">Hospital Deployments</h3>
-          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="inline-block px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-mono-ui text-[10px] uppercase tracking-wider mb-2">CLINICAL TRIAGE</div>
+          <h3 class="font-display text-xl text-white mb-2">Hospital Deployments</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
             Pilot deployments for Level-1 and Level-2 trauma centers seeking nocturnal triage automation, zero-wait patient routing, and intake streamlining.
           </p>
         </div>
 
-        <div class="clean-card p-6">
-          <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-900 mb-4">
-            <i data-lucide="git-merge" class="w-5 h-5"></i>
+        <div class="health-card p-6">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+            <i data-lucide="git-merge" class="w-6 h-6"></i>
           </div>
-          <h3 class="font-display text-lg text-gray-900 mb-2">EHR &amp; HL7/FHIR</h3>
-          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="inline-block px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono-ui text-[10px] uppercase tracking-wider mb-2">INTEROPERABILITY</div>
+          <h3 class="font-display text-xl text-white mb-2">EHR &amp; HL7/FHIR</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
             Bi-directional EHR integration with Epic Systems, Oracle Cerner, and Meditech via standardized FHIR R4 interfaces and automated ticket logging.
           </p>
         </div>
 
-        <div class="clean-card p-6">
-          <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-900 mb-4">
-            <i data-lucide="file-text" class="w-5 h-5"></i>
+        <div class="health-card p-6">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+            <i data-lucide="file-text" class="w-6 h-6"></i>
           </div>
-          <h3 class="font-display text-lg text-gray-900 mb-2">Clinical Research</h3>
-          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="inline-block px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 font-mono-ui text-[10px] uppercase tracking-wider mb-2">PUBLICATIONS</div>
+          <h3 class="font-display text-xl text-white mb-2">Clinical Research</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
             Academic collaboration on computer vision accuracy benchmarks, ESI concordance studies, and emergency trauma triage publications.
           </p>
         </div>
 
       </div>
 
+      <!-- Open Source Repository Box -->
+      <div class="health-card p-8 sm:p-10 text-left mb-16" data-aos="fade-up">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-teal-950/40 text-teal-300 font-mono-ui text-[11px] mb-3">
+              <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+              <span>100% OPEN SOURCE &middot; MIT LICENSE</span>
+            </div>
+            <h3 class="font-display text-2xl text-white mb-2">Inspect, Audit &amp; Contribute on GitHub</h3>
+            <p class="text-sm text-slate-300 leading-relaxed font-light max-w-xl">
+              All optical algorithms, unit tests, and ESI v4 decision matrices are fully open-source and auditable under the permissive MIT License.
+            </p>
+          </div>
+          <a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-xs font-mono-ui font-semibold bg-[#0f2117] border border-emerald-500/40 text-emerald-300 hover:text-white hover:bg-emerald-500/20 transition-all">
+            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span>Explore Repository</span>
+            <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
       <!-- Center CTA Button -->
-      <div class="text-center pt-16" data-aos="fade-up">
-        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono-ui text-xs font-semibold uppercase tracking-wider bg-black text-white hover:bg-gray-800 shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all transform hover:-translate-y-0.5">
+      <div class="text-center pt-6" data-aos="fade-up">
+        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono-ui text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_6px_24px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
           <span>Try Robo Receptionist</span>
           <svg class="w-3.5 h-3.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
@@ -229,34 +263,36 @@
     </div>
   </section>
 
-  <!-- MINIMALIST BLACK EDITORIAL FOOTER -->
-  <footer class="bg-[#0a0a0a] text-gray-400 py-16 px-4 sm:px-6">
+  <!-- MINIMALIST GREEN & BLACK EDITORIAL FOOTER -->
+  <footer class="bg-[#030604] border-t border-emerald-950/80 text-slate-400 py-16 px-4 sm:px-6">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
         <div class="md:col-span-1">
           <div class="flex items-center gap-2 mb-3">
-            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-gray-400 font-light">+</span></span>
+            <img src="./static/img/logo_mark.svg" alt="Robo Receptionist + Logo" class="w-6 h-6 rounded">
+            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-emerald-400 font-bold">+</span></span>
           </div>
-          <p class="text-xs text-gray-400 leading-relaxed font-light">
+          <p class="text-xs text-slate-400 leading-relaxed font-light">
             Autonomous late-night emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
           </p>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Navigation</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
-            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-            <li><a href="about.html" class="hover:text-white transition">About</a></li>
-            <li><a href="latest-work.html" class="hover:text-white transition">Latest Work</a></li>
-            <li><a href="triage.html" class="hover:text-white transition">Triage Console</a></li>
-            <li><a href="contact.html" class="hover:text-white transition text-white">Contact</a></li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Navigation</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-emerald-300 transition">About</a></li>
+            <li><a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a></li>
+            <li><a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-300 transition text-emerald-300">Contact</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Compliance</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Open Source &amp; Standards</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">GitHub Repository</a></li>
             <li>Emergency Severity Index (ESI v4)</li>
             <li>ISO 13485 Quality Standard</li>
             <li>HL7 / FHIR Admission Export</li>
@@ -265,8 +301,8 @@
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Connect</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Connect</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
             <li>
               <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition inline-flex items-center gap-2">
                 <span class="w-4 h-4 rounded-[3px] bg-[#0a66c2] text-white flex items-center justify-center font-bold text-[9px] font-sans">in</span>
@@ -281,8 +317,8 @@
 
       </div>
 
-      <div class="border-t border-gray-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-gray-500">
-        <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved.</p>
+      <div class="border-t border-emerald-950/60 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-slate-500">
+        <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved. Open-source under MIT License.</p>
         <p>Emergency Severity Index (ESI v4) &middot; ISO 13485 Compliant</p>
       </div>
     </div>

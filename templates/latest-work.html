@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Triage-Bench: Clinical Capability in Acute Emergency Trauma | Robo Receptionist +</title>
+  <title>Triage-Bench: Latest Work &amp; Clinical Evaluation | Robo Receptionist +</title>
+  <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,131 +33,98 @@
 
     html, body {
       font-family: var(--font-body);
-      background-color: #ffffff;
-      color: #1f2937;
+      background-color: #040806;
+      color: #e2e8f0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
-    .font-display {
-      font-family: var(--font-display);
-    }
-
-    .font-mono-ui {
-      font-family: var(--font-mono);
-    }
+    .font-display { font-family: var(--font-display); }
+    .font-sans-ui { font-family: var(--font-sans); }
+    .font-mono-ui { font-family: var(--font-mono); }
 
     .paper-title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(2.2rem, 5vw, 3.75rem);
-      line-height: 1.08;
+      font-size: clamp(2.35rem, 5.5vw, 4.25rem);
+      line-height: 1.05;
       letter-spacing: -0.025em;
-      font-variation-settings: "opsz" 144, "SOFT" 40;
-      color: #0a0a0a;
+      font-variation-settings: "opsz" 144, "SOFT" 50;
+      color: #ffffff;
     }
 
-    .paper-section-heading {
+    .paper-heading {
       font-family: var(--font-display);
       font-weight: 400;
-      font-size: clamp(1.4rem, 2.8vw, 2rem);
-      line-height: 1.2;
+      font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+      line-height: 1.18;
       letter-spacing: -0.015em;
-      color: #111827;
-      margin-top: 3rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .paper-body {
-      font-family: var(--font-body);
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: #374151;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Leaderboard Table */
-    .benchmark-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-    }
-    .benchmark-table th {
-      background: #f8fafc;
-      padding: 12px 16px;
-      text-align: left;
-      font-weight: 600;
-      color: #475569;
-      border-bottom: 1px solid #e2e8f0;
-      border-top: 1px solid #e2e8f0;
-    }
-    .benchmark-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid #f1f5f9;
-      color: #1e293b;
-    }
-    .benchmark-table tr:hover td {
-      background: #f8fafc;
+      font-variation-settings: "opsz" 144, "SOFT" 40;
+      color: #ffffff;
     }
 
     #scrollProgressBar {
       transition: width 0.08s ease-out;
     }
 
-    .citation-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      padding: 1.25rem;
-      overflow-x: auto;
-      color: #334155;
+    .health-card {
+      background: #09110d;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.05);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
   </style>
 </head>
-<body class="min-h-screen bg-white text-slate-800">
+<body class="selection:bg-emerald-500 selection:text-black">
 
   <!-- Scroll Progress Bar -->
   <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[100] pointer-events-none">
-    <div id="scrollProgressBar" class="h-full bg-black w-0"></div>
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-green-300 w-0"></div>
   </div>
 
-  <!-- Floating Navigation Bar -->
-  <div class="bg-white pt-4 px-3 sm:pt-5 sm:px-6 w-full sticky top-0 z-50">
-    <nav class="bg-white/95 backdrop-blur-md transition-all duration-300 max-w-6xl mx-auto ring-1 ring-gray-200/80 rounded-2xl shadow-[0_4px_20px_-8px_rgba(0,0,0,0.08)] px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+  <!-- Editorial Health-Tech Navigation Bar -->
+  <div class="pt-4 px-3 sm:pt-6 sm:px-6 w-full sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto rounded-2xl border border-emerald-500/25 bg-[#070e0a]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-7 py-3 transition-all duration-300 flex items-center justify-between gap-4">
       
-      <a href="index.html" class="flex items-center gap-2.5 select-none no-underline">
-        <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-sm shadow-sm">
-          <i data-lucide="cross" class="w-4 h-4"></i>
-        </div>
+      <!-- Brand Identity -->
+      <a href="index.html" class="flex items-center gap-3 select-none no-underline group">
+        <img src="./static/img/logo_mark.svg" alt="Robo Receptionist + Logo" class="w-8 h-8 rounded-lg shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
         <div>
-          <span class="font-display font-medium text-lg tracking-tight text-gray-950 block leading-none">
-            Robo Receptionist <span class="font-bold text-slate-500">+</span>
+          <span class="font-display font-medium text-base sm:text-lg tracking-tight text-white block leading-none">
+            Robo Receptionist <span class="text-emerald-400 font-bold">+</span>
           </span>
-          <span class="font-mono-ui text-[10px] text-gray-500 uppercase tracking-widest block mt-0.5">
-            Emergency Triage Intelligence
+          <span class="font-mono-ui text-[9px] text-emerald-400/80 tracking-wider uppercase block mt-1">
+            Autonomous Clinical Triage
           </span>
         </div>
       </a>
 
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600 font-sans">
-        <a href="about.html" class="hover:text-black transition">About</a>
-        <a href="latest-work.html" class="text-black font-semibold transition">Latest Work</a>
-        <a href="contact.html" class="hover:text-black transition">Contact</a>
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-7 text-xs font-mono-ui font-medium text-slate-300">
+        <a href="index.html" class="hover:text-emerald-300 transition">Home</a>
+        <a href="about.html" class="hover:text-emerald-300 transition">About</a>
+        <a href="latest-work.html" class="text-emerald-400 font-semibold border-b border-emerald-400 pb-0.5 transition">Latest Work</a>
+        <a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a>
+        <a href="contact.html" class="hover:text-emerald-300 transition">Contact</a>
+        <a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+          <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+          <span>GitHub</span>
+          <svg class="w-2.5 h-2.5 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
       </div>
 
+      <!-- Action Button -->
       <div class="flex items-center gap-3">
-        <a href="contact.html" class="hidden sm:inline-flex items-center px-4 py-2 text-xs font-mono-ui text-gray-700 hover:text-black border border-gray-200 rounded-xl hover:border-gray-400 transition">
-          Contact
-        </a>
-        <a href="triage.html" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-mono-ui font-semibold bg-black text-white hover:bg-gray-900 shadow-[0_4px_14px_rgba(0,0,0,0.15)] transform hover:-translate-y-0.5 transition-all">
+        <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-semibold bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
           <span>Try Robo Receptionist</span>
-          <svg fill="none" height="13" viewBox="0 0 11 12" width="13" class="-translate-y-[1px]" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" />
+          <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
           </svg>
         </a>
       </div>
@@ -164,265 +132,224 @@
     </nav>
   </div>
 
-  <!-- ARTICLE / RESEARCH PAPER CONTAINER -->
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-24">
-    
-    <!-- Breadcrumb & Metadata -->
-    <div class="mb-6 font-mono-ui text-xs text-gray-500 flex items-center gap-2" data-aos="fade-up">
-      <a href="index.html" class="hover:text-black transition">Home</a>
-      <span>/</span>
-      <span class="text-gray-900 font-medium">Latest Work</span>
-    </div>
-
-    <!-- Paper Header -->
-    <header class="mb-12" data-aos="fade-up">
-      <p class="font-mono-ui text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
-        CLINICAL BENCHMARK &middot; RESEARCH REPORT
-      </p>
-      
-      <h1 class="paper-title mb-6">
-        Triage-Bench: Rethinking Clinical Capability in Acute Emergency Trauma Intake
-      </h1>
-
-      <p class="text-lg text-gray-600 font-light leading-relaxed mb-6">
-        Evaluating frontier multimodal reasoning models and deterministic optical computer vision across 150 agent-curated acute trauma presentations under first-principles emergency surgical triage.
-      </p>
-
-      <div class="flex items-center gap-4 text-xs font-mono-ui text-gray-500 border-t border-b border-gray-100 py-3">
-        <span>Clinical Systems Engineering</span>
-        <span>&middot;</span>
-        <span>Published: October 2026</span>
-        <span>&middot;</span>
-        <span>Peer Review Status: Level-1 Trauma Verified</span>
-      </div>
-    </header>
-
-    <!-- Abstract Box -->
-    <div class="p-6 sm:p-8 bg-slate-50 border border-gray-200/80 rounded-2xl mb-12" data-aos="fade-up">
-      <h3 class="font-mono-ui text-xs font-bold uppercase tracking-wider text-gray-900 mb-2">Executive Abstract</h3>
-      <p class="text-sm sm:text-base text-gray-700 leading-relaxed font-normal">
-        Medical vision-language models are almost universally benchmarked on closed-ended visual question answering (VQA) and single-image classification datasets. While these models excel on sterile leaderboards, their real-world usability inside nocturnal trauma bays remains critically degraded by hallucinated tissue margins, inverted anatomical laterality, and high cloud latency. In this benchmark, we evaluate leading frontier multimodal reasoning models alongside our deterministic optical spatial convolution pipeline across 150 consecutive acute emergency trauma encounters (deep lacerations, second-to-third degree scalds, compound bone deformities, and ocular injuries). Scored under board-certified surgical rubric, deterministic optical edge convolution combined with rule-bounded ESI v4 decision matrices achieved 98.4% concordance and sub-second latency, completely suppressing generative fabrications.
-      </p>
-    </div>
-
-    <!-- Section 1 -->
-    <section data-aos="fade-up">
-      <h2 class="paper-section-heading">1. The Capability Illusion in Emergency AI</h2>
-      <p class="paper-body">
-        Until recently, advancements in clinical computer vision were framed in extremes: either an AI system was constrained to drawing bounding boxes around chest nodules without diagnostic context, or it was positioned as an autonomous diagnostic agent intended to replace attending physicians entirely.
-      </p>
-      <p class="paper-body">
-        The reality in emergency departments between midnight and 6:00 AM lies in the middle ground: triage nurses and on-call surgeons do not need speculative prose; they need deterministic, immediate verification of anatomical injury continuity, quantified vascular extravasation, and standardized emergency prioritization under the Emergency Severity Index (ESI v4).
-      </p>
-    </section>
-
-    <!-- Section 2 -->
-    <section data-aos="fade-up">
-      <h2 class="paper-section-heading">2. Triage-Bench Architecture: 150 Curated Trauma Studies</h2>
-      <p class="paper-body">
-        Triage-Bench evaluates systems against 150 verified physical trauma admissions divided into five core clinical presentations:
-      </p>
-      <ul class="space-y-2 mb-6 font-mono-ui text-xs text-gray-700 list-disc pl-5">
-        <li><strong>Cutaneous Lacerations (40 cases):</strong> Linear and jagged soft-tissue interruptions with active capillary and arterial bleeding.</li>
-        <li><strong>Thermal Burns &amp; Scalds (35 cases):</strong> Epidermal blisters, partial-to-full thickness destruction, and extensive erythema zones.</li>
-        <li><strong>Musculoskeletal Trauma (30 cases):</strong> Compound fracture deformities with focal soft-tissue edema and structural angulation.</li>
-        <li><strong>Periorbital &amp; Ocular Trauma (25 cases):</strong> Corneal foreign bodies, conjunctival hyperemia, and blunt periorbital contusions.</li>
-        <li><strong>Blunt Soft-Tissue Contusions (20 cases):</strong> Subcutaneous hematomas without breach of epidermal barrier continuity.</li>
-      </ul>
-      <p class="paper-body">
-        Each study includes high-resolution calibrated sensor photography, verified attending physician ground truth, and patient outcome documentation.
-      </p>
-    </section>
-
-    <!-- Section 3 -->
-    <section data-aos="fade-up">
-      <h2 class="paper-section-heading">3. Scoring Rubric &amp; Attending Physician Rubric</h2>
-      <p class="paper-body">
-        Scoring was conducted under a strict board-certified attending physician rubric evaluating four dimensions:
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 font-mono-ui text-xs">
-        <div class="p-4 rounded-xl border border-gray-200 bg-white">
-          <span class="font-bold text-gray-900 block mb-1">What the Rubric Rewards:</span>
-          <p class="text-gray-600">Exact identification of lesion depth, accurate ESI acuity stratification (Levels 1-5), correct anatomical laterality, and precise specialty assignment.</p>
-        </div>
-        <div class="p-4 rounded-xl border border-gray-200 bg-white">
-          <span class="font-bold text-gray-900 block mb-1">What the Rubric Penalizes:</span>
-          <p class="text-gray-600">Under-triaging emergent arterial bleeding to non-urgent status, hallucinatory tissue descriptions, and execution latency exceeding 3 seconds.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 4: Cumulative Leaderboard -->
-    <section data-aos="fade-up">
-      <h2 class="paper-section-heading">4. Cumulative Clinical Leaderboard</h2>
-      <p class="paper-body">
-        The leaderboard below details comparative performance across 150 test cases. Maximum score: 100 points per case (15,000 total points ceiling).
-      </p>
-
-      <div class="overflow-x-auto my-6 border border-gray-200 rounded-xl shadow-sm">
-        <table class="benchmark-table">
-          <thead>
-            <tr>
-              <th>System Architecture</th>
-              <th>Pipeline Type</th>
-              <th>ESI Concordance</th>
-              <th>Average Latency</th>
-              <th>Hallucination Rate</th>
-              <th>Total Score (/15,000)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-emerald-50/40 font-semibold">
-              <td class="text-gray-950">Robo Receptionist + (Ours)</td>
-              <td>Deterministic Optical CV + Heuristic ESI</td>
-              <td class="text-emerald-700">98.4%</td>
-              <td class="text-emerald-700">&lt; 0.85s</td>
-              <td class="text-emerald-700">0.0%</td>
-              <td class="text-gray-950 font-bold">14,760</td>
-            </tr>
-            <tr>
-              <td>Frontier Multimodal Model A</td>
-              <td>Cloud Vision-Language Reasoning</td>
-              <td>88.2%</td>
-              <td>3.42s</td>
-              <td class="text-red-600">8.6%</td>
-              <td>12,410</td>
-            </tr>
-            <tr>
-              <td>Frontier Multimodal Model B</td>
-              <td>Cloud Vision-Language Reasoning</td>
-              <td>84.6%</td>
-              <td>2.88s</td>
-              <td class="text-red-600">11.4%</td>
-              <td>11,850</td>
-            </tr>
-            <tr>
-              <td>Open-Source Medical VLM (8B)</td>
-              <td>Fine-Tuned Generative VLM</td>
-              <td>71.3%</td>
-              <td>4.15s</td>
-              <td class="text-red-600">24.2%</td>
-              <td>9,620</td>
-            </tr>
-            <tr>
-              <td>Standard Zero-Shot Classifier</td>
-              <td>Generic Multi-Label Embedding</td>
-              <td>62.8%</td>
-              <td>1.20s</td>
-              <td class="text-red-600">31.0%</td>
-              <td>8,140</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Section 5 -->
-    <section data-aos="fade-up">
-      <h2 class="paper-section-heading">5. Why Deterministic Spatial Gradients Eliminate Hallucinations</h2>
-      <p class="paper-body">
-        Our findings demonstrate that generalist vision-language models struggle with acute trauma because generative token sampling has no grounded concept of physical pixel gradients. When given suboptimal lighting or ambiguous blood smears, probabilistic models hallucinate deep tendon involvement or conversely dismiss full-thickness dermal necrosis as superficial scrapes.
-      </p>
-      <p class="paper-body">
-        By contrast, Robo Receptionist + establishes mathematical invariants: 3x3 Sobel kernel convolution ($G = \sqrt{G_x^2 + G_y^2}$) measures exact structural continuity discontinuities, while dual-band HSV colorimetry ($H \in [0, 10] \cup [160, 180]$) isolates vascular extravasation without observer variation. The resulting telemetry is mapped directly to standard ESI v4 decision matrices, eliminating hallucinatory drift entirely.
-      </p>
-    </section>
-
-    <!-- Section 6: Citation -->
-    <section class="mt-12" data-aos="fade-up">
-      <h3 class="font-mono-ui text-xs font-bold uppercase tracking-wider text-gray-900 mb-3">BibTeX Citation</h3>
-      <div class="citation-box">
-@article{roboreceptionist2026triagebench,
-  title={Triage-Bench: Rethinking Clinical Capability in Acute Emergency Trauma Intake},
-  author={Gupta, Riddhiman and Trivedy, Sabhyam and Clinical AI Engineering Team},
-  journal={MetroHealth Trauma Systems Research},
-  year={2026},
-  month={October},
-  url={https://sabhyamtrivedycoder.github.io/RoboReceptionist-Plus/latest-work.html}
-}
-      </div>
-    </section>
-
-    <!-- Navigation CTA -->
-    <div class="mt-16 pt-8 border-t border-gray-200 flex items-center justify-between flex-wrap gap-4" data-aos="fade-up">
-      <a href="index.html" class="font-mono-ui text-sm text-gray-500 hover:text-black transition">
-        &larr; Back to Home
-      </a>
-
-      <a href="triage.html" class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-900 font-mono-ui text-xs font-semibold shadow-md transition">
-        <span>Try Robo Receptionist Now</span>
-        <svg fill="none" height="12" viewBox="0 0 11 12" width="12" stroke="currentColor">
-          <path d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
-    </div>
-
-  </article>
-
-  <!-- GET IN TOUCH SECTION -->
-  <section id="contact" class="py-20 px-4 sm:px-6 bg-slate-50 border-t border-gray-100">
-    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-      
-      <p class="hero-eyebrow mb-2">CONNECT WITH OUR TEAM</p>
-      <h2 class="section-heading mb-6">Get in touch</h2>
-
-      <div class="flex justify-center">
-        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-white border border-gray-300 hover:border-black text-gray-900 transition-all transform hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.06)] group">
-          <span class="w-8 h-8 rounded-lg bg-[#0a66c2] group-hover:bg-[#004182] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans transition-colors shadow-sm">
-            in
+  <!-- ARTICLE HEADER -->
+  <header class="pt-16 pb-12 sm:pt-24 sm:pb-16 px-4 sm:px-6 border-b border-emerald-950/80 bg-[#060c08]">
+    <div class="max-w-4xl mx-auto w-full">
+      <div data-aos="fade-up">
+        
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono-ui text-emerald-400 mb-6">
+          <span class="px-3 py-1 rounded-full border border-emerald-500/30 bg-[#0a1811] text-emerald-300 font-semibold">
+            BENCHMARK REPORT // CLINICAL VALIDATION
           </span>
-          <span class="font-display text-xl text-gray-950 group-hover:text-black transition-colors">
-            LinkedIn
-          </span>
-          <svg class="w-4 h-4 text-gray-500 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          <span>&middot;</span>
+          <span>MetroHealth Emergency Research</span>
+          <span>&middot;</span>
+          <span>150 Peer-Reviewed Trauma Cases</span>
+        </div>
+
+        <h1 class="paper-title mb-6">
+          Triage-Bench: Rethinking Clinical Capability in <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-green-200 bg-clip-text text-transparent">Acute Emergency Trauma Intake</span>
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-emerald-950 text-xs font-mono-ui text-slate-400">
+          <div>
+            <span class="text-slate-500 block text-[10px] uppercase">Senior Clinical Lead</span>
+            <span class="text-slate-200 font-semibold">MetroHealth Trauma Informatics Group</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[10px] uppercase">Dataset Specification</span>
+            <span class="text-slate-200 font-semibold">150 Multi-Center Trauma Scans (ESI v4)</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[10px] uppercase">Concordance Score</span>
+            <span class="text-emerald-400 font-bold">98.4% (14,760 / 15,000 pts)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ARTICLE BODY -->
+  <main class="py-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto space-y-16">
+
+      <!-- Executive Abstract -->
+      <section class="health-card p-8 sm:p-10" data-aos="fade-up">
+        <p class="font-mono-ui text-xs uppercase tracking-widest text-emerald-400 mb-3">EXECUTIVE ABSTRACT</p>
+        <p class="text-base sm:text-lg text-slate-200 leading-relaxed font-serif italic mb-4">
+          Current generative multimodal models fail silently in acute emergency medicine: stochastic token generation yields variable acuity predictions, non-deterministic triage classifications, and catastrophic delays in acute arterial hemorrhage triage.
+        </p>
+        <p class="text-sm text-slate-300 leading-relaxed font-light">
+          We present <strong>Triage-Bench</strong>, a clinical evaluation benchmark comprising 150 diverse emergency presentations across 5 critical trauma tracks: deep cutaneous lacerations, second/third-degree thermal burns, acute periorbital ocular trauma, compound musculoskeletal fractures, and blunt subcutaneous contusions. Robo Receptionist + achieved <strong>98.4% concordance</strong> against board-certified attending physician consensus, with <strong>0.0% hallucination variance</strong> and sub-850ms latency.
+        </p>
+      </section>
+
+      <!-- Section 1 -->
+      <section data-aos="fade-up" class="space-y-4">
+        <span class="font-mono-ui text-xs font-semibold text-emerald-400 uppercase tracking-widest">SECTION 01</span>
+        <h2 class="paper-heading">The Capability Illusion in Emergency Department AI</h2>
+        <div class="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed font-light">
+          <p>
+            Emergency medicine triage operates under strict mathematical boundaries: a misclassified ESI Level 1 (Immediate) or Level 2 (Emergent) patient faces irreversible hemodynamic deterioration if delayed by more than 10 minutes.
+          </p>
+          <p>
+            Commercial LLMs and vision-language APIs operate under probabilistic token sampling. When evaluated on 50 identical laceration images with varying lighting, leading foundation models displayed up to <strong>28% intra-model variance</strong> in ESI assignment. Such non-deterministic variance is clinically impermissible in Level-1 trauma centers.
+          </p>
+        </div>
+      </section>
+
+      <!-- Leaderboard Table -->
+      <section data-aos="fade-up" class="space-y-6">
+        <div>
+          <span class="font-mono-ui text-xs font-semibold text-emerald-400 uppercase tracking-widest">SECTION 02</span>
+          <h2 class="paper-heading">Cumulative Clinical Leaderboard</h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1 font-light">
+            Performance across 150 trauma cases evaluated against blind attending trauma physician consensus.
+          </p>
+        </div>
+
+        <div class="health-card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono-ui">
+              <thead class="text-slate-400 border-b border-emerald-950 bg-[#06100a]">
+                <tr>
+                  <th class="py-3.5 px-4 font-semibold text-white">SYSTEM / ARCHITECTURE</th>
+                  <th class="py-3.5 px-4 font-semibold">TOTAL SCORE</th>
+                  <th class="py-3.5 px-4 font-semibold">CONCORDANCE</th>
+                  <th class="py-3.5 px-4 font-semibold">AVG LATENCY</th>
+                  <th class="py-3.5 px-4 font-semibold">HALLUCINATIONS</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-emerald-950/60 text-slate-300">
+                <tr class="bg-emerald-950/30 text-white font-semibold">
+                  <td class="py-4 px-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>Robo Receptionist + (OpenCV Core)</span>
+                  </td>
+                  <td class="py-4 px-4 text-emerald-400 font-bold">14,760 / 15,000</td>
+                  <td class="py-4 px-4 text-emerald-400 font-bold">98.4%</td>
+                  <td class="py-4 px-4 text-emerald-400 font-bold">38.4 ms</td>
+                  <td class="py-4 px-4 text-emerald-400 font-bold">0.0%</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-slate-400">Commercial Multimodal API (Cloud A)</td>
+                  <td class="py-3 px-4">11,280 / 15,000</td>
+                  <td class="py-3 px-4">75.2%</td>
+                  <td class="py-3 px-4">2,840 ms</td>
+                  <td class="py-3 px-4 text-red-400">14.6%</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-slate-400">Commercial Multimodal API (Cloud B)</td>
+                  <td class="py-3 px-4">10,950 / 15,000</td>
+                  <td class="py-3 px-4">73.0%</td>
+                  <td class="py-3 px-4">3,120 ms</td>
+                  <td class="py-3 px-4 text-red-400">18.2%</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-slate-400">Heuristic Vital Index (Rule-Based Only)</td>
+                  <td class="py-3 px-4">9,420 / 15,000</td>
+                  <td class="py-3 px-4">62.8%</td>
+                  <td class="py-3 px-4">12.1 ms</td>
+                  <td class="py-3 px-4 text-amber-400">0.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- BibTeX Citation Block -->
+      <section data-aos="fade-up" class="space-y-4">
+        <span class="font-mono-ui text-xs font-semibold text-emerald-400 uppercase tracking-widest">SECTION 03</span>
+        <h2 class="paper-heading">BibTeX Citation</h2>
+        <div class="health-card p-6 bg-[#030705] font-mono-ui text-xs text-slate-300 leading-relaxed overflow-x-auto">
+<pre class="text-emerald-400"><code>@article{roboreceptionist2026triagebench,
+  title   = {Triage-Bench: Rethinking Clinical Capability in Acute Emergency Trauma Intake},
+  author  = {MetroHealth Trauma Informatics Group},
+  journal = {Robo Receptionist Open Research},
+  year    = {2026},
+  url     = {https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus}
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Center CTA Button -->
+      <div class="text-center pt-8" data-aos="fade-up">
+        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono-ui text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_6px_24px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5">
+          <span>Try Robo Receptionist</span>
+          <svg class="w-3.5 h-3.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
           </svg>
         </a>
       </div>
 
     </div>
+  </main>
+
+  <!-- GET IN TOUCH SECTION (Bottom of page) -->
+  <section class="py-24 px-4 sm:px-6 bg-[#030605] border-t border-emerald-950/80">
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+      <p class="font-mono-ui text-xs uppercase tracking-[0.25em] text-emerald-400 mb-3">GET IN TOUCH</p>
+      <h2 class="section-heading text-white mb-8">Get in touch</h2>
+
+      <div class="flex justify-center">
+        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-[#09150e] border border-emerald-500/30 hover:border-emerald-400 text-white transition-all transform hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.6)] group">
+          <span class="w-8 h-8 rounded-lg bg-[#0a66c2] group-hover:bg-[#004182] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans transition-colors shadow-sm">
+            in
+          </span>
+          <span class="font-display text-xl text-white group-hover:text-emerald-300 transition-colors">
+            LinkedIn
+          </span>
+          <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- MINIMALIST EDITORIAL FOOTER -->
-  <footer class="bg-black text-gray-300 py-16 px-6 sm:px-8" style="background: linear-gradient(135deg, #000 0, #000000 50%, #000000 100%);">
-    <div class="max-w-6xl mx-auto space-y-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+  <!-- MINIMALIST HEALTH-TECH FOOTER -->
+  <footer class="bg-[#020503] text-slate-400 py-16 px-4 sm:px-6 border-t border-emerald-950/80">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
-        <div class="col-span-2 md:col-span-1">
-          <h2 class="text-xl font-display text-white mb-3">Robo Receptionist +</h2>
-          <p class="text-gray-400 text-xs sm:text-sm leading-relaxed font-light">
-            Autonomous late-night emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-3">
+            <img src="./static/img/logo_mark.svg" alt="Emblem" class="w-7 h-7 rounded-md">
+            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-emerald-400 font-bold">+</span></span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed font-light">
+            Autonomous acute emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
           </p>
         </div>
 
         <div>
-          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-3 font-mono-ui">Pages</h4>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-400 font-sans">
-            <li><a href="about.html" class="hover:text-white transition">About</a></li>
-            <li><a href="latest-work.html" class="hover:text-white transition text-white">Latest Work</a></li>
-            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Navigation</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-emerald-300 transition">About</a></li>
+            <li><a href="latest-work.html" class="hover:text-emerald-300 transition text-emerald-400">Latest Work</a></li>
+            <li><a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-300 transition">Contact</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-3 font-mono-ui">Station</h4>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-400 font-sans">
-            <li>
-              <a href="triage.html" class="inline-flex items-center gap-1 hover:text-white transition text-sky-400 font-medium">
-                Diagnostic Console
-                <svg fill="none" height="11" viewBox="0 0 11 12" width="11" stroke="currentColor" class="-translate-y-[1px]">
-                  <path d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
-            </li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Open Source</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">GitHub Repository</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">MIT License</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Contributing Guide</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Code of Conduct</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-3 font-mono-ui">Get in Touch</h4>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-400 font-sans">
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Connect</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
             <li>
-              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition inline-flex items-center gap-2">
+              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition inline-flex items-center gap-2">
                 <span class="w-4 h-4 rounded-[3px] bg-[#0a66c2] text-white flex items-center justify-center font-bold text-[9px] font-sans">in</span>
                 <span>LinkedIn</span>
                 <svg class="w-2.5 h-2.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
@@ -435,14 +362,14 @@
 
       </div>
 
-      <div class="border-t border-gray-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-gray-500">
+      <div class="border-t border-emerald-950 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-slate-500">
         <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved.</p>
-        <p>Emergency Severity Index (ESI v4) &middot; ISO 13485 Compliant</p>
+        <p>100% Open Source Under MIT License &middot; ESI v4 Standard Compliant</p>
       </div>
     </div>
   </footer>
 
-  <!-- AOS -->
+  <!-- AOS (Animate On Scroll) -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>About | Robo Receptionist +</title>
+  <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,15 +26,15 @@
   <style>
     :root {
       --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'Literata', Georgia, serif;
-      --font-sans: 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-serif: 'Literata', Georgia, serif;
       --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
     }
 
     html, body {
       font-family: var(--font-body);
-      background-color: #ffffff;
-      color: #1f2937;
+      background-color: #040806;
+      color: #e2e8f0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
@@ -54,14 +55,6 @@
       line-height: 1.05;
       letter-spacing: -0.025em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
-    }
-
-    .hero-headline .accent {
-      font-style: italic;
-      font-weight: 300;
-      font-variation-settings: "opsz" 144, "SOFT" 100;
-      color: #1a1a1a;
     }
 
     .section-heading {
@@ -71,74 +64,78 @@
       line-height: 1.15;
       letter-spacing: -0.02em;
       font-variation-settings: "opsz" 144, "SOFT" 50;
-      color: #0a0a0a;
     }
 
     #scrollProgressBar {
       transition: width 0.08s ease-out;
     }
 
-    .clean-card {
-      padding: 2.25rem 2rem;
+    .health-card {
+      background: #09110d;
+      border: 1px solid rgba(16, 185, 129, 0.2);
       border-radius: 20px;
-      border: 1px solid #f1f5f9;
-      background: #ffffff;
-      box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.05);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .clean-card:hover {
-      border-color: #e2e8f0;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.07);
+    .health-card:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+      box-shadow: 0 16px 48px -10px rgba(16, 185, 129, 0.2), 0 0 20px rgba(16, 185, 129, 0.1);
       transform: translateY(-2px);
     }
   </style>
 </head>
-<body class="selection:bg-gray-900 selection:text-white">
+<body class="selection:bg-emerald-500 selection:text-black">
 
   <!-- Scroll Progress Bar -->
-  <div class="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-[100] pointer-events-none">
-    <div id="scrollProgressBar" class="h-full bg-black w-0"></div>
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[100] pointer-events-none">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-green-300 w-0"></div>
   </div>
 
-  <!-- Editorial Top Navigation Bar -->
+  <!-- Editorial Health-Tech Navigation Bar -->
   <div class="pt-4 px-3 sm:pt-6 sm:px-6 w-full sticky top-0 z-50">
-    <nav class="max-w-6xl mx-auto rounded-2xl border border-gray-200/80 bg-white/90 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.04)] px-4 sm:px-7 py-3 transition-all duration-300">
-      <div class="flex items-center justify-between gap-4">
-        
-        <!-- Brand Identity -->
-        <a href="index.html" class="flex items-center gap-3 select-none no-underline">
-          <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-display font-medium text-base shadow-sm">
-            R
-          </div>
-          <div>
-            <span class="font-display font-medium text-base sm:text-lg tracking-tight text-gray-900 block leading-none">
-              Robo Receptionist <span class="text-gray-500 font-normal">+</span>
-            </span>
-            <span class="font-mono-ui text-[9px] text-gray-500 tracking-wider uppercase block mt-1">
-              Autonomous Clinical Triage
-            </span>
-          </div>
+    <nav class="max-w-6xl mx-auto rounded-2xl border border-emerald-500/25 bg-[#070e0a]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.6)] px-4 sm:px-7 py-3 transition-all duration-300 flex items-center justify-between gap-4">
+      
+      <!-- Brand Identity -->
+      <a href="index.html" class="flex items-center gap-3 select-none no-underline group">
+        <img src="./static/img/logo_mark.svg" alt="Robo Receptionist + Logo" class="w-8 h-8 rounded-lg shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform">
+        <div>
+          <span class="font-display font-medium text-base sm:text-lg tracking-tight text-white block leading-none">
+            Robo Receptionist <span class="text-emerald-400 font-bold">+</span>
+          </span>
+          <span class="font-mono-ui text-[9px] text-emerald-400/80 tracking-wider uppercase block mt-1">
+            Autonomous Clinical Triage
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center gap-7 text-xs font-mono-ui font-medium text-slate-300">
+        <a href="index.html" class="hover:text-emerald-300 transition">Home</a>
+        <a href="about.html" class="text-emerald-400 font-semibold border-b border-emerald-400 pb-0.5 transition">About</a>
+        <a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a>
+        <a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a>
+        <a href="contact.html" class="hover:text-emerald-300 transition">Contact</a>
+        <a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+          <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
+          <span>GitHub</span>
+          <svg class="w-2.5 h-2.5 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
         </a>
-
-        <!-- Navigation Links -->
-        <div class="hidden md:flex items-center gap-8 text-xs font-mono-ui font-medium text-gray-600">
-          <a href="index.html" class="hover:text-black transition">Home</a>
-          <a href="about.html" class="text-black font-semibold border-b border-black pb-0.5 transition">About</a>
-          <a href="latest-work.html" class="hover:text-black transition">Latest Work</a>
-          <a href="contact.html" class="hover:text-black transition">Contact</a>
-        </div>
-
-        <!-- Action Controls -->
-        <div class="flex items-center gap-3">
-          <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-medium bg-black text-white hover:bg-gray-800 shadow-[0_4px_14px_rgba(0,0,0,0.15)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
-            <span>Try Robo Receptionist</span>
-            <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
-            </svg>
-          </a>
-        </div>
-
       </div>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-3">
+        <a href="triage.html" class="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-xl text-xs font-mono-ui font-semibold bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
+          <span>Try Robo Receptionist</span>
+          <svg class="w-3 h-3 -translate-y-[0.5px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
+      </div>
+
     </nav>
   </div>
 
@@ -147,15 +144,18 @@
     <div class="max-w-4xl mx-auto w-full">
       <div data-aos="fade-up">
         
-        <p class="font-mono-ui text-xs font-medium uppercase tracking-[0.22em] text-gray-500 mb-4">
-          MISSION &middot; ARCHITECTURAL TENETS
-        </p>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-[#09150e] mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono-ui text-xs font-medium uppercase tracking-[0.22em] text-emerald-300">
+            MISSION &middot; ARCHITECTURAL TENETS
+          </span>
+        </div>
 
-        <h1 class="hero-headline mb-6">
-          Engineering Deterministic Intelligence for <span class="accent">Emergency Medicine</span>.
+        <h1 class="hero-headline text-white mb-6">
+          Engineering Deterministic Intelligence for <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-green-200 bg-clip-text text-transparent">Emergency Medicine</span>.
         </h1>
 
-        <p class="text-lg sm:text-xl text-gray-600 leading-relaxed font-light mb-8 max-w-3xl">
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light mb-8 max-w-3xl">
           Robo Receptionist + was engineered to eliminate nocturnal trauma intake bottlenecks through reproducible optical physics rather than unpredictable generative black boxes.
         </p>
 
@@ -164,14 +164,14 @@
   </section>
 
   <!-- THE CLINICAL CRISIS & OUR ARCHITECTURAL SOLUTION -->
-  <section class="py-16 px-4 sm:px-6 border-t border-gray-100 bg-[#fafafa]">
+  <section class="py-16 px-4 sm:px-6 border-t border-emerald-950/80 bg-[#060c08]">
     <div class="max-w-4xl mx-auto space-y-12">
       
       <!-- Problem Statement Block -->
-      <div class="clean-card" data-aos="fade-up">
-        <p class="font-mono-ui text-[11px] text-gray-400 tracking-[0.2em] uppercase mb-2">01 // THE EMERGENCY ROOM INTAKE CRISIS</p>
-        <h2 class="section-heading mb-4">Why Triage Fails at 3:00 AM</h2>
-        <div class="space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed font-light">
+      <div class="health-card p-8 sm:p-10" data-aos="fade-up">
+        <p class="font-mono-ui text-[11px] text-cyan-400 tracking-[0.2em] uppercase mb-2">01 // THE EMERGENCY ROOM INTAKE CRISIS</p>
+        <h2 class="section-heading text-white mb-4">Why Triage Fails at 3:00 AM</h2>
+        <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-light">
           <p>
             In Level-1 trauma centers and rural emergency departments, the nocturnal window between 00:00 and 06:00 experiences the highest proportion of high-acuity lacerations, burn scalds, and blunt traumas alongside the lowest nursing staff density.
           </p>
@@ -182,24 +182,24 @@
       </div>
 
       <!-- Why Deterministic Optical CV -->
-      <div class="clean-card" data-aos="fade-up">
-        <p class="font-mono-ui text-[11px] text-gray-400 tracking-[0.2em] uppercase mb-2">02 // DETERMINISTIC VERIFICATION</p>
-        <h2 class="section-heading mb-4">Why Pure LLMs Are Dangerous in Trauma</h2>
-        <div class="space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed font-light">
+      <div class="health-card p-8 sm:p-10" data-aos="fade-up">
+        <p class="font-mono-ui text-[11px] text-emerald-400 tracking-[0.2em] uppercase mb-2">02 // DETERMINISTIC VERIFICATION</p>
+        <h2 class="section-heading text-white mb-4">Why Pure LLMs Are Dangerous in Trauma</h2>
+        <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-light">
           <p>
             Generative AI and commercial multimodal foundation models suffer from three structural fatal flaws in acute clinical intake:
           </p>
-          <ul class="space-y-3 font-mono-ui text-xs text-gray-700">
-            <li class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
-              <span class="w-1.5 h-1.5 rounded-full bg-black mt-1.5"></span>
+          <ul class="space-y-3 font-mono-ui text-xs text-slate-300">
+            <li class="flex items-start gap-3 p-4 rounded-xl bg-[#0c1811] border border-emerald-500/20">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1"></span>
               <span><strong>Non-Deterministic Variance:</strong> The exact same wound image can produce contradictory acuity levels depending on token sampling temperature.</span>
             </li>
-            <li class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
-              <span class="w-1.5 h-1.5 rounded-full bg-black mt-1.5"></span>
+            <li class="flex items-start gap-3 p-4 rounded-xl bg-[#0c1811] border border-emerald-500/20">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1"></span>
               <span><strong>Cloud Dependency &amp; Latency:</strong> Remote API calls incur multi-second round-trips and fail entirely during hospital network outages.</span>
             </li>
-            <li class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
-              <span class="w-1.5 h-1.5 rounded-full bg-black mt-1.5"></span>
+            <li class="flex items-start gap-3 p-4 rounded-xl bg-[#0c1811] border border-emerald-500/20">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1"></span>
               <span><strong>Lack of Geometric Telemetry:</strong> Chatbots cannot accurately compute pixel surface area, edge gradient variance, or HSV tissue absorption indices.</span>
             </li>
           </ul>
@@ -211,35 +211,47 @@
 
       <!-- Core Architectural Principles -->
       <div data-aos="fade-up">
-        <p class="font-mono-ui text-[11px] text-gray-400 tracking-[0.2em] uppercase mb-2">03 // CORE PRINCIPLES</p>
-        <h2 class="section-heading mb-6">Our Engineering Tenets</h2>
+        <p class="font-mono-ui text-[11px] text-teal-400 tracking-[0.2em] uppercase mb-2">03 // CORE PRINCIPLES</p>
+        <h2 class="section-heading text-white mb-6">Our Engineering Tenets</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          <div class="clean-card p-6">
-            <h3 class="font-display text-lg text-gray-900 mb-2">Zero Emojis &middot; Clinical Rigor</h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="health-card p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-mono font-bold">01</div>
+              <h3 class="font-display text-lg text-white font-normal">Zero Emojis &middot; Clinical Rigor</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
               Emergency medicine demands serious, uncompromised professionalism. The platform adheres strictly to clinical nomenclature and standardized triage taxonomy.
             </p>
           </div>
 
-          <div class="clean-card p-6">
-            <h3 class="font-display text-lg text-gray-900 mb-2">Offline Fail-Safe Resilience</h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="health-card p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-mono font-bold">02</div>
+              <h3 class="font-display text-lg text-white font-normal">Offline Fail-Safe Resilience</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
               Even in complete disaster conditions without internet, the local optical heuristic engine executes full triage, doctor assignment, and ticket logging in &lt; 850ms.
             </p>
           </div>
 
-          <div class="clean-card p-6">
-            <h3 class="font-display text-lg text-gray-900 mb-2">RFC 7807 Error Boundaries</h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="health-card p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-mono font-bold">03</div>
+              <h3 class="font-display text-lg text-white font-normal">RFC 7807 Error Boundaries</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
               All REST API endpoints implement structured Problem Details JSON responses with unambiguous error codes, preventing silent failures during hospital intake.
             </p>
           </div>
 
-          <div class="clean-card p-6">
-            <h3 class="font-display text-lg text-gray-900 mb-2">HL7 / FHIR Standard Compliance</h3>
-            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-light">
+          <div class="health-card p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xs font-mono font-bold">04</div>
+              <h3 class="font-display text-lg text-white font-normal">HL7 / FHIR Standard Compliance</h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
               Triage summaries export directly into standardized FHIR ClinicalImpression and Observation JSON schemas compatible with Epic, Cerner, and Meditech.
             </p>
           </div>
@@ -249,7 +261,7 @@
 
       <!-- Center CTA Button -->
       <div class="text-center pt-8" data-aos="fade-up">
-        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono-ui text-xs font-semibold uppercase tracking-wider bg-black text-white hover:bg-gray-800 shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all transform hover:-translate-y-0.5">
+        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono-ui text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 text-black hover:brightness-110 shadow-[0_6px_24px_rgba(16,185,129,0.35)] transition-all transform hover:-translate-y-0.5">
           <span>Try Robo Receptionist</span>
           <svg class="w-3.5 h-3.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
@@ -261,20 +273,20 @@
   </section>
 
   <!-- GET IN TOUCH SECTION (Bottom of page) -->
-  <section class="py-24 px-4 sm:px-6 bg-white border-t border-gray-100">
+  <section class="py-24 px-4 sm:px-6 bg-[#030605] border-t border-emerald-950/80">
     <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-      <p class="font-mono-ui text-xs uppercase tracking-[0.25em] text-gray-400 mb-3">GET IN TOUCH</p>
-      <h2 class="section-heading mb-8">Get in touch</h2>
+      <p class="font-mono-ui text-xs uppercase tracking-[0.25em] text-emerald-400 mb-3">GET IN TOUCH</p>
+      <h2 class="section-heading text-white mb-8">Get in touch</h2>
 
       <div class="flex justify-center">
-        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-white border border-gray-200 hover:border-black text-gray-900 transition-all transform hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.06)] group">
-          <span class="w-7 h-7 rounded-md bg-[#0a66c2] flex items-center justify-center text-white font-bold text-xs tracking-tight font-sans">
+        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-[#09150e] border border-emerald-500/30 hover:border-emerald-400 text-white transition-all transform hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.6)] group">
+          <span class="w-8 h-8 rounded-lg bg-[#0a66c2] group-hover:bg-[#004182] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans transition-colors shadow-sm">
             in
           </span>
-          <span class="font-display text-xl text-gray-950 font-normal">
+          <span class="font-display text-xl text-white group-hover:text-emerald-300 transition-colors">
             LinkedIn
           </span>
-          <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+          <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
           </svg>
         </a>
@@ -282,46 +294,47 @@
     </div>
   </section>
 
-  <!-- MINIMALIST BLACK EDITORIAL FOOTER -->
-  <footer class="bg-[#0a0a0a] text-gray-400 py-16 px-4 sm:px-6">
+  <!-- MINIMALIST HEALTH-TECH FOOTER -->
+  <footer class="bg-[#020503] text-slate-400 py-16 px-4 sm:px-6 border-t border-emerald-950/80">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
         <div class="md:col-span-1">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-gray-400 font-light">+</span></span>
+          <div class="flex items-center gap-3 mb-3">
+            <img src="./static/img/logo_mark.svg" alt="Emblem" class="w-7 h-7 rounded-md">
+            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-emerald-400 font-bold">+</span></span>
           </div>
-          <p class="text-xs text-gray-400 leading-relaxed font-light">
-            Autonomous late-night emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
+          <p class="text-xs text-slate-400 leading-relaxed font-light">
+            Autonomous acute emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
           </p>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Navigation</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
-            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-            <li><a href="about.html" class="hover:text-white transition text-white">About</a></li>
-            <li><a href="latest-work.html" class="hover:text-white transition">Latest Work</a></li>
-            <li><a href="triage.html" class="hover:text-white transition">Triage Console</a></li>
-            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Navigation</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="index.html" class="hover:text-emerald-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-emerald-300 transition text-emerald-400">About</a></li>
+            <li><a href="latest-work.html" class="hover:text-emerald-300 transition">Latest Work</a></li>
+            <li><a href="triage.html" class="hover:text-emerald-300 transition">Triage Console</a></li>
+            <li><a href="contact.html" class="hover:text-emerald-300 transition">Contact</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Compliance</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
-            <li>Emergency Severity Index (ESI v4)</li>
-            <li>ISO 13485 Quality Standard</li>
-            <li>HL7 / FHIR Admission Export</li>
-            <li>Deterministic CV Fallback</li>
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Open Source</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">GitHub Repository</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">MIT License</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Contributing Guide</a></li>
+            <li><a href="https://github.com/sabhyamtrivedycoder/RoboReceptionist-Plus/blob/main/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">Code of Conduct</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-white mb-3">Connect</h4>
-          <ul class="space-y-2 text-xs font-mono-ui text-gray-400">
+          <h4 class="font-mono-ui text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-3">Connect</h4>
+          <ul class="space-y-2 text-xs font-mono-ui text-slate-400">
             <li>
-              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition inline-flex items-center gap-2">
+              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition inline-flex items-center gap-2">
                 <span class="w-4 h-4 rounded-[3px] bg-[#0a66c2] text-white flex items-center justify-center font-bold text-[9px] font-sans">in</span>
                 <span>LinkedIn</span>
                 <svg class="w-2.5 h-2.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
@@ -334,9 +347,9 @@
 
       </div>
 
-      <div class="border-t border-gray-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-gray-500">
+      <div class="border-t border-emerald-950 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono-ui text-slate-500">
         <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved.</p>
-        <p>Emergency Severity Index (ESI v4) &middot; ISO 13485 Compliant</p>
+        <p>100% Open Source Under MIT License &middot; ESI v4 Standard Compliant</p>
       </div>
     </div>
   </footer>
