@@ -31,6 +31,8 @@ class AppConfig(BaseSettings):
     # Cloud Vision Defaults
     GEMINI_API_TIMEOUT_SECONDS: float = 25.0
     OPENAI_API_TIMEOUT_SECONDS: float = 25.0
+    OPENAI_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
 
     class Config:
         env_file = ".env"

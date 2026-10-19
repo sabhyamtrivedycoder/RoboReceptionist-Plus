@@ -267,6 +267,56 @@ class MultimodalVisionInference:
             cleaned = raw_text.replace("```json", "").replace("```", "").strip()
             return json.loads(cleaned)
 
+    @staticmethod
+    async def call_openai(image_b64: str, api_key: str) -> Dict[str, Any]:
+        data_uri = image_b64 if image_b64.startswith("data:") else f"data:image/jpeg;base64,{image_b64}"
+        url = "https://api.openai.com/v1/chat/completions"
+        prompt = (
+            "You are 'Robo Receptionist +', an advanced late-night emergency hospital triage vision system.\n"
+            "Carefully examine this patient injury image and provide a clinical triage assessment.\n"
+            "Respond STRICTLY in valid JSON with these exact keys:\n"
+            "{\n"
+            '  "injury_type": "<e.g., Deep Laceration, Second-Degree Thermal Burn, Displaced Bone Fracture, Severe Contusion, Corneal Ocular Trauma>",\n'
+            '  "severity": "<Emergency, Urgent, Moderate, or Mild>",\n'
+            '  "confidence": <float between 0.85 and 0.99>,\n'
+            '  "description": "<Clinical observation: size, tissue layers involved, swelling, blood loss indicators>",\n'
+            '  "recommended_specialty": "<Must be one of: Trauma & Emergency, Orthopedic Surgery, Plastic & Reconstructive Surgery, Dermatology & Burn Care, Ophthalmology, Neurology & Head Trauma, General Emergency Medicine>",\n'
+            '  "first_aid": ["Step 1 immediate measure", "Step 2 stabilization step", "Step 3 precautionary warning"]\n'
+            "}\n"
+            "Do not include markdown code ticks like ```json, only raw JSON."
+        )
+
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "gpt-4o-mini",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": data_uri, "detail": "low"}
+                        }
+                    ]
+                }
+            ],
+            "max_tokens": 600,
+            "temperature": 0.1,
+            "response_format": {"type": "json_object"}
+        }
+
+        async with httpx.AsyncClient(timeout=settings.OPENAI_API_TIMEOUT_SECONDS) as client:
+            resp = await client.post(url, headers=headers, json=payload)
+            if resp.status_code != 200:
+                raise ProviderAPIError("openai", resp.status_code, resp.text)
+            data = resp.json()
+            raw_text = data["choices"][0]["message"]["content"]
+            return json.loads(raw_text)
+
 class TriageCoordinator:
     """Orchestrates image decoding, optical feature extraction, multimodal inference, and triage aggregation."""
 
@@ -294,14 +344,25 @@ class TriageCoordinator:
         diagnosis = None
         ai_source = "OpenCV Optical Telemetry & Clinical Rules"
 
-        # 2. Try Upstream Multimodal Vision if credentials are provided
-        if api_key and (provider in ["gemini", "auto"]) and len(api_key.strip()) > 20:
-            try:
-                diagnosis = await self.vision_client.call_gemini(image_b64, api_key.strip())
-                ai_source = "Google Gemini 1.5 Flash Multimodal Vision"
-                logger.info("Multimodal inference successful via %s", ai_source)
-            except Exception as exc:
-                logger.warning("Upstream vision call failed (%s). Falling back to local optical classifier.", exc)
+        # 2. Server-side API key resolution
+        effective_key = api_key or settings.OPENAI_API_KEY or settings.GEMINI_API_KEY or os.getenv("OPENAI_API_KEY", "") or os.getenv("GEMINI_API_KEY", "")
+
+        # Try Multimodal Vision if credentials exist
+        if effective_key and len(effective_key.strip()) > 20:
+            if effective_key.startswith("sk-") or provider == "openai":
+                try:
+                    diagnosis = await self.vision_client.call_openai(image_b64, effective_key.strip())
+                    ai_source = "OpenAI GPT-4o Multimodal Vision"
+                    logger.info("Multimodal inference successful via %s", ai_source)
+                except Exception as exc:
+                    logger.warning("OpenAI vision call failed (%s). Falling back to local optical classifier.", exc)
+            else:
+                try:
+                    diagnosis = await self.vision_client.call_gemini(image_b64, effective_key.strip())
+                    ai_source = "Google Gemini 1.5 Flash Multimodal Vision"
+                    logger.info("Multimodal inference successful via %s", ai_source)
+                except Exception as exc:
+                    logger.warning("Gemini vision call failed (%s). Falling back to local optical classifier.", exc)
 
         # 3. Deterministic Fallback Pipeline
         if not diagnosis:

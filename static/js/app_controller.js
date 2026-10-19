@@ -728,11 +728,13 @@ class RoboReceptionistApp {
 
   toggleApiModal() {
     const modal = document.getElementById("apiModal");
-    modal.classList.toggle("hidden");
+    if (modal) modal.classList.toggle("hidden");
   }
 
   saveApiKeys() {
-    const gKey = document.getElementById("inputGeminiKey").value.trim();
+    const input = document.getElementById("inputGeminiKey");
+    if (!input) return;
+    const gKey = input.value.trim();
     if (gKey) localStorage.setItem("robo_gemini_key", gKey);
     this.loadApiKeys();
     this.toggleApiModal();
@@ -740,20 +742,23 @@ class RoboReceptionistApp {
 
   clearApiKeys() {
     localStorage.removeItem("robo_gemini_key");
-    document.getElementById("inputGeminiKey").value = "";
+    const input = document.getElementById("inputGeminiKey");
+    if (input) input.value = "";
     this.loadApiKeys();
   }
 
   loadApiKeys() {
     const gKey = localStorage.getItem("robo_gemini_key");
     const label = document.getElementById("apiKeyStatusLabel");
-    if (gKey) {
-      document.getElementById("inputGeminiKey").value = gKey;
-      label.innerText = "Gemini Key Active";
-      label.classList.add("text-amber-300");
-    } else {
-      label.innerText = "Clinical CV Engine";
-      label.classList.remove("text-amber-300");
+    const input = document.getElementById("inputGeminiKey");
+    if (input && gKey) input.value = gKey;
+    if (label) {
+      if (gKey) {
+        label.innerText = "Clinical AI Online";
+        label.classList.add("text-emerald-400");
+      } else {
+        label.innerText = "Clinical AI Online";
+      }
     }
   }
 
@@ -775,7 +780,8 @@ class RoboReceptionistApp {
         this.selectSample("contusion", "Soft Tissue Contusion");
       } else if (e.key === "Escape") {
         this.closeDispatchModal();
-        document.getElementById("apiModal").classList.add("hidden");
+        const modal = document.getElementById("apiModal");
+        if (modal) modal.classList.add("hidden");
       }
     });
   }
