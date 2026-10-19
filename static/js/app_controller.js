@@ -18,14 +18,17 @@ class RoboReceptionistApp {
 
   init() {
     this.bindEvents();
-    this.startEcgMonitor();
     this.loadHistory();
     this.loadApiKeys();
     this.loadHospitalKpis();
     this.initScrollReveal();
 
+    if (window.AOS) {
+      window.AOS.init({ once: true, duration: 800, offset: 40, easing: "ease-out-cubic" });
+    }
+
     // Pre-load default sample case for immediate readiness
-    this.selectSample("laceration", "Deep Cutaneous Laceration");
+    this.selectSample("laceration", "Case Study 101: Deep Cutaneous Laceration");
   }
 
   // --- Audio Feedback (Web Audio API) ---
@@ -530,6 +533,7 @@ class RoboReceptionistApp {
     });
 
     lucide.createIcons();
+    if (window.AOS) window.AOS.refresh();
     this.saveAuditRecord(result);
   }
 
