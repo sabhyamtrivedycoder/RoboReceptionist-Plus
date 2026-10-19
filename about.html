@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>About | Robo Receptionist +</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Fraunces (Editorial Headline), IBM Plex Mono (Technical), Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Fraunces"', 'Georgia', 'serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#040711', // Deepest Obsidian Navy
+              900: '#070d1e', // Rich Midnight Navy
+              850: '#0b142c', // Surface Card
+              800: '#101c3d', // Elevated Subcard
+              750: '#152550', // Hover Surface
+              700: '#1c3066', // Subtle Slate Navy Border
+            },
+            gold: {
+              100: '#fcf6df',
+              200: '#f7eab4',
+              300: '#f1d782',
+              400: '#e5be49',
+              500: '#d4af37', // Pure Classic Gold
+              600: '#b89127',
+              700: '#94701d',
+              accent: '#fbbf24', // Radiant Amber Gold
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #040711;
+      color: #f1f5f9;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.3rem, 5.5vw, 4.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-variation-settings: "opsz" 144, "SOFT" 40;
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    #scrollProgressBar {
+      transition: width 0.08s ease-out;
+    }
+
+    .bento-card {
+      background: #0b142c;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      border-radius: 18px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bento-card:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.08);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="selection:bg-gold-500 selection:text-navy-950">
+
+  <!-- Scroll Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[100] pointer-events-none">
+    <div id="scrollProgressBar" class="h-full bg-gradient-to-r from-gold-600 via-gold-400 to-amber-300 w-0"></div>
+  </div>
+
+  <!-- Floating Glass Navigation Bar -->
+  <div class="pt-4 px-3 sm:pt-6 sm:px-6 w-full sticky top-0 z-50">
+    <nav class="max-w-6xl mx-auto rounded-2xl border border-gold-500/20 bg-navy-900/85 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.45)] px-4 sm:px-7 py-3 transition-all duration-300">
+      <div class="flex items-center justify-between gap-4">
+        
+        <!-- Brand Identity -->
+        <a href="index.html" class="flex items-center gap-3 select-none no-underline">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-500/20 to-navy-800 border border-gold-500/40 flex items-center justify-center text-gold-400 shadow-sm">
+            <i data-lucide="cross" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="font-display font-medium text-lg tracking-tight text-white block leading-none">
+              Robo Receptionist <span class="text-gold-400 font-bold">+</span>
+            </span>
+            <span class="font-mono text-[10px] text-slate-400 tracking-wider uppercase block mt-1">
+              Autonomous Clinical Triage
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center gap-7 text-xs font-mono font-medium text-slate-300">
+          <a href="index.html" class="hover:text-gold-300 transition">Home</a>
+          <a href="about.html" class="text-gold-300 font-bold transition">About</a>
+          <a href="latest-work.html" class="hover:text-gold-300 transition">Latest Work</a>
+          <a href="contact.html" class="hover:text-gold-300 transition">Contact</a>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono border border-emerald-500/30 text-emerald-400 bg-navy-800/60 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Clinical AI Online</span>
+          </div>
+
+          <a href="triage.html" class="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-gold-400 via-gold-500 to-amber-500 text-navy-950 hover:brightness-110 shadow-[0_4px_16px_rgba(212,175,55,0.25)] transition-all transform hover:-translate-y-0.5 active:scale-[0.98]">
+            <span>Try Robo Receptionist</span>
+            <svg class="w-3 h-3 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  <!-- ABOUT HERO SECTION -->
+  <section class="relative overflow-visible pt-20 pb-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto w-full">
+      <div data-aos="fade-up">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold-500/30 bg-navy-850/80 mb-6 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+          <span class="font-mono text-[11px] font-semibold text-gold-300 tracking-[0.2em] uppercase">
+            MISSION &amp; ARCHITECTURAL TENETS
+          </span>
+        </div>
+
+        <h1 class="hero-headline text-white mb-6">
+          Engineering Deterministic Intelligence for Emergency Medicine
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light mb-8">
+          Robo Receptionist + was engineered to eliminate late-night trauma intake bottlenecks through reproducible optical physics rather than unpredictable generative black boxes.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- THE CLINICAL CRISIS & OUR SOLUTION -->
+  <section class="py-16 px-4 sm:px-6 border-t border-navy-700/60 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950">
+    <div class="max-w-4xl mx-auto space-y-16">
+      
+      <!-- Problem Statement Block -->
+      <div class="bento-card p-8 sm:p-10" data-aos="fade-up">
+        <p class="font-mono text-[11px] text-gold-400 tracking-[0.2em] uppercase mb-2">01 // THE EMERGENCY ROOM INTAKE CRISIS</p>
+        <h2 class="section-headline text-white mb-4">Why Triage Fails at 3:00 AM</h2>
+        <div class="space-y-4 text-sm text-slate-300 leading-relaxed font-light">
+          <p>
+            In Level-1 trauma centers and rural emergency departments, the nocturnal window between 00:00 and 06:00 experiences the highest proportion of high-acuity lacerations, burn scalds, and blunt traumas alongside the lowest nursing staff density.
+          </p>
+          <p>
+            Subjective human visual inspection under severe cognitive fatigue often leads to inaccurate Emergency Severity Index (ESI) assignment: critical arterial bleeds get under-triaged to waiting queues, while non-emergent contusions overwhelm on-duty trauma surgeons.
+          </p>
+        </div>
+      </div>
+
+      <!-- Why Deterministic Optical CV -->
+      <div class="bento-card p-8 sm:p-10" data-aos="fade-up">
+        <p class="font-mono text-[11px] text-gold-400 tracking-[0.2em] uppercase mb-2">02 // DETERMINISTIC VERIFICATION</p>
+        <h2 class="section-headline text-white mb-4">Why Pure LLMs Are Dangerous in Trauma</h2>
+        <div class="space-y-4 text-sm text-slate-300 leading-relaxed font-light">
+          <p>
+            Generative AI and commercial multimodal foundation models suffer from three structural fatal flaws in acute clinical intake:
+          </p>
+          <ul class="space-y-3 font-mono text-xs text-slate-300">
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-navy-900/80 border border-navy-700">
+              <span class="text-gold-400 font-bold">&bull;</span>
+              <span><strong>Non-Deterministic Variance:</strong> The exact same wound image can produce contradictory acuity levels depending on token sampling temperature.</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-navy-900/80 border border-navy-700">
+              <span class="text-gold-400 font-bold">&bull;</span>
+              <span><strong>Cloud Dependency &amp; Latency:</strong> Remote API calls incur multi-second round-trips and fail entirely during hospital network outages.</span>
+            </li>
+            <li class="flex items-start gap-3 p-3 rounded-xl bg-navy-900/80 border border-navy-700">
+              <span class="text-gold-400 font-bold">&bull;</span>
+              <span><strong>Lack of Geometric Telemetry:</strong> Chatbots cannot accurately compute pixel surface area, edge gradient variance, or HSV tissue absorption indices.</span>
+            </li>
+          </ul>
+          <p class="pt-2">
+            Robo Receptionist + solves this by grounding all decisions in deterministic OpenCV 5.0 spatial convolution filters and mathematically bounded ESI decision trees.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Architectural Principles -->
+      <div data-aos="fade-up">
+        <p class="font-mono text-[11px] text-gold-400 tracking-[0.2em] uppercase mb-2">03 // CORE PRINCIPLES</p>
+        <h2 class="section-headline text-white mb-6">Our Engineering Tenets</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="bento-card p-6">
+            <h3 class="font-display text-lg text-white mb-2">Zero Emojis &middot; Clinical Rigor</h3>
+            <p class="text-xs text-slate-400 leading-relaxed font-light">
+              Emergency medicine demands serious, uncompromised professionalism. The platform adheres strictly to clinical nomenclature and standardized triage taxonomy.
+            </p>
+          </div>
+
+          <div class="bento-card p-6">
+            <h3 class="font-display text-lg text-white mb-2">Offline Fail-Safe Resilience</h3>
+            <p class="text-xs text-slate-400 leading-relaxed font-light">
+              Even in complete disaster conditions without internet, the local optical heuristic engine executes full triage, doctor assignment, and ticket logging in < 850ms.
+            </p>
+          </div>
+
+          <div class="bento-card p-6">
+            <h3 class="font-display text-lg text-white mb-2">RFC 7807 Error Boundaries</h3>
+            <p class="text-xs text-slate-400 leading-relaxed font-light">
+              All REST API endpoints implement structured Problem Details JSON responses with unambiguous error codes, preventing silent failures during hospital intake.
+            </p>
+          </div>
+
+          <div class="bento-card p-6">
+            <h3 class="font-display text-lg text-white mb-2">HL7 / FHIR Standard Compliance</h3>
+            <p class="text-xs text-slate-400 leading-relaxed font-light">
+              Triage summaries export directly into standardized FHIR ClinicalImpression and Observation JSON schemas compatible with Epic, Cerner, and Meditech.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Center CTA Button -->
+      <div class="text-center pt-8" data-aos="fade-up">
+        <a href="triage.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-gold-400 via-gold-500 to-amber-500 text-navy-950 hover:brightness-110 shadow-[0_8px_25px_rgba(212,175,55,0.3)] transition transform hover:-translate-y-0.5">
+          <span>Try Robo Receptionist</span>
+          <svg class="w-3.5 h-3.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GET IN TOUCH SECTION -->
+  <section id="contact" class="py-24 px-4 sm:px-6 relative border-t border-navy-700/60 bg-gradient-to-b from-navy-950 via-[#060c1d] to-[#030612]">
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+      
+      <p class="font-mono text-[11px] text-gold-400 tracking-[0.25em] uppercase mb-3">GET IN TOUCH</p>
+      <h2 class="section-headline text-white mb-8">
+        Get in touch
+      </h2>
+
+      <!-- Verified [in] LinkedIn Button -->
+      <div class="flex justify-center">
+        <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3.5 px-8 py-4 rounded-2xl bg-navy-850 border border-gold-500/30 hover:border-gold-400 hover:bg-navy-800 text-white transition-all transform hover:-translate-y-1 shadow-[0_8px_30px_rgba(0,0,0,0.5)] group">
+          <span class="w-8 h-8 rounded-lg bg-[#0a66c2] group-hover:bg-[#004182] flex items-center justify-center text-white font-bold text-sm tracking-tight font-sans transition-colors shadow-sm">
+            in
+          </span>
+          <span class="font-display text-xl text-white group-hover:text-gold-300 transition-colors">
+            LinkedIn
+          </span>
+          <svg class="w-4 h-4 text-gold-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MINIMALIST EDITORIAL FOOTER -->
+  <footer class="border-t border-navy-700/60 bg-[#03050c] text-slate-400 py-16 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="font-display font-medium text-lg text-white">Robo Receptionist <span class="text-gold-400 font-bold">+</span></span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed font-light">
+            Autonomous late-night emergency hospital triage station utilizing optical computer vision and ESI v4 decision matrices to eliminate intake delays.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">Navigation</h4>
+          <ul class="space-y-2 text-xs font-mono">
+            <li><a href="index.html" class="hover:text-gold-300 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-gold-300 transition text-gold-400">About</a></li>
+            <li><a href="latest-work.html" class="hover:text-gold-300 transition">Latest Work</a></li>
+            <li><a href="triage.html" class="hover:text-gold-300 transition">Triage Terminal</a></li>
+            <li><a href="contact.html" class="hover:text-gold-300 transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">Connect</h4>
+          <ul class="space-y-2 text-xs font-mono text-slate-400">
+            <li>
+              <a href="https://www.linkedin.com/in/riddhiman-gupta-4075b1396/" target="_blank" rel="noopener noreferrer" class="hover:text-gold-300 transition inline-flex items-center gap-2">
+                <span class="w-4 h-4 rounded-[3px] bg-[#0a66c2] text-white flex items-center justify-center font-bold text-[9px] font-sans leading-none">in</span>
+                <span>LinkedIn</span>
+                <svg class="w-2.5 h-2.5 -translate-y-[1px]" fill="none" viewBox="0 0 11 12" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M1.71 4.5h6.07m0 0v6.07m0-6.07-7 7" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-200 mb-3">Compliance</h4>
+          <ul class="space-y-2 text-xs font-mono text-slate-400">
+            <li>Emergency Severity Index (ESI v4)</li>
+            <li>ISO 13485 Quality Standard</li>
+            <li>HL7 / FHIR Admission Export</li>
+            <li>Deterministic CV Fallback</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-navy-800 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <p>&copy; 2026 MetroHealth Trauma Network &middot; Robo Receptionist + All rights reserved.</p>
+        <p>Autonomous Emergency Triage &amp; Clinical Referral Station.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS (Animate On Scroll) -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    window.addEventListener("scroll", () => {
+      const bar = document.getElementById("scrollProgressBar");
+      if (bar) {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${progress}%`;
+      }
+    }, { passive: true });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+      if (window.AOS) AOS.init({ once: true, duration: 800, offset: 40, easing: "ease-out-cubic" });
+    });
+  </script>
+
+</body>
+</html>

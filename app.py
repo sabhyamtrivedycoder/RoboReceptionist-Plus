@@ -94,10 +94,35 @@ if settings.STATIC_DIR.exists():
 templates = Jinja2Templates(directory=str(settings.TEMPLATES_DIR))
 
 # Routes
-@app.get("/", summary="Serve Emergency Dashboard")
-async def serve_dashboard(request: Request):
-    """Renders the emergency triage clinical tactical HUD."""
+@app.get("/", summary="Serve Homepage")
+@app.get("/index.html", include_in_schema=False)
+async def serve_home(request: Request):
+    """Renders the Robo Receptionist editorial homepage."""
     return templates.TemplateResponse(request=request, name="index.html")
+
+@app.get("/triage", summary="Serve Triage Diagnostic Workstation")
+@app.get("/triage.html", include_in_schema=False)
+async def serve_triage(request: Request):
+    """Renders the emergency triage clinical tactical workstation."""
+    return templates.TemplateResponse(request=request, name="triage.html")
+
+@app.get("/about", summary="Serve About Page")
+@app.get("/about.html", include_in_schema=False)
+async def serve_about(request: Request):
+    """Renders the architectural & clinical mission about page."""
+    return templates.TemplateResponse(request=request, name="about.html")
+
+@app.get("/latest-work", summary="Serve Latest Work & Methodology Page")
+@app.get("/latest-work.html", include_in_schema=False)
+async def serve_latest_work(request: Request):
+    """Renders the scientific methodology, Sobel kernels, HSV colorimetry, and ESI v4 documentation."""
+    return templates.TemplateResponse(request=request, name="latest-work.html")
+
+@app.get("/contact", summary="Serve Contact Page")
+@app.get("/contact.html", include_in_schema=False)
+async def serve_contact(request: Request):
+    """Renders the direct contact and clinical inquiries page."""
+    return templates.TemplateResponse(request=request, name="contact.html")
 
 @app.get("/api/health", summary="System Health & Readiness Probe")
 async def health_probe():

@@ -17,10 +17,6 @@ class RoboReceptionistApp {
   }
 
   init() {
-    this.bindEvents();
-    this.loadHistory();
-    this.loadApiKeys();
-    this.loadHospitalKpis();
     this.initScrollReveal();
 
     if (window.lucide) {
@@ -31,8 +27,21 @@ class RoboReceptionistApp {
       window.AOS.init({ once: true, duration: 800, offset: 40, easing: "ease-out-cubic" });
     }
 
-    // Pre-load default sample case for immediate readiness
-    this.selectSample("laceration", "Case Study 101: Deep Cutaneous Laceration");
+    // Only initialize interactive workstation components if present on current page
+    if (document.getElementById("scanViewport")) {
+      this.bindEvents();
+      this.loadHistory();
+      this.loadApiKeys();
+      this.loadHospitalKpis();
+      this.selectSample("laceration", "Case Study 101: Deep Cutaneous Laceration");
+    } else {
+      if (document.getElementById("kpiTotal")) {
+        this.loadHospitalKpis();
+      }
+      if (document.getElementById("historyTableBody")) {
+        this.loadHistory();
+      }
+    }
   }
 
   // --- Audio Feedback (Web Audio API) ---
@@ -204,6 +213,8 @@ class RoboReceptionistApp {
     const btnWebcam = document.getElementById("btnTabWebcam");
     const btnSamples = document.getElementById("btnTabSamples");
 
+    if (!uploadView || !webcamView || !samplesView || !btnUpload || !btnWebcam || !btnSamples) return;
+
     [btnUpload, btnWebcam, btnSamples].forEach(btn => {
       btn.className = "py-1.5 rounded text-center transition font-semibold text-slate-400 hover:text-white";
     });
@@ -217,25 +228,28 @@ class RoboReceptionistApp {
     webcamView.classList.add("hidden");
     samplesView.classList.add("hidden");
 
+    const hudStatus = document.getElementById("hudStatus");
+
     if (mode === "upload") {
       uploadView.classList.remove("hidden");
       btnUpload.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
-      document.getElementById("hudStatus").innerText = "READY // FILE INGESTION";
+      if (hudStatus) hudStatus.innerText = "READY // FILE INGESTION";
     } else if (mode === "webcam") {
       webcamView.classList.remove("hidden");
       btnWebcam.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
       this.startWebcam();
-      document.getElementById("hudStatus").innerText = "OPTICAL SENSOR // LIVE CAMERA";
+      if (hudStatus) hudStatus.innerText = "OPTICAL SENSOR // LIVE CAMERA";
     } else if (mode === "samples") {
       samplesView.classList.remove("hidden");
       btnSamples.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
-      document.getElementById("hudStatus").innerText = "CLINICAL CASE STUDIES";
+      if (hudStatus) hudStatus.innerText = "CLINICAL CASE STUDIES";
     }
   }
 
   async startWebcam() {
     try {
       const video = document.getElementById("webcamVideo");
+      if (!video) return;
       this.webcamStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { ideal: 640 }, height: { ideal: 640 }, facingMode: "environment" }
       });
@@ -288,7 +302,8 @@ class RoboReceptionistApp {
       this.currentImageBase64 = canvas.toDataURL("image/jpeg", 0.92);
       this.showPreview(this.currentImageBase64);
       this.switchInputMode("upload");
-      document.getElementById("hudStatus").innerText = `LOADED: ${title.toUpperCase()}`;
+      const hudStatus = document.getElementById("hudStatus");
+      if (hudStatus) hudStatus.innerText = `LOADED: ${title.toUpperCase()}`;
     };
     img.src = sampleUrl;
   }
@@ -296,10 +311,16 @@ class RoboReceptionistApp {
   showPreview(src) {
     const preview = document.getElementById("previewImage");
     const placeholder = document.getElementById("uploadPlaceholder");
-    preview.src = src;
-    preview.classList.remove("hidden");
-    placeholder.classList.add("hidden");
-    lucide.createIcons();
+    if (preview) {
+      preview.src = src;
+      preview.classList.remove("hidden");
+    }
+    if (placeholder) {
+      placeholder.classList.add("hidden");
+    }
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
   // --- Main Evaluation Flow ---

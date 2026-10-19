@@ -50,14 +50,26 @@ Open **[http://localhost:5000](http://localhost:5000)** in your browser.
 
 ---
 
-## 4. Project Structure
+## 4. Multi-Page Architecture & Project Structure
+Robo Receptionist + is structured into dedicated, modular pages:
+- **Home (`index.html`)**: Editorial explanation, central animated AI demonstration showcase with floating telemetry cards, "Try Robo Receptionist" primary CTA, and "Get in touch" LinkedIn section.
+- **Triage Console (`triage.html`)**: Full interactive diagnostic workstation (webcam stream, upload, 3x3 Sobel convolution, ESI acuity grading, on-call doctor paging, FHIR export, and audit registry).
+- **About (`about.html`)**: Clinical emergency mission, the late-night ER intake crisis, why deterministic optical CV beats generative black boxes, and engineering principles.
+- **Latest Work (`latest-work.html`)**: In-depth scientific methodology, HSV colorimetric formula, 3x3 Sobel kernels, ESI v4 decision matrices, and HL7/FHIR export protocols.
+- **Contact (`contact.html`)**: Dedicated "Get in touch" page featuring the verified LinkedIn redirect button.
+
 ```
 RoboReceptionist-Plus/
 ├── app.py                      # FastAPI application with latency middleware and RFC 7807 handlers
 ├── cv_engine.py                # 4-tier OpenCV optical segmentation & heuristic inference
 ├── database.py                 # Thread-safe DatabaseManager with SQLite WAL journaling
 ├── run_tests.py                # Automated unit and integration test suite
-├── index.html                  # Clinical emergency department console (GitHub Pages compatible)
+├── index.html                  # Homepage with central video demonstration & Try Robo Receptionist CTA
+├── triage.html                 # Dedicated interactive diagnostic terminal workstation
+├── about.html                  # Mission, clinical emergency problem, and architecture
+├── latest-work.html            # HSV colorimetry, Sobel kernels, and ESI v4 methodology
+├── contact.html                # Dedicated contact page with LinkedIn redirect
+├── templates/                  # Server-rendered template mirror for FastAPI
 ├── static/
 │   ├── js/
 │   │   ├── vision_core.js      # Pixel-level HSV, Sobel, and contour bounding box engine
@@ -65,8 +77,6 @@ RoboReceptionist-Plus/
 │   │   ├── specialists_roster.js# Hospital directory of on-call specialist physicians
 │   │   └── app_controller.js   # Application coordinator & state machine
 │   └── samples/                # Authenticated clinical test cases
-└── templates/
-    └── index.html              # Server-rendered template mirror
 ```
 
 ---
