@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robo Receptionist + // Clinical Computer Vision Triage & Specialist Referral</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Robo Receptionist + | Emergency Department Clinical Triage & Specialist Referral</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +30,7 @@
           },
           colors: {
             clinical: {
-              bg: '#0a0f1d',
+              bg: '#090d16',
               card: '#0f172a',
               subcard: '#1e293b',
               border: '#334155',
@@ -47,113 +50,82 @@
   </script>
 
   <style>
-    /* Clinical Laser Scanning Effect */
-    @keyframes clinicalScan {
-      0% { top: 0%; opacity: 0.8; }
-      50% { opacity: 1; }
-      100% { top: 96%; opacity: 0.8; }
+    /* Clean Medical Scanning Progress Bar */
+    @keyframes progressSweep {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
-    .scanner-active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #38bdf8, #0284c7, transparent);
-      box-shadow: 0 0 12px #38bdf8;
-      animation: clinicalScan 1.8s ease-in-out infinite alternate;
-      z-index: 25;
+    .scanner-active .scan-progress-bar {
+      display: block !important;
     }
 
     /* Scroll Reveal Animation */
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(14px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
     .scroll-reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Clinical Status Marquee */
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      display: inline-flex;
-      animation: marqueeScroll 36s linear infinite;
-    }
-    .animate-marquee:hover {
-      animation-play-state: paused;
-    }
   </style>
 </head>
-<body class="bg-clinical-bg text-slate-100 font-sans min-h-screen selection:bg-sky-500 selection:text-white">
+<body class="bg-clinical-bg text-slate-100 font-sans min-h-screen selection:bg-sky-600 selection:text-white">
 
-  <!-- Top Emergency Department Status Ticker -->
-  <div class="bg-slate-950/90 border-b border-clinical-border py-1.5 px-4 overflow-hidden text-[11px] font-mono text-slate-400 flex items-center gap-4 whitespace-nowrap z-50 relative">
-    <div class="flex items-center gap-2 text-sky-400 font-bold shrink-0">
-      <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
-      <span class="tracking-wider">TRAUMA CENTER STATUS //</span>
+  <!-- Hospital Facility Institutional Bar -->
+  <div class="bg-slate-950 border-b border-clinical-border py-1.5 px-4 text-[11px] font-mono text-slate-400 flex flex-wrap items-center justify-between gap-4 z-50 relative">
+    <div class="flex items-center gap-3">
+      <span class="text-sky-400 font-bold uppercase tracking-wider">MetroHealth Hospital Network</span>
+      <span class="text-slate-600">|</span>
+      <span>Trauma Center: <strong class="text-slate-200">Level-1 Emergency Care</strong></span>
+      <span class="text-slate-600 hidden sm:inline">|</span>
+      <span class="hidden sm:inline">Terminal: <strong class="text-slate-200">ED-TRIAGE-WS04</strong></span>
     </div>
-    <div class="inline-flex gap-8 animate-marquee">
-      <span>TRAUMA BAY 01: <strong class="text-emerald-400">OPERATIONAL</strong></span>
-      <span>CT ANGIOGRAPHY: <strong class="text-sky-400">READY (SUITE 2)</strong></span>
-      <span>ICU BED OCCUPANCY: <strong class="text-amber-400">82% (4 BEDS RESERVED P1)</strong></span>
-      <span>ON-CALL SURGEONS: <strong class="text-emerald-400">6 / 6 ACTIVE</strong></span>
-      <span>REVISED TRAUMA SCORE (RTS): <strong class="text-white">7.84 CRITICAL POOL</strong></span>
-      <span>DECISION MATRIX: <strong class="text-sky-400">ESI v4 CLINICAL ALIGNED</strong></span>
-      <span>TRAUMA BAY 01: <strong class="text-emerald-400">OPERATIONAL</strong></span>
-      <span>CT ANGIOGRAPHY: <strong class="text-sky-400">READY (SUITE 2)</strong></span>
-      <span>ICU BED OCCUPANCY: <strong class="text-amber-400">82% (4 BEDS RESERVED P1)</strong></span>
+    <div class="flex items-center gap-4 text-[11px]">
+      <span class="flex items-center gap-1.5 text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        Operational Status: Active Intake
+      </span>
+      <span class="text-slate-600">|</span>
+      <span>Standard: <strong class="text-slate-300">ESI v4 Protocol</strong></span>
     </div>
   </div>
 
-  <!-- Clinical Navigation Bar -->
-  <header class="border-b border-clinical-border bg-slate-950/80 backdrop-blur sticky top-0 z-40">
+  <!-- Primary Clinical Header -->
+  <header class="border-b border-clinical-border bg-slate-900/90 backdrop-blur sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
       
-      <!-- Hospital Identity & Brand -->
+      <!-- System Identity -->
       <div class="flex items-center gap-3.5">
-        <div class="w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-          <i data-lucide="activity" class="w-6 h-6"></i>
+        <div class="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+          <i data-lucide="activity" class="w-5 h-5"></i>
         </div>
         <div>
-          <div class="flex items-center gap-2.5">
-            <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
-              Robo Receptionist <span class="text-sky-400 font-extrabold text-xl leading-none">+</span>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-1">
+              Robo Receptionist <span class="text-sky-400 font-bold text-lg leading-none">+</span>
             </h1>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/30 font-semibold">
-              ENTERPRISE TRIAGE v2.4
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-700 font-semibold">
+              Clinical Triage Console v2.6
             </span>
           </div>
           <p class="text-xs text-slate-400 font-mono">
-            MetroHealth Level-1 Trauma Center &middot; Optical Computer Vision Diagnostic Unit
+            Optical Computer Vision Diagnostics &middot; On-Call Specialist Dispatching
           </p>
         </div>
       </div>
 
-      <!-- Real-Time Cardiac Hemodynamics Waveform Monitor -->
-      <div class="hidden sm:flex items-center gap-3 px-3 py-1.5 rounded-lg bg-slate-900 border border-clinical-border shadow-inner">
-        <canvas id="ecgCanvas" width="100" height="22" class="opacity-90"></canvas>
-        <div class="text-[10px] font-mono leading-tight">
-          <span class="text-slate-400 block">PHYSIOLOGY</span>
-          <span id="liveBpm" class="text-sky-400 font-bold">76 BPM</span>
-        </div>
-      </div>
-
-      <!-- Compliance Badges & Controls -->
+      <!-- System Telemetry & Configuration -->
       <div class="flex items-center gap-3">
         <div class="hidden md:flex items-center gap-1.5 font-mono text-[11px]">
-          <span class="px-2 py-1 rounded bg-slate-900 border border-clinical-border text-slate-300">ESI v4</span>
-          <span class="px-2 py-1 rounded bg-slate-900 border border-clinical-border text-slate-300">OpenCV Vision</span>
-          <span class="px-2 py-1 rounded bg-slate-900 border border-clinical-border text-slate-300">ISO 13485</span>
+          <span class="px-2 py-1 rounded bg-slate-800 border border-clinical-border text-slate-300">ISO 13485</span>
+          <span class="px-2 py-1 rounded bg-slate-800 border border-clinical-border text-slate-300">HL7 / FHIR JSON</span>
+          <span class="px-2 py-1 rounded bg-slate-800 border border-clinical-border text-slate-300">ICD-10 Mapped</span>
         </div>
 
-        <button onclick="app.toggleApiModal()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 text-xs text-slate-300 flex items-center gap-1.5 transition">
+        <button onclick="app.toggleApiModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 border border-clinical-border hover:border-sky-400 text-xs text-slate-300 flex items-center gap-1.5 transition">
           <i data-lucide="key" class="w-3.5 h-3.5 text-sky-400"></i>
           <span id="apiKeyStatusLabel">Clinical CV Engine</span>
         </button>
@@ -168,37 +140,40 @@
       <!-- LEFT COLUMN: DIAGNOSTIC OPTICAL INGESTION (5 Cols) -->
       <section class="lg:col-span-5 flex flex-col gap-5 scroll-reveal">
 
-        <!-- Optical Terminal Card -->
+        <!-- Ingestion Terminal Card -->
         <div class="bg-clinical-card border border-clinical-border rounded-xl p-5 shadow-xl relative overflow-hidden">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-3.5">
             <h2 class="text-xs font-mono font-bold tracking-wider text-slate-200 uppercase flex items-center gap-2">
               <i data-lucide="crosshair" class="w-4 h-4 text-sky-400"></i>
-              Optical Diagnostic Ingestion Terminal
+              Diagnostic Optical Ingestion Terminal
             </h2>
-            <span class="text-[10px] font-mono text-slate-400">SENSOR PIPELINE</span>
+            <span class="text-[10px] font-mono text-slate-400">INPUT SOURCE</span>
           </div>
 
-          <!-- Input Ingestion Mode Selectors -->
+          <!-- Mode Selectors: File Upload / Camera / Case Studies -->
           <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-900 rounded-lg border border-clinical-border mb-4 text-xs font-mono">
-            <button id="btnTabUpload" onclick="app.switchInputMode('upload')" class="py-1.5 rounded text-center transition font-semibold bg-slate-800 text-sky-400 shadow">
-              📁 File Ingestion
+            <button id="btnTabUpload" onclick="app.switchInputMode('upload')" class="py-1.5 rounded text-center transition font-semibold bg-slate-800 text-sky-400 shadow flex items-center justify-center gap-1.5">
+              <i data-lucide="file-up" class="w-3.5 h-3.5"></i>
+              <span>File Upload</span>
             </button>
-            <button id="btnTabWebcam" onclick="app.switchInputMode('webcam')" class="py-1.5 rounded text-center transition font-semibold text-slate-400 hover:text-white">
-              📷 Camera Sensor
+            <button id="btnTabWebcam" onclick="app.switchInputMode('webcam')" class="py-1.5 rounded text-center transition font-semibold text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+              <span>Camera</span>
             </button>
-            <button id="btnTabSamples" onclick="app.switchInputMode('samples')" class="py-1.5 rounded text-center transition font-semibold text-slate-400 hover:text-white">
-              🧪 Case Studies
+            <button id="btnTabSamples" onclick="app.switchInputMode('samples')" class="py-1.5 rounded text-center transition font-semibold text-slate-400 hover:text-white flex items-center justify-center gap-1.5">
+              <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
+              <span>Case Studies</span>
             </button>
           </div>
 
           <!-- Viewport Box with Crosshairs & Telemetry HUD -->
           <div id="scanViewport" class="relative w-full aspect-square bg-slate-950 rounded-lg border border-clinical-border overflow-hidden flex items-center justify-center group">
             
-            <!-- Target Reticle Accents -->
-            <div class="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-sky-400 pointer-events-none z-10"></div>
-            <div class="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-sky-400 pointer-events-none z-10"></div>
-            <div class="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-sky-400 pointer-events-none z-10"></div>
-            <div class="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-sky-400 pointer-events-none z-10"></div>
+            <!-- Reticle Corner Accents -->
+            <div class="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-sky-500/70 pointer-events-none z-10"></div>
+            <div class="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-sky-500/70 pointer-events-none z-10"></div>
+            <div class="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-sky-500/70 pointer-events-none z-10"></div>
+            <div class="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-sky-500/70 pointer-events-none z-10"></div>
 
             <!-- Optical Sensor Status Overlay -->
             <div id="hudOverlay" class="absolute top-3 left-4 right-4 flex justify-between items-center text-[10px] font-mono text-sky-400 z-20 pointer-events-none opacity-90">
@@ -206,16 +181,21 @@
               <span id="hudResolution">CALIBRATED 640 &times; 640</span>
             </div>
 
+            <!-- Indeterminate Medical Progress Bar (Shows only during scan) -->
+            <div class="scan-progress-bar hidden absolute top-0 left-0 right-0 h-1 bg-slate-900 overflow-hidden z-30">
+              <div class="w-full h-full bg-sky-500 animate-[progressSweep_1.5s_infinite_linear]"></div>
+            </div>
+
             <!-- File Upload Dropzone -->
             <div id="uploadView" class="w-full h-full flex flex-col items-center justify-center p-6 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()">
               <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="app.handleFileSelect(event)">
               <div id="uploadPlaceholder" class="flex flex-col items-center gap-3">
-                <div class="w-14 h-14 rounded-full bg-slate-900 border border-clinical-border flex items-center justify-center text-sky-400 group-hover:scale-105 transition">
-                  <i data-lucide="upload-cloud" class="w-7 h-7"></i>
+                <div class="w-12 h-12 rounded-full bg-slate-900 border border-clinical-border flex items-center justify-center text-sky-400 group-hover:scale-105 transition">
+                  <i data-lucide="upload-cloud" class="w-6 h-6"></i>
                 </div>
                 <div>
-                  <p class="text-sm font-semibold text-white">Ingest patient injury imagery</p>
-                  <p class="text-xs text-slate-400 font-mono mt-1">Click to browse or drop DICOM / JPEG / PNG files</p>
+                  <p class="text-sm font-semibold text-white">Ingest Patient Injury Imagery</p>
+                  <p class="text-xs text-slate-400 font-mono mt-1">Click to browse or drop DICOM, JPEG, or PNG files</p>
                 </div>
               </div>
               <img id="previewImage" src="" alt="Diagnostic Preview" class="hidden max-h-full max-w-full object-contain">
@@ -224,53 +204,53 @@
             <!-- Live Webcam Sensor View -->
             <div id="webcamView" class="hidden w-full h-full relative">
               <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover"></video>
-              <button onclick="app.captureWebcamFrame()" class="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-sky-500 text-slate-950 text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg hover:bg-sky-400 z-30">
+              <button onclick="app.captureWebcamFrame()" class="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-sky-600 text-white text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg hover:bg-sky-500 z-30">
                 <i data-lucide="camera" class="w-4 h-4"></i>
-                CAPTURE OPTICAL FRAME
+                Capture Frame
               </button>
             </div>
 
             <!-- Clinical Case Studies Selector -->
             <div id="samplesView" class="hidden w-full h-full p-3 overflow-y-auto flex flex-col gap-2">
-              <p class="text-[11px] font-mono text-slate-400 mb-1">Select an authenticated clinical test study:</p>
+              <p class="text-[11px] font-mono text-slate-400 mb-1">Select an authenticated clinical test case:</p>
               
-              <div onclick="app.selectSample('laceration', 'Deep Cutaneous Laceration')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
+              <div onclick="app.selectSample('laceration', 'Case Study 101: Deep Cutaneous Laceration')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
                 <img src="./static/samples/laceration.jpg" class="w-12 h-12 rounded object-cover border border-clinical-border">
                 <div class="text-left">
-                  <p class="text-xs font-semibold text-white">Deep Cutaneous Laceration</p>
-                  <p class="text-[10px] font-mono text-red-400">Level 1 &middot; Active Capillary Bleed</p>
+                  <p class="text-xs font-semibold text-white">Case Study 101: Deep Laceration</p>
+                  <p class="text-[10px] font-mono text-red-400">ESI Level 1 &middot; Active Capillary Hemorrhage</p>
                 </div>
               </div>
 
-              <div onclick="app.selectSample('burn', 'Second-Degree Thermal Burn')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
+              <div onclick="app.selectSample('burn', 'Case Study 102: Second-Degree Thermal Burn')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
                 <img src="./static/samples/burn.jpg" class="w-12 h-12 rounded object-cover border border-clinical-border">
                 <div class="text-left">
-                  <p class="text-xs font-semibold text-white">Second-Degree Thermal Burn</p>
-                  <p class="text-[10px] font-mono text-amber-300">Level 2 &middot; Burn Unit Reconstruction</p>
+                  <p class="text-xs font-semibold text-white">Case Study 102: Thermal Burn</p>
+                  <p class="text-[10px] font-mono text-amber-300">ESI Level 2 &middot; Burn Unit Reconstruction</p>
                 </div>
               </div>
 
-              <div onclick="app.selectSample('fracture', 'Suspected Bone Fracture / Trauma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
+              <div onclick="app.selectSample('fracture', 'Case Study 103: Closed Musculoskeletal Deformity')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
                 <img src="./static/samples/fracture.jpg" class="w-12 h-12 rounded object-cover border border-clinical-border">
                 <div class="text-left">
-                  <p class="text-xs font-semibold text-white">Musculoskeletal Trauma / Fracture</p>
-                  <p class="text-[10px] font-mono text-sky-400">Level 2 &middot; Orthopedic Surgery</p>
+                  <p class="text-xs font-semibold text-white">Case Study 103: Musculoskeletal Trauma</p>
+                  <p class="text-[10px] font-mono text-sky-400">ESI Level 2 &middot; Orthopedic Surgery</p>
                 </div>
               </div>
 
-              <div onclick="app.selectSample('eye', 'Acute Ocular Trauma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
+              <div onclick="app.selectSample('eye', 'Case Study 104: Acute Ocular Trauma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
                 <img src="./static/samples/eye_trauma.jpg" class="w-12 h-12 rounded object-cover border border-clinical-border">
                 <div class="text-left">
-                  <p class="text-xs font-semibold text-white">Acute Ocular Trauma</p>
-                  <p class="text-[10px] font-mono text-red-400">Level 1 &middot; Ophthalmology Emergency</p>
+                  <p class="text-xs font-semibold text-white">Case Study 104: Ocular Trauma</p>
+                  <p class="text-[10px] font-mono text-red-400">ESI Level 1 &middot; Ophthalmology Emergency</p>
                 </div>
               </div>
 
-              <div onclick="app.selectSample('contusion', 'Soft Tissue Contusion')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
+              <div onclick="app.selectSample('contusion', 'Case Study 105: Soft Tissue Hematoma')" class="flex items-center gap-3 p-2.5 rounded-lg bg-slate-900 border border-clinical-border hover:border-sky-400 cursor-pointer transition">
                 <img src="./static/samples/contusion.jpg" class="w-12 h-12 rounded object-cover border border-clinical-border">
                 <div class="text-left">
-                  <p class="text-xs font-semibold text-white">Soft Tissue Contusion &amp; Hematoma</p>
-                  <p class="text-[10px] font-mono text-slate-400">Level 3 &middot; General Emergency</p>
+                  <p class="text-xs font-semibold text-white">Case Study 105: Soft Tissue Hematoma</p>
+                  <p class="text-[10px] font-mono text-slate-400">ESI Level 3 &middot; General Emergency</p>
                 </div>
               </div>
             </div>
@@ -278,42 +258,42 @@
           </div>
 
           <!-- Primary Execution Button -->
-          <button id="btnScan" onclick="app.triggerScan()" class="mt-4 w-full py-3 rounded-lg bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-lg">
+          <button id="btnScan" onclick="app.triggerScan()" class="mt-4 w-full py-3 rounded-lg bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-md">
             <i data-lucide="scan-line" class="w-4 h-4"></i>
-            <span id="scanBtnText">INITIALIZE OPTICAL TRIAGE</span>
+            <span id="scanBtnText">Run Clinical Triage Assessment</span>
           </button>
         </div>
 
-        <!-- Optical Telemetry Pipeline Sensors -->
+        <!-- Sensor Verification Metadata -->
         <div class="bg-clinical-card border border-clinical-border rounded-xl p-4 text-xs font-mono text-slate-400 space-y-2">
           <div class="flex items-center justify-between text-slate-200 font-bold border-b border-clinical-border pb-2">
             <span class="flex items-center gap-1.5">
               <i data-lucide="cpu" class="w-3.5 h-3.5 text-sky-400"></i>
-              Optical Sensor Pipeline
+              Optical Diagnostic Telemetry Pipeline
             </span>
-            <span class="text-emerald-400">CALIBRATED</span>
+            <span class="text-emerald-400 text-[11px]">CALIBRATED</span>
           </div>
           <div class="space-y-1 text-[11px]">
             <p>&bull; Colorimetric Segmentation: <span class="text-slate-300">HSV Erythema &amp; Necrosis Masking</span></p>
-            <p>&bull; Edge Gradient Convolution: <span class="text-slate-300">Sobel 3&times;3 Kernel Magnitude</span></p>
+            <p>&bull; Edge Gradient Convolution: <span class="text-slate-300">Sobel 3&times;3 Kernel Matrix</span></p>
             <p>&bull; Contour Localization: <span class="text-slate-300">Dynamic Bounding Box &amp; Centroid Calculation</span></p>
-            <p>&bull; Clinical Decision Tree: <span class="text-slate-300">Emergency Severity Index (ESI v4)</span></p>
+            <p>&bull; Triage Decision Matrix: <span class="text-slate-300">Emergency Severity Index (ESI v4)</span></p>
           </div>
         </div>
 
       </section>
 
-      <!-- RIGHT COLUMN: TRIAGE DIAGNOSIS & MATCHED SPECIALISTS (7 Cols) -->
+      <!-- RIGHT COLUMN: TRIAGE ASSESSMENT & SPECIALIST REFERRAL (7 Cols) -->
       <section class="lg:col-span-7 flex flex-col gap-5 scroll-reveal">
 
         <!-- Standby Prompt (Before Scan) -->
         <div id="standbyCard" class="bg-clinical-card border border-clinical-border rounded-xl p-10 flex flex-col items-center justify-center text-center min-h-[460px]">
-          <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-clinical-border flex items-center justify-center text-sky-400 mb-4">
-            <i data-lucide="stethoscope" class="w-8 h-8"></i>
+          <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-clinical-border flex items-center justify-center text-sky-400 mb-4">
+            <i data-lucide="stethoscope" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-base font-bold text-white font-mono uppercase tracking-wide">Awaiting Diagnostic Ingestion</h3>
+          <h3 class="text-sm font-bold text-white font-mono uppercase tracking-wide">Awaiting Diagnostic Ingestion</h3>
           <p class="text-xs text-slate-400 max-w-md mt-2 leading-relaxed">
-            Ingest a clinical photo, capture an optical frame from the camera, or choose a case study to trigger algorithmic pixel-level computer vision, ESI triage grading, and on-call specialist physician matching.
+            Ingest patient clinical imagery, capture a camera frame, or select a case study to trigger algorithmic pixel-level computer vision, ESI acuity grading, and on-call specialist matching.
           </p>
         </div>
 
@@ -327,7 +307,7 @@
                 <span id="resSeverityBadge" class="text-[11px] font-mono px-3 py-1 rounded-full font-bold uppercase tracking-wider inline-block mb-2">
                   ESI LEVEL 1 // IMMEDIATE RESUSCITATION
                 </span>
-                <h3 id="resInjuryType" class="text-2xl font-bold text-white tracking-tight">
+                <h3 id="resInjuryType" class="text-xl font-bold text-white tracking-tight">
                   Deep Cutaneous Laceration
                 </h3>
                 <p id="resIcd10" class="text-xs font-mono text-slate-400 mt-0.5">
@@ -339,7 +319,7 @@
                 </p>
               </div>
 
-              <!-- Confidence Dial -->
+              <!-- Confidence Percentage -->
               <div class="text-right">
                 <span class="text-[10px] font-mono text-slate-400 block uppercase">Confidence</span>
                 <span id="resConfidence" class="text-2xl font-mono font-bold text-sky-400">95.0%</span>
@@ -410,7 +390,7 @@
             <div class="flex items-center justify-between mb-4">
               <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
                 <i data-lucide="stethoscope" class="w-4 h-4 text-sky-400"></i>
-                Recommended Specialist Physicians (On-Call Matching)
+                Recommended Specialist Physicians (On-Call Roster)
               </h4>
               <span class="text-[10px] font-mono text-slate-400">SPECIALTY &amp; SHIFT RANKED</span>
             </div>
@@ -430,9 +410,9 @@
     <!-- Emergency Department Throughput KPI Bar -->
     <section class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 scroll-reveal">
       <div class="bg-clinical-card border border-clinical-border rounded-xl p-4 shadow-lg">
-        <span class="text-[10px] font-mono text-slate-400 block">TOTAL TRAUMA INGESTIONS</span>
+        <span class="text-[10px] font-mono text-slate-400 block">TOTAL ADMISSIONS</span>
         <span id="kpiTotal" class="text-xl font-bold font-mono text-white mt-1 block">16 Cases</span>
-        <span class="text-[10px] font-mono text-emerald-400 mt-0.5 block">100% Optical Ingestion</span>
+        <span class="text-[10px] font-mono text-emerald-400 mt-0.5 block">100% Ingestion Coverage</span>
       </div>
       <div class="bg-clinical-card border border-clinical-border rounded-xl p-4 shadow-lg">
         <span class="text-[10px] font-mono text-slate-400 block">CODE RED EMERGENCIES</span>
@@ -446,7 +426,7 @@
       </div>
       <div class="bg-clinical-card border border-clinical-border rounded-xl p-4 shadow-lg">
         <span class="text-[10px] font-mono text-slate-400 block">PEER CLINICAL RATING</span>
-        <span id="kpiRating" class="text-xl font-bold font-mono text-amber-300 mt-1 block">⭐ 4.93 / 5.0</span>
+        <span id="kpiRating" class="text-xl font-bold font-mono text-amber-300 mt-1 block">4.93 / 5.0</span>
         <span class="text-[10px] font-mono text-slate-400 mt-0.5 block">Board Reviewed</span>
       </div>
     </section>
@@ -456,7 +436,7 @@
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
           <i data-lucide="history" class="w-4 h-4 text-sky-400"></i>
-          Clinical Emergency Triage Audit Log (HIPAA Session Registry)
+          Clinical Emergency Triage Audit Log (Session Registry)
         </h3>
         <button onclick="app.loadHistory()" class="text-xs font-mono text-sky-400 hover:underline flex items-center gap-1">
           <i data-lucide="refresh-cw" class="w-3 h-3"></i> Refresh Log
@@ -487,8 +467,8 @@
   <!-- Specialist Pager Dispatch Modal -->
   <div id="dispatchModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-clinical-card border border-sky-500/60 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-center">
-      <div class="w-14 h-14 rounded-full bg-sky-500/20 border border-sky-400 mx-auto flex items-center justify-center text-sky-400 mb-4">
-        <i data-lucide="bell-ring" class="w-7 h-7"></i>
+      <div class="w-12 h-12 rounded-full bg-sky-500/20 border border-sky-400 mx-auto flex items-center justify-center text-sky-400 mb-4">
+        <i data-lucide="bell-ring" class="w-6 h-6"></i>
       </div>
       <h3 class="text-base font-bold text-white font-mono uppercase tracking-wide">Emergency Specialist Paged</h3>
       <p id="dispatchMsg" class="text-xs text-slate-300 mt-2 font-mono leading-relaxed">
@@ -503,7 +483,7 @@
       </div>
 
       <button onclick="app.closeDispatchModal()" class="mt-6 w-full py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs transition">
-        ACKNOWLEDGE &amp; RETURN TO TERMINAL
+        Acknowledge &amp; Return to Terminal
       </button>
     </div>
   </div>
@@ -522,7 +502,7 @@
       </div>
 
       <p class="text-xs text-slate-300 leading-relaxed mb-4">
-        By default, Robo Receptionist runs genuine pixel-level Computer Vision algorithms entirely in-browser. You can optionally attach a Google Gemini API key to augment evaluations with multimodal LLM reasoning.
+        By default, Robo Receptionist runs pixel-level Computer Vision algorithms entirely in-browser. You can optionally attach a Google Gemini API key to augment evaluations with multimodal LLM reasoning.
       </p>
 
       <div class="space-y-4 text-xs font-mono">
@@ -535,7 +515,7 @@
 
       <div class="mt-6 flex gap-2">
         <button onclick="app.saveApiKeys()" class="flex-1 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs transition">
-          SAVE CREDENTIALS
+          Save Credentials
         </button>
         <button onclick="app.clearApiKeys()" class="px-4 py-2.5 rounded-lg bg-slate-900 border border-clinical-border text-xs text-slate-400 font-mono hover:text-white">
           Clear
@@ -544,11 +524,11 @@
     </div>
   </div>
 
-  <!-- Modular Scripts -->
-  <script src="./static/js/vision_core.js"></script>
-  <script src="./static/js/triage_classifier.js"></script>
-  <script src="./static/js/specialists_roster.js"></script>
-  <script src="./static/js/app_controller.js"></script>
+  <!-- Modular Scripts with Cache-Busting Version Query -->
+  <script src="./static/js/vision_core.js?v=2.6.0"></script>
+  <script src="./static/js/triage_classifier.js?v=2.6.0"></script>
+  <script src="./static/js/specialists_roster.js?v=2.6.0"></script>
+  <script src="./static/js/app_controller.js?v=2.6.0"></script>
 
 </body>
 </html>

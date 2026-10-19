@@ -503,7 +503,7 @@ class RoboReceptionistApp {
           <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
             <div class="text-right sm:block hidden">
               <span class="text-[10px] font-mono text-slate-500 block">Lic / Rating</span>
-              <span class="text-xs font-mono font-semibold text-slate-300">${doc.license || 'MD-ACUTE'} &middot; ⭐ ${doc.rating}</span>
+              <span class="text-xs font-mono font-semibold text-slate-300">${doc.license || 'MD-ACUTE'} &middot; Rating: ${doc.rating} / 5.0</span>
             </div>
 
             <button onclick="app.dispatchSpecialist(${doc.id}, '${doc.name}', '${doc.department}', '${doc.roomNumber || doc.room_number}')" class="px-4 py-2 rounded-lg ${isPrimary ? 'bg-sky-500 text-slate-950 hover:bg-sky-400' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-500'} text-xs font-mono font-bold transition flex items-center gap-1.5 shadow">
@@ -701,7 +701,7 @@ class RoboReceptionistApp {
     const spec = document.getElementById("kpiSpecialists");
     if (spec) spec.innerText = "6 / 6 On Duty";
     const rat = document.getElementById("kpiRating");
-    if (rat) rat.innerText = "⭐ 4.93 / 5.0";
+    if (rat) rat.innerText = "4.93 / 5.0 (Peer Reviewed)";
   }
 
   toggleApiModal() {
