@@ -156,18 +156,32 @@ class RoboReceptionistApp {
     requestAnimationFrame(animate);
   }
 
-  // --- Scroll Reveal Animations ---
+  // --- Scroll Reveal & Dynamic Progress Bar Animations ---
   initScrollReveal() {
+    // Window dynamic scroll progress bar
+    const bar = document.getElementById("scrollProgressBar");
+    window.addEventListener("scroll", () => {
+      if (bar) {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${progress}%`;
+      }
+    }, { passive: true });
+
     const elements = document.querySelectorAll(".scroll-reveal");
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            if (entry.target.id === "kpiSection") {
+              this.loadHospitalKpis();
+            }
             obs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.08 });
+      }, { threshold: 0.1 });
       elements.forEach(el => observer.observe(el));
     } else {
       elements.forEach(el => el.classList.add("is-visible"));
@@ -198,16 +212,16 @@ class RoboReceptionistApp {
 
     if (mode === "upload") {
       uploadView.classList.remove("hidden");
-      btnUpload.className = "py-1.5 rounded text-center transition font-semibold bg-slate-800 text-sky-400 shadow";
+      btnUpload.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
       document.getElementById("hudStatus").innerText = "READY // FILE INGESTION";
     } else if (mode === "webcam") {
       webcamView.classList.remove("hidden");
-      btnWebcam.className = "py-1.5 rounded text-center transition font-semibold bg-slate-800 text-sky-400 shadow";
+      btnWebcam.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
       this.startWebcam();
       document.getElementById("hudStatus").innerText = "OPTICAL SENSOR // LIVE CAMERA";
     } else if (mode === "samples") {
       samplesView.classList.remove("hidden");
-      btnSamples.className = "py-1.5 rounded text-center transition font-semibold bg-slate-800 text-sky-400 shadow";
+      btnSamples.className = "py-1.5 rounded text-center transition font-semibold bg-[#132347] text-amber-300 border border-amber-500/40 shadow";
       document.getElementById("hudStatus").innerText = "CLINICAL CASE STUDIES";
     }
   }
@@ -440,7 +454,7 @@ class RoboReceptionistApp {
       badge.className = "text-[11px] font-mono px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 inline-block mb-2";
       badge.innerText = "ESI LEVEL 2 // HIGH-RISK EMERGENT (CODE ORANGE)";
     } else {
-      badge.className = "text-[11px] font-mono px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/40 inline-block mb-2";
+      badge.className = "text-[11px] font-mono px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-amber-500/10 text-amber-300 border border-amber-500/30 inline-block mb-2";
       badge.innerText = "ESI LEVEL 3 // URGENT STABILIZATION (CODE YELLOW)";
     }
 
@@ -471,8 +485,8 @@ class RoboReceptionistApp {
     faList.innerHTML = "";
     (d.firstAidProtocol || []).forEach((step, idx) => {
       faList.innerHTML += `
-        <li class="flex items-start gap-2.5 bg-slate-900/80 p-3 rounded-lg border border-slate-800">
-          <span class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 font-mono font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+        <li class="flex items-start gap-2.5 bg-[#0d1830] p-3 rounded-lg border border-[#1e3567]">
+          <span class="w-5 h-5 rounded-full bg-amber-500/15 text-amber-400 font-mono font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 border border-amber-500/30">
             ${idx + 1}
           </span>
           <span class="text-slate-200 text-xs leading-relaxed">${step}</span>
@@ -486,27 +500,27 @@ class RoboReceptionistApp {
     (result.recommendedDoctors || []).forEach((doc, idx) => {
       const isPrimary = idx === 0;
       docContainer.innerHTML += `
-        <div class="p-4 rounded-xl border ${isPrimary ? 'border-sky-500/60 bg-sky-950/20' : 'border-slate-800 bg-slate-900/60'} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition hover:border-sky-400">
+        <div class="p-4 rounded-xl border ${isPrimary ? 'border-amber-400/60 bg-[#111e3c]' : 'border-[#1e3567] bg-[#0c1527]'} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition hover:border-amber-400">
           <div class="flex items-center gap-3.5">
-            <img src="${doc.avatarUrl || doc.avatar_url}" class="w-12 h-12 rounded-full object-cover border-2 ${isPrimary ? 'border-sky-400' : 'border-slate-700'}">
+            <img src="${doc.avatarUrl || doc.avatar_url}" class="w-12 h-12 rounded-full object-cover border-2 ${isPrimary ? 'border-amber-400' : 'border-[#1e3567]'}">
             <div>
               <div class="flex items-center gap-2">
                 <h5 class="text-sm font-bold text-white">${doc.name}</h5>
-                ${isPrimary ? '<span class="text-[9px] font-mono px-2 py-0.5 rounded bg-sky-500 text-slate-950 font-extrabold uppercase">Primary Match</span>' : ''}
-                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-700">${doc.status}</span>
+                ${isPrimary ? '<span class="text-[9px] font-mono px-2 py-0.5 rounded bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold uppercase shadow-sm">Primary Match</span>' : ''}
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#132347] text-amber-200 border border-[#1e3567]">${doc.status}</span>
               </div>
               <p class="text-xs text-slate-400">${doc.title}</p>
-              <p class="text-[11px] font-mono text-slate-500 mt-0.5">${doc.department} &middot; Room: ${doc.roomNumber || doc.room_number}</p>
+              <p class="text-[11px] font-mono text-slate-400 mt-0.5">${doc.department} &middot; Room: ${doc.roomNumber || doc.room_number}</p>
             </div>
           </div>
 
           <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
             <div class="text-right sm:block hidden">
-              <span class="text-[10px] font-mono text-slate-500 block">Lic / Rating</span>
-              <span class="text-xs font-mono font-semibold text-slate-300">${doc.license || 'MD-ACUTE'} &middot; Rating: ${doc.rating} / 5.0</span>
+              <span class="text-[10px] font-mono text-slate-400 block">Lic / Rating</span>
+              <span class="text-xs font-mono font-semibold text-amber-200">${doc.license || 'MD-ACUTE'} &middot; Rating: ${doc.rating} / 5.0</span>
             </div>
 
-            <button onclick="app.dispatchSpecialist(${doc.id}, '${doc.name}', '${doc.department}', '${doc.roomNumber || doc.room_number}')" class="px-4 py-2 rounded-lg ${isPrimary ? 'bg-sky-500 text-slate-950 hover:bg-sky-400' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-500'} text-xs font-mono font-bold transition flex items-center gap-1.5 shadow">
+            <button onclick="app.dispatchSpecialist(${doc.id}, '${doc.name}', '${doc.department}', '${doc.roomNumber || doc.room_number}')" class="px-4 py-2 rounded-lg ${isPrimary ? 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 shadow-md' : 'bg-[#132347] border border-[#1e3567] text-amber-200 hover:text-white hover:border-amber-400'} text-xs font-mono font-bold transition flex items-center gap-1.5 shadow">
               <i data-lucide="bell" class="w-3.5 h-3.5"></i>
               PAGE SPECIALIST
             </button>
@@ -598,11 +612,11 @@ class RoboReceptionistApp {
     logs.forEach(log => {
       const isL1 = (log.esi || "").includes("Level 1");
       const isL2 = (log.esi || "").includes("Level 2");
-      const badgeClass = isL1 ? "bg-red-500/20 text-red-400 border-red-500/30" : (isL2 ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-sky-500/20 text-sky-300 border-sky-500/30");
+      const badgeClass = isL1 ? "bg-red-500/20 text-red-400 border-red-500/30" : (isL2 ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-amber-500/10 text-amber-300 border-amber-500/30");
 
       tbody.innerHTML += `
-        <tr class="hover:bg-slate-900/60 transition border-b border-slate-800/60">
-          <td class="py-2.5 px-3 font-mono font-bold text-sky-400">${log.ticket}</td>
+        <tr class="hover:bg-[#111e3c]/60 transition border-b border-[#1e3567]/60">
+          <td class="py-2.5 px-3 font-mono font-bold text-amber-400">${log.ticket}</td>
           <td class="py-2.5 px-3 font-mono text-slate-400">${log.timestamp}</td>
           <td class="py-2.5 px-3 font-medium text-white">${log.diagnosis}</td>
           <td class="py-2.5 px-3">
@@ -728,10 +742,10 @@ class RoboReceptionistApp {
     if (gKey) {
       document.getElementById("inputGeminiKey").value = gKey;
       label.innerText = "Gemini Key Active";
-      label.classList.add("text-sky-400");
+      label.classList.add("text-amber-300");
     } else {
       label.innerText = "Clinical CV Engine";
-      label.classList.remove("text-sky-400");
+      label.classList.remove("text-amber-300");
     }
   }
 

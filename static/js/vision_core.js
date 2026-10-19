@@ -174,7 +174,7 @@ class ClinicalVisionCore {
 
     // Draw Clinical Reticle & Bounding Box
     const isCritical = erythemaRatio > 14 || edgeDensity > 9 || necroticRatio > 4;
-    const accentColor = isCritical ? "#ef4444" : "#0284c7"; // Crimson or Medical Azure
+    const accentColor = isCritical ? "#ef4444" : "#d4af37"; // Crimson or Burnished Gold
 
     this.ctx.save();
     this.ctx.strokeStyle = accentColor;
