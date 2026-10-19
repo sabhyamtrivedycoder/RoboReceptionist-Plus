@@ -23,6 +23,10 @@ class RoboReceptionistApp {
     this.loadHospitalKpis();
     this.initScrollReveal();
 
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
     if (window.AOS) {
       window.AOS.init({ once: true, duration: 800, offset: 40, easing: "ease-out-cubic" });
     }
